@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Investor Visual Overview — Dadaba Group</title>
+  <meta name="description" content="An image-led snapshot for investors: sectors, projects, impact — plus key docs and IR contact." />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --font:"Manrope",system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      --brand:#0f4a13; --brand-600:#0b3a0e; --accent:#d6ff3f;
+      --ink:#0f1a14; --muted:#5c5f63; --bg:#ffffff;
+      --line:#ece9df; --shadow:0 12px 28px rgba(0,0,0,.08);
+      --container:1160px; --nav-h:78px;
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{margin:0;padding:0}
+    body{font-family:var(--font); color:var(--ink); background:var(--bg); line-height:1.55}
+    img{max-width:100%; display:block}
+    a{color:inherit; text-decoration:none}
+    .container{width:min(var(--container), 100% - 32px); margin-inline:auto}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+    .scroll-progress{position:fixed; inset:0 0 auto 0; height:3px; background:linear-gradient(90deg,var(--accent),#baff7a); width:0%; z-index:300; transform-origin:left center}
+
+    /* Header */
+    header{position:sticky; top:0; z-index:280; background:#fff; border-bottom:1px solid var(--line); transition:box-shadow .25s ease, background .25s ease; padding-top:env(safe-area-inset-top)}
+    header.scrolled{box-shadow:0 10px 24px rgba(0,0,0,.06)}
+    .nav{height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:900}
+    .logo-img{ width:84px; height:84px; border-radius:8px; object-fit:cover }
+    .menu{display:flex; align-items:center; gap:18px; list-style:none; padding:0; margin:0}
+    .menu a{font-weight:700; color:#18201b}
+    .menu a[aria-current="page"]{color:var(--brand)}
+    .utils{display:flex; align-items:center; gap:10px}
+    .btn-icon{display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:12px; border:1px solid var(--line); background:#fff; cursor:pointer}
+    .btn-icon:hover{background:#f6f7f4}
+    .hamburger svg{width:22px;height:22px}
+
+    /* Drawer */
+    .drawer[aria-hidden="true"]{display:none}
+    .drawer{position:fixed; inset:0; z-index:380; display:block}
+    .drawer::before{content:""; position:absolute; inset:0; background:rgba(0,0,0,.48)}
+    .drawer-panel{position:absolute; right:0; top:0; bottom:0; width:min(92vw, 380px); background:#fff; padding:16px; border-left:1px solid var(--line); overflow:auto}
+    .drawer .badge{display:block; padding:12px 10px; margin:4px 0; border:1px solid var(--line); border-radius:12px; font-weight:800}
+
+    /* Hero (image-first) */
+    .hero{position:relative; color:#fff; background:#0b2726; overflow:hidden}
+    .hero .media{position:relative; min-height:60vh}
+    .hero .media img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; transform:translateY(var(--parallax,0px)) scale(1.05)}
+    .hero .media::after{content:""; position:absolute; inset:0; background:linear-gradient(120deg, rgba(18,71,1,.45), rgba(11,39,38,.55))}
+    .hero .content{position:absolute; inset:0; display:flex; align-items:flex-end; z-index:2}
+    .hero .inner{width:min(1100px,92%); margin:0 auto; padding: clamp(18px,4vw,36px); padding-top:20vh; display:grid; gap:10px}
+    .eyebrow{letter-spacing:.18em; text-transform:uppercase; font-weight:800; font-size:12px; opacity:.92}
+    .headline{font-size:clamp(28px,4.4vw,50px); line-height:1.08; font-weight:900; margin:0}
+    .subhead{max-width:68ch; opacity:.98}
+    .cta-row{display:flex; gap:12px; flex-wrap:wrap}
+    .btn{display:inline-flex; align-items:center; justify-content:center; padding:12px 20px; border-radius:999px; border:1.5px solid var(--accent); background:transparent; color:var(--accent); font-weight:900}
+    .btn.primary{background:var(--accent); color:#0b2b08; border-color:var(--accent)}
+    .btn:hover{filter:brightness(.95)}
+
+    /* Image mosaic */
+    .section{padding: clamp(28px,4.8vw,48px) 0}
+    .section-title{font-size: clamp(24px,3.2vw,34px); margin:0 0 10px; font-weight:900}
+    .lead{color:#3a3d40; margin:0 0 14px}
+    .mosaic{display:grid; gap:10px; grid-template-columns: 2fr 1fr 1fr; grid-auto-rows: 200px}
+    .mosaic .tile{position:relative; border-radius:16px; overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow); background:#f6f7f4}
+    .mosaic .tile img{width:100%; height:100%; object-fit:cover}
+    .mosaic .tile.big{grid-row: span 2}
+    .mosaic .tile.wide{grid-column: span 2}
+    .overlay{position:absolute; inset:auto 10px 10px 10px; display:flex; align-items:center; justify-content:space-between; gap:8px}
+    .chip{display:inline-flex; align-items:center; height:26px; padding:0 10px; border-radius:999px; font-size:12px; font-weight:900; border:1px solid rgba(255,255,255,.6); background:rgba(0,0,0,.28); color:#fff; backdrop-filter:blur(2px)}
+
+    /* Sector image cards */
+    .sectors{display:grid; grid-template-columns: repeat(4,1fr); gap:12px}
+    .sector{position:relative; border-radius:16px; overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow); background:#000}
+    .sector img{width:100%; height:280px; object-fit:cover; opacity:.92; transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+    .sector:hover img{transform:scale(1.04)}
+    .sector .grad{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.0) 40%, rgba(0,0,0,.55) 100%)}
+    .sector .label{position:absolute; left:12px; bottom:12px; color:#fff; font-weight:900; font-size:18px; text-shadow:0 2px 10px rgba(0,0,0,.35)}
+    .badge{display:inline-flex; align-items:center; height:26px; padding:0 10px; border-radius:999px; font-size:12px; font-weight:900; border:1px solid #e6eadf; background:#fff; margin-right:6px}
+
+    /* Gallery (filterable) */
+    .filters{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .filter-btn{appearance:none; border:1px solid var(--line); background:#fff; color:#0f1a14; padding:8px 12px; border-radius:999px; font-weight:900; cursor:pointer}
+    .filter-btn[aria-pressed="true"]{background:#e8f7ea; border-color:#d5f2d7}
+    .gallery{display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top:12px}
+    .g-item{position:relative; border-radius:16px; overflow:hidden; border:1px solid var(--line); background:#f6f7f4; cursor:pointer}
+    .g-item img{width:100%; height:260px; object-fit:cover; transition:transform .35s ease}
+    .g-item:hover img{transform:scale(1.02)}
+    .g-cap{position:absolute; left:10px; bottom:10px; color:#fff; font-weight:800; font-size:14px; text-shadow:0 2px 10px rgba(0,0,0,.45)}
+
+    /* Lightbox */
+    .lightbox{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.85); z-index:420}
+    .lightbox[aria-hidden="false"]{display:flex}
+    .lb-inner{position:relative; width:min(92vw,1100px); max-height:88vh; display:grid; gap:10px}
+    .lb-media{position:relative; background:#000; border-radius:12px; overflow:hidden}
+    .lb-media img{width:100%; height:auto; max-height:78vh; object-fit:contain; display:block}
+    .lb-cap{color:#fff; display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .lb-btn{position:absolute; top:8px; width:40px; height:40px; border-radius:10px; border:0; background:rgba(255,255,255,.1); color:#fff; cursor:pointer}
+    .lb-close{right:8px}
+    .lb-prev{left:8px}
+    .lb-next{right:56px}
+
+    /* Key docs (with image thumbs) */
+    .docs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+    .doc{position:relative; border-radius:16px; overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow); background:#fff}
+    .doc img{width:100%; height:220px; object-fit:cover}
+    .doc .doc-body{padding:12px}
+    .doc .doc-body h4{margin:0 0 6px; font-size:16px}
+    .doc .doc-body p{margin:0; color:#3a3d40; font-size:14px}
+    .doc .doc-actions{display:flex; gap:8px; padding:12px; border-top:1px solid var(--line)}
+    .btn.doc{border-color:var(--line); padding:8px 12px}
+
+    /* IR contact */
+    .contact-grid{display:grid; grid-template-columns: repeat(2,1fr); gap:16px}
+    .contact-card{border:1px solid var(--line); border-radius:16px; background:#fff; padding:16px; box-shadow:var(--shadow)}
+    .contact-card p{margin:0 0 8px; color:#3a3d40}
+    #ir .contact-card a{ color: var(--ink); font-weight:800; text-decoration:none }
+    #ir .contact-card a:hover{ color: var(--brand); text-decoration:underline }
+    #ir .contact-card a:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:6px }
+
+    /* Partners */
+    .partners{ padding: 16px 0 clamp(40px,6vw,64px) }
+    .partners-head{text-align:center; font-weight:800; letter-spacing:.18em; color:var(--muted); font-size:12px; margin-bottom:16px}
+    .partners-grid{display:grid; gap:14px; grid-template-columns: repeat(6,1fr)}
+    .partner-tile{background:#fff; border:1px solid var(--line); border-radius:12px; display:flex; align-items:center; justify-content:center; height:76px; padding:12px; transition:transform .25s ease}
+    .partner-tile:hover{transform:translateY(-2px)}
+    .partner-tile img{ max-height:42px; max-width:100%; object-fit:contain }
+
+    /* Footer */
+    .site-footer{ color:#e6f4ea }
+    .footer-main{ background:var(--brand); padding: clamp(28px,5vw,48px) 0 }
+    .footer-grid{display:grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: clamp(16px,2.8vw,32px); align-items:start}
+    .foot-col h4{font-size:16px; margin: 6px 0 12px; color:#eaf8ee; font-weight:800}
+    .foot-brand{ display:flex; align-items:center; gap:10px; margin-bottom:8px }
+    .foot-brand strong{ font-weight:900; font-size:18px }
+    .foot-tag{ color:#cfe8d2; margin:0 0 12px }
+    .foot-links{ list-style:none; padding:0; margin:0 }
+    .foot-links li{ margin: 8px 0 }
+    .foot-links a{ color:#e6f4ea }
+    .newsletter-wide{ margin-top: clamp(20px,3vw,28px); background:var(--brand-600); border:1px solid rgba(255,255,255,.10); border-radius:16px; padding:12px }
+    .newsletter-row{ display:grid; grid-template-columns: 1fr auto auto; gap:12px; align-items:center }
+    .newsletter-row .nl-label{ font-weight:800; white-space:nowrap; font-size:14px }
+    .newsletter-row input{ min-width: 260px; height:48px; border-radius:999px; border:0; padding:0 16px; color:#111; background:#fff }
+    .newsletter-row button{ height:48px; border-radius:999px; border:0; padding:0 22px; font-weight:900; cursor:pointer; background:var(--accent); color:#0b2b08 }
+    .footer-bottom{ background:var(--brand-600) }
+    .foot-bottom-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding: 14px 0; color:#cfe8d2 }
+
+    .btn.backtotop{position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom)); display:none; z-index:260; border:1px solid var(--line); background:#fff; font-weight:900; padding:10px 16px; border-radius:999px}
+
+    /* Reveal */
+    [data-reveal]{opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1)}
+    .is-visible{opacity:1; transform:translateY(0)}
+
+    @media (prefers-reduced-motion: reduce){
+      [data-reveal]{transition:none}
+      .hero .media img{transform:none}
+    }
+    @media (max-width:1120px){
+      .sectors{grid-template-columns: repeat(2,1fr)}
+      .docs{grid-template-columns: repeat(2,1fr)}
+      .gallery{grid-template-columns: repeat(2,1fr)}
+    }
+    @media (max-width:900px){
+      .menu{display:none}
+      .utils .hamburger{display:inline-flex}
+      .contact-grid{grid-template-columns:1fr}
+    }
+    @media (min-width:901px){ .utils .hamburger{display:none} }
+    @media (max-width:640px){
+      .docs, .gallery{grid-template-columns:1fr}
+      .mosaic{grid-template-columns:1fr; grid-auto-rows:200px}
+      .partners-grid{ grid-template-columns: repeat(3,1fr) }
+      .foot-bottom-row{ flex-direction:column; text-align:center }
+      .hero .media{ min-height:54vh }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Progress bar -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header id="siteHeader">
+    <div class="container nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="index.html">
+        <img class="logo-img" src="assets/img/logo1.png" alt="Dadaba Group logo" width="80" height="80" loading="eager">
+        <span>Dadaba Group</span>
+      </a>
+      <ul class="menu">
+        <li><a href="about.html">About</a></li>
+        <li><a href="businesses.html">Businesses</a></li>
+        <li><a href="investors.html">Investors</a></li>
+        <li><a href="media.html" aria-current="page">Updates</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="utils">
+        <button class="btn-icon hamburger" id="openDrawer" aria-expanded="false" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-panel" role="dialog" aria-label="Mobile menu">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="brand" style="gap:8px; font-weight:900">
+          <img src="assets/img/logo2.png" width="32" height="32" alt="Dadaba Group logo" style="border-radius:8px">
+          Dadaba Group
+        </div>
+        <button class="btn" id="closeDrawer" style="border:1px solid var(--line); border-radius:10px; padding:8px 12px; font-weight:800; background:#f6f7f4; cursor:pointer">Close</button>
+      </div>
+      <div style="margin-top:10px">
+        <a href="about.html" class="badge" onclick="toggleDrawer(false)">About</a>
+        <a href="businesses.html" class="badge" onclick="toggleDrawer(false)">Businesses</a>
+        <a href="investors.html" class="badge" onclick="toggleDrawer(false)">Investors</a>
+        <a href="media.html" class="badge" onclick="toggleDrawer(false)">Updates</a>
+        <a href="careers.html" class="badge" onclick="toggleDrawer(false)">Careers</a>
+        <a href="contact.html" class="badge" onclick="toggleDrawer(false)">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Investor visual intro">
+    <div class="media">
+      <!-- Replace with your hero stock image -->
+      <img src="assets/stock/hero.jpg" alt="Our recent work and projects" loading="eager">
+    </div>
+    <div class="content">
+      <div class="inner">
+        <span class="eyebrow">Investor Visual Overview</span>
+        <h1 class="headline">Real assets & climate solutions — in pictures</h1>
+        <p class="subhead">Browse image-led highlights from our core businesses. Formal press will follow; for diligence, see key docs below or contact IR.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#gallery">View gallery</a>
+          <a class="btn" href="#docs">Download investor docs</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Mosaic (hero montage) -->
+  <section class="section container" id="mosaic">
+    <h2 class="section-title" data-reveal>Snapshot</h2>
+    <p class="lead" data-reveal>A quick, visual sense of our footprint.</p>
+    <div class="mosaic">
+      <!-- Replace all src with your stock images -->
+      <figure class="tile big" data-reveal>
+        <img src="assets/stock/mosaic-1.jpg" alt="Mixed-use real estate exterior" loading="lazy">
+        <div class="overlay"><span class="chip">Real Estate</span></div>
+      </figure>
+      <figure class="tile" data-reveal>
+        <img src="assets/stock/mosaic-2.jpg" alt="Agroforestry canopy" loading="lazy">
+        <div class="overlay"><span class="chip">Carbon Hub</span></div>
+      </figure>
+      <figure class="tile" data-reveal>
+        <img src="assets/stock/mosaic-3.jpg" alt="Exploration site" loading="lazy">
+        <div class="overlay"><span class="chip">Mining</span></div>
+      </figure>
+      <figure class="tile wide" data-reveal>
+        <img src="assets/stock/mosaic-4.jpg" alt="Community health outreach" loading="lazy">
+        <div class="overlay"><span class="chip">Foundation</span></div>
+      </figure>
+      <figure class="tile" data-reveal>
+        <img src="assets/stock/mosaic-5.jpg" alt="Smart farming operations" loading="lazy">
+        <div class="overlay"><span class="chip">Prestige</span></div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Sectors as image cards -->
+  <section class="section container" id="sectors">
+    <h2 class="section-title" data-reveal>Core businesses</h2>
+    <p class="lead" data-reveal>High-level visual overview across sectors.</p>
+    <div class="sectors">
+      <a class="sector" href="subsidiaries/dadaba-estate.html" data-reveal>
+        <img src="assets/stock/sector-estate.jpg" alt="Residential & mixed-use developments" loading="lazy">
+        <div class="grad"></div>
+        <div class="label">Dadaba Estate</div>
+      </a>
+      <a class="sector" href="subsidiaries/dadaba-carbon-hub.html" data-reveal>
+        <img src="assets/stock/sector-carbon.jpg" alt="Nature-based climate projects" loading="lazy">
+        <div class="grad"></div>
+        <div class="label">Carbon Hub</div>
+      </a>
+      <a class="sector" href="subsidiaries/dadaba-mining.html" data-reveal>
+        <img src="assets/stock/sector-mining.jpg" alt="Exploration and responsible operations" loading="lazy">
+        <div class="grad"></div>
+        <div class="label">Mining</div>
+      </a>
+      <a class="sector" href="subsidiaries/dadaba-prestige.html" data-reveal>
+        <img src="assets/stock/sector-prestige.jpg" alt="Agritech & precision inputs" loading="lazy">
+        <div class="grad"></div>
+        <div class="label">Dadaba Prestige</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Filterable Gallery with Lightbox -->
+  <section class="section container" id="gallery">
+    <h2 class="section-title" data-reveal>Gallery</h2>
+    <div class="filters" data-reveal>
+      <button class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+      <button class="filter-btn" data-filter="estate">Real Estate</button>
+      <button class="filter-btn" data-filter="carbon">Carbon</button>
+      <button class="filter-btn" data-filter="mining">Mining</button>
+      <button class="filter-btn" data-filter="prestige">Prestige</button>
+      <button class="filter-btn" data-filter="community">Community</button>
+    </div>
+
+    <div class="gallery" id="galleryGrid">
+      <!-- Replace images; keep data-tags for filtering -->
+      <figure class="g-item" data-tags="estate">
+        <img src="assets/stock/g-01.jpg" alt="Residential courtyard" loading="lazy">
+        <figcaption class="g-cap">Courtyard — estate</figcaption>
+      </figure>
+      <figure class="g-item" data-tags="estate">
+        <img src="assets/stock/g-02.jpg" alt="Retail frontage" loading="lazy">
+        <figcaption class="g-cap">Retail frontage</figcaption>
+      </figure>
+      <figure class="g-item" data-tags="carbon">
+        <img src="assets/stock/g-03.jpg" alt="Mangrove restoration" loading="lazy">
+        <figcaption class="g-cap">Mangrove restoration</figcaption>
+      </figure>
+      <figure class="g-item" data-tags="mining">
+        <img src="assets/stock/g-04.jpg" alt="Core samples" loading="lazy">
+        <figcaption class="g-cap">Core samples</figcaption>
+      </figure>
+      <figure class="g-item" data-tags="prestige">
+        <img src="assets/stock/g-05.jpg" alt="Smart irrigation" loading="lazy">
+        <figcaption class="g-cap">Smart irrigation</figcaption>
+      </figure>
+      <figure class="g-item" data-tags="community">
+        <img src="assets/stock/g-06.jpg" alt="Scholarship award day" loading="lazy">
+        <figcaption class="g-cap">Scholarships</figcaption>
+      </figure>
+      <figure class="g-item" data-tags="carbon">
+        <img src="assets/stock/g-07.jpg" alt="Agroforestry seedlings" loading="lazy">
+        <figcaption class="g-cap">Seedlings</figcaption>
+      </figure>
+      <figure class="g-item" data-tags="mining">
+        <img src="assets/stock/g-08.jpg" alt="Exploration camp" loading="lazy">
+        <figcaption class="g-cap">Exploration camp</figcaption>
+      </figure>
+      <figure class="g-item" data-tags="community">
+        <img src="assets/stock/g-09.jpg" alt="Clinic partnership" loading="lazy">
+        <figcaption class="g-cap">Community health</figcaption>
+      </figure>
+      <figure class="g-item" data-tags="estate">
+        <img src="assets/stock/g-10.jpg" alt="Interior model unit" loading="lazy">
+        <figcaption class="g-cap">Model interior</figcaption>
+      </figure>
+      <figure class="g-item" data-tags="prestige">
+        <img src="assets/stock/g-11.jpg" alt="Soil analytics in field" loading="lazy">
+        <figcaption class="g-cap">Soil analytics</figcaption>
+      </figure>
+      <figure class="g-item" data-tags="carbon">
+        <img src="assets/stock/g-12.jpg" alt="Clean cookstove deployment" loading="lazy">
+        <figcaption class="g-cap">Clean cooking</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Key documents (use cover images of PDFs if you have them) -->
+  <section class="section container" id="docs">
+    <h2 class="section-title" data-reveal>Key documents</h2>
+    <p class="lead" data-reveal>Download the deck, ESG report and our Code of Ethics.</p>
+    <div class="docs">
+      <article class="doc" data-reveal>
+        <img src="assets/stock/doc-deck.jpg" alt="Investor deck cover" loading="lazy">
+        <div class="doc-body">
+          <h4>Investor Presentation — Q2 2025</h4>
+          <p>Presentation • 2025 • 3.4 MB</p>
+        </div>
+        <div class="doc-actions">
+          <a class="btn doc" href="assets/reports/Dadaba_Investor_Presentation_Q2_2025.pdf" download>Download</a>
+          <a class="btn doc" href="mailto:investors@dadabagroup.com?subject=Send%20me:%20Investor%20Presentation%20Q2%202025">Email me</a>
+        </div>
+      </article>
+
+      <article class="doc" data-reveal>
+        <img src="assets/stock/doc-esg.jpg" alt="ESG report cover" loading="lazy">
+        <div class="doc-body">
+          <h4>ESG Report 2025</h4>
+          <p>ESG Report • 2025 • 6.1 MB</p>
+        </div>
+        <div class="doc-actions">
+          <a class="btn doc" href="assets/reports/Dadaba_ESG_Report_2025.pdf" download>Download</a>
+          <a class="btn doc" href="mailto:investors@dadabagroup.com?subject=Send%20me:%20ESG%20Report%202025">Email me</a>
+        </div>
+      </article>
+
+      <article class="doc" data-reveal>
+        <img src="assets/stock/doc-ethics.jpg" alt="Code of Ethics cover" loading="lazy">
+        <div class="doc-body">
+          <h4>Code of Ethics & Business Conduct</h4>
+          <p>Policy • 2024 • 0.9 MB</p>
+        </div>
+        <div class="doc-actions">
+          <a class="btn doc" href="assets/reports/Dadaba_Code_of_Ethics.pdf" download>Download</a>
+          <a class="btn doc" href="mailto:investors@dadabagroup.com?subject=Send%20me:%20Code%20of%20Ethics">Email me</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- IR contact -->
+  <section class="section container" id="ir">
+    <h2 class="section-title" data-reveal>Contact Investor Relations</h2>
+    <div class="contact-grid">
+      <div class="contact-card" data-reveal>
+        <p><strong>Email:</strong> <a href="mailto:investors@dadabagroup.com">investors@dadabagroup.com</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+233000000000">+233 (0) 00 000 0000</a></p>
+        <p><strong>Address:</strong> East Legon, Boundary Rd, Accra</p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
+          <a class="btn primary" href="mailto:investors@dadabagroup.com?subject=Investor%20enquiry">Email IR</a>
+          <a class="btn" href="#docs">Browse docs</a>
+        </div>
+      </div>
+      <div class="contact-card" data-reveal>
+        <p><strong>Investor list</strong> — quarterly letters and event invites.</p>
+        <form onsubmit="event.preventDefault(); alert('Thanks! You are subscribed.');" style="display:grid; gap:10px">
+          <input type="email" required placeholder="Email" aria-label="Email" style="height:48px; border:1px solid var(--line); border-radius:12px; padding:0 12px; font-weight:700">
+          <button class="btn primary" type="submit">Subscribe</button>
+        </form>
+        <small class="muted">Unsubscribe any time.</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners -->
+  <section class="partners">
+    <div class="container">
+      <div class="partners-head" data-reveal>FEATURED PARTNERS AND SPONSORS</div>
+      <div class="partners-grid">
+        <div class="partner-tile" data-reveal><img src="assets/img/NYA.webp" alt="Partner 1"></div>
+        <div class="partner-tile" data-reveal><img src="assets/img/sbpafricalogo2.png" alt="Partner 2"></div>
+        <div class="partner-tile" data-reveal><img src="assets/img/ghb.png" alt="Partner 3"></div>
+        <div class="partner-tile" data-reveal><img src="assets/img/COP28_BrandMark_Horizontal_2line_English+(1).png" alt="Partner 4"></div>
+        <div class="partner-tile" data-reveal><img src="assets/img/gro.jpg" alt="Partner 5"></div>
+        <div class="partner-tile" data-reveal><img src="assets/img/ampath.webp" alt="Partner 6"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-main">
+      <div class="container">
+        <div class="footer-grid" id="footerGrid">
+          <div class="foot-col" data-reveal>
+            <div class="foot-brand">
+              <img class="logo-img" src="assets/img/logo2.png" alt="Dadaba Group logo" width="64" height="64" style="width:64px;height:64px;border-radius:8px">
+              <strong>Dadaba Group</strong>
+            </div>
+            <p class="foot-tag">A diversified group advancing sustainable development across Africa and the world.</p>
+          </div>
+          <div class="foot-col" data-reveal>
+            <h4>Head Office — Ghana</h4>
+            <ul class="foot-links">
+              <li>East Legon, Boundary Rd, Accra</li>
+              <li>P.O. Box LG 1234, Legon</li>
+              <li><a href="tel:+233000000000">+233 (0) 00 000 0000</a></li>
+              <li><a href="mailto:info@dadabagroup.com">info@dadabagroup.com</a></li>
+            </ul>
+          </div>
+          <div class="foot-col" data-reveal>
+            <h4>Quick Links</h4>
+            <ul class="foot-links">
+              <li><a href="investors.html">Investors</a></li>
+              <li><a href="#docs">Investor Docs</a></li>
+              <li><a href="sustainability.html#reports">ESG Reports</a></li>
+            </ul>
+          </div>
+          <div class="foot-col" data-reveal>
+            <h4>Legal</h4>
+            <ul class="foot-links">
+              <li><a href="legal.html">Legal</a></li>
+              <li><a href="privacy.html">Privacy</a></li>
+              <li><a href="terms.html">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <form class="newsletter-wide" action="#" onsubmit="event.preventDefault(); alert('Subscribed: ' + this.email.value)" data-reveal>
+          <div class="newsletter-row">
+            <span class="nl-label">Subscribe To Our Newsletter</span>
+            <input type="email" name="email" required placeholder="Enter your email" aria-label="Email" />
+            <button type="submit">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container foot-bottom-row">
+        <div>© <span id="year"></span> Dadaba Group — All rights reserved</div>
+        <nav class="foot-legal">
+          <a href="legal.html">Legal</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <button class="btn backtotop" id="backToTop" aria-label="Back to top">↑ Top</button>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lb-inner">
+      <div class="lb-media"><img id="lbImg" alt=""></div>
+      <div class="lb-cap"><div id="lbCaption"></div></div>
+      <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+      <button class="lb-btn lb-next" id="lbNext" aria-label="Next">›</button>
+      <button class="lb-btn lb-close" id="lbClose" aria-label="Close">✕</button>
+    </div>
+  </div>
+
+<script>
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Year
+  (function(){ const y = document.getElementById('year'); if(y && !y.textContent) y.textContent = new Date().getFullYear(); })();
+
+  // Header shadow + progress
+  const header = document.getElementById('siteHeader');
+  const progress = document.getElementById('scrollProgress');
+  const onScrollDecor = ()=>{
+    const y = window.scrollY || document.documentElement.scrollTop;
+    header.classList.toggle('scrolled', y>4);
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (h>0 ? (y / h) * 100 : 0) + '%';
+  };
+  window.addEventListener('scroll', onScrollDecor, {passive:true});
+  onScrollDecor();
+
+  // Drawer
+  const body = document.body;
+  function lockScroll(){ body.style.overflow='hidden'; body.style.touchAction='none'; }
+  function unlockScroll(){ body.style.overflow=''; body.style.touchAction=''; }
+  function toggleDrawer(show){
+    const el = document.getElementById('drawer'); if(!el) return;
+    el.setAttribute('aria-hidden', show? 'false':'true');
+    el.style.display = show ? 'block' : 'none';
+    document.getElementById('openDrawer')?.setAttribute('aria-expanded', show? 'true':'false');
+    show ? lockScroll() : unlockScroll();
+  }
+  document.getElementById('openDrawer')?.addEventListener('click', ()=>toggleDrawer(true));
+  document.getElementById('closeDrawer')?.addEventListener('click', ()=>toggleDrawer(false));
+  document.getElementById('drawer')?.addEventListener('click', (e)=>{ if(e.target.id==='drawer') toggleDrawer(false) });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ toggleDrawer(false); closeLightbox(); } });
+
+  // Parallax hero
+  (function(){
+    const heroImg = document.querySelector('.hero .media img');
+    const heroSection = document.querySelector('.hero');
+    function parallaxTick(){
+      if(!heroImg || !heroSection || prefersReduced){ return; }
+      const rect = heroSection.getBoundingClientRect();
+      const viewH = window.innerHeight || 0;
+      const prog = 1 - Math.min(Math.max((rect.bottom) / (rect.height + viewH), 0), 1);
+      heroImg.style.setProperty('--parallax', (prog * 24).toFixed(1)+'px');
+    }
+    window.addEventListener('scroll', ()=>{ requestAnimationFrame(parallaxTick); }, {passive:true});
+    window.addEventListener('resize', parallaxTick);
+    parallaxTick();
+  })();
+
+  // Reveal on scroll
+  const revealEls = Array.from(document.querySelectorAll('[data-reveal]'));
+  const ioReveal = new IntersectionObserver((entries, obs)=>{
+    entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('is-visible'); obs.unobserve(entry.target); } });
+  }, {threshold:0.16, rootMargin:'0px 0px -40px 0px'});
+  revealEls.forEach(el=> ioReveal.observe(el));
+
+  // Back to top
+  const btt = document.getElementById('backToTop');
+  window.addEventListener('scroll', ()=>{ btt.style.display = window.scrollY>600 ? 'inline-flex':'none'; });
+  btt.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
+
+  // Gallery filtering
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const items = Array.from(document.querySelectorAll('.g-item'));
+  function applyFilter(tag){
+    items.forEach(fig=>{
+      const tags = (fig.dataset.tags||'').split(',').map(t=>t.trim());
+      fig.style.display = (tag==='all' || tags.includes(tag)) ? '' : 'none';
+    });
+  }
+  filterBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      filterBtns.forEach(b=>b.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+      applyFilter(btn.dataset.filter);
+    });
+  });
+
+  // Lightbox
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCaption = document.getElementById('lbCaption');
+  const lbPrev = document.getElementById('lbPrev');
+  const lbNext = document.getElementById('lbNext');
+  const lbClose = document.getElementById('lbClose');
+  let currentIndex = -1;
+  function openLightbox(i){
+    currentIndex = i;
+    const target = items.filter(el => el.style.display !== 'none')[currentIndex];
+    if(!target) return;
+    const img = target.querySelector('img');
+    const cap = target.querySelector('.g-cap')?.textContent || img.alt || '';
+    lbImg.src = img.src;
+    lbImg.alt = img.alt || '';
+    lbCaption.textContent = cap;
+    lb.setAttribute('aria-hidden','false');
+    lockScroll();
+  }
+  function closeLightbox(){
+    lb.setAttribute('aria-hidden','true');
+    lbImg.src = '';
+    unlockScroll();
+  }
+  function nextLightbox(dir){
+    const visible = items.filter(el => el.style.display !== 'none');
+    if(!visible.length) return;
+    currentIndex = (currentIndex + dir + visible.length) % visible.length;
+    const img = visible[currentIndex].querySelector('img');
+    const cap = visible[currentIndex].querySelector('.g-cap')?.textContent || img.alt || '';
+    lbImg.src = img.src; lbImg.alt = img.alt || ''; lbCaption.textContent = cap;
+  }
+  items.forEach((fig, i)=> fig.addEventListener('click', ()=> openLightbox( items.filter(el => el.style.display !== 'none').indexOf(fig) )));
+  lbPrev.addEventListener('click', ()=> nextLightbox(-1));
+  lbNext.addEventListener('click', ()=> nextLightbox(1));
+  lbClose.addEventListener('click', closeLightbox);
+  lb.addEventListener('click', (e)=>{ if(e.target.id==='lightbox') closeLightbox(); });
+  document.addEventListener('keydown', (e)=>{
+    if(lb.getAttribute('aria-hidden')==='false'){
+      if(e.key==='Escape') closeLightbox();
+      if(e.key==='ArrowLeft') nextLightbox(-1);
+      if(e.key==='ArrowRight') nextLightbox(1);
+    }
+  });
+
+  // Image fallback loader (webp/jpg/png)
+  (function(){
+    function fallbackChain(src){
+      const url = new URL(src, location.href);
+      const name = url.pathname.split('/').pop() || '';
+      const dot = name.lastIndexOf('.');
+      const base = dot > -1 ? name.slice(0, dot) : name;
+      const ext  = dot > -1 ? name.slice(dot+1).toLowerCase() : '';
+      const exts = ['webp','jpg','jpeg','png'];
+      const ordered = [ext, ...exts.filter(e=>e!==ext)];
+      const folder = url.pathname.slice(0, url.pathname.length - name.length);
+      return ordered.map(e => folder + base + '.' + e);
+    }
+    function wire(img){
+      if(!img) return;
+      if(img.complete && img.naturalWidth) return;
+      const tried = new Set([img.getAttribute('src')]);
+      const candidates = fallbackChain(img.getAttribute('src'));
+      img.addEventListener('error', ()=>{
+        let next = null;
+        for(const cand of candidates){
+          const abs = new URL(cand, location.href).pathname;
+          if(!tried.has(abs)){ next = cand; break; }
+        }
+        if(next){ tried.add(next); img.src = next; }
+      });
+    }
+    document.querySelectorAll('img').forEach(wire);
+  })();
+</script>
+</body>
+</html>
