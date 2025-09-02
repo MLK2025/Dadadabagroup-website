@@ -115,23 +115,30 @@
     .section-title{font-size: clamp(24px,3.2vw,34px); margin:0 0 10px; font-weight:900}
     .lead{color:#3a3d40; margin:0 0 14px}
 
-    /* ===== Core Businesses ===== */
+    /* ===== Core Businesses (light theme) ===== */
     .core-grid{display:grid; grid-template-columns: repeat(2,1fr); gap:18px}
-    .core-card{position:relative; overflow:hidden; border-radius:18px; background:#0d201c; color:#e7f6ea; border:1px solid #d9ffd3; box-shadow:0 20px 44px rgba(15,74,19,.22); display:grid; grid-template-rows:auto 1fr auto; transition:transform .35s ease, box-shadow .35s ease}
-    .core-card:hover{ transform:translateY(-6px); box-shadow:0 24px 56px rgba(15,74,19,.28) }
-    .core-media{position:relative; aspect-ratio:16/9; overflow:hidden; background:#153a2b}
-    .core-media img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.92; transition:opacity .35s ease, transform .6s ease}
+    .core-card{
+      position:relative; overflow:hidden; border-radius:18px;
+      background:#f4fbf6; /* lightened */
+      color:#0f1a14; border:1px solid #d9ffd3;
+      box-shadow:0 14px 30px rgba(15,74,19,.10);
+      display:grid; grid-template-rows:auto 1fr auto;
+      transition:transform .35s ease, box-shadow .35s ease
+    }
+    .core-card:hover{ transform:translateY(-6px); box-shadow:0 20px 44px rgba(15,74,19,.14) }
+    .core-media{position:relative; aspect-ratio:16/9; overflow:hidden; background:#e9f5ef}
+    .core-media img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.96; transition:opacity .35s ease, transform .6s ease}
     .core-card:hover .core-media img{ transform:scale(1.03) }
-    .core-media::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.22))}
+    .core-media::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.10))}
     .badge{position:absolute; top:10px; left:10px; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:900; background:var(--accent); color:#0b2b08; border:1px solid #aeea27; letter-spacing:.04em}
     .core-body{padding:16px 16px 4px}
-    .core-body .kicker{font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#c9f6cf; font-weight:800; opacity:.9}
-    .core-body h3{margin:8px 0 6px; color:#ffffff}
-    .core-body .desc{color:#dff6e3; margin:0 0 10px}
-    .core-foot{display:flex; justify-content:space-between; align-items:center; padding:12px 16px 16px; border-top:1px solid rgba(255,255,255,.12)}
+    .core-body .kicker{font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#2b5731; font-weight:800; opacity:.9}
+    .core-body h3{margin:8px 0 6px; color:#0f1a14}
+    .core-body .desc{color:#3a3d40; margin:0 0 10px}
+    .core-foot{display:flex; justify-content:space-between; align-items:center; padding:12px 16px 16px; border-top:1px solid rgba(16,26,20,.08)}
     .core-link{font-weight:900; color:#101b12; background:var(--accent); border:1.5px solid var(--accent); padding:10px 14px; border-radius:999px}
     .core-link:hover{filter:brightness(.95)}
-    .core-ghost{font-weight:800; padding:10px 14px; border-radius:999px; border:1.5px solid rgba(255,255,255,.24); color:#e7f6ea}
+    .core-ghost{font-weight:800; padding:10px 14px; border-radius:999px; border:1.5px solid rgba(16,26,20,.18); color:#1a2a1f}
 
     /* ===== Other Verticals ===== */
     .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
@@ -498,6 +505,23 @@
           <a class="core-ghost" href="contact.html">Partner with us</a>
         </div>
       </article>
+
+      <!-- NEW: Dadaba Recruitment as Core -->
+      <article class="core-card" data-reveal>
+        <div class="core-media">
+          <span class="badge">Core</span>
+          <img src="assets/img/workforce.jpg" alt="Dadaba Recruitment Agency — Talent & Workforce Solutions" loading="lazy" decoding="async">
+        </div>
+        <div class="core-body">
+          <span class="kicker">Talent & Workforce</span>
+          <h3>Dadaba Recruitment Agency</h3>
+          <p class="desc">Placing skilled and unskilled talent across sectors, powering growth for clients across Africa and Europe.</p>
+        </div>
+        <div class="core-foot">
+          <a class="core-link" href="subsidiaries/dadaba-recruitment.html">Visit Recruitment</a>
+          <a class="core-ghost" href="careers.html">Careers</a>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -573,9 +597,7 @@
       </article>
     </div>
 
-    <div style="margin-top:16px" data-reveal>
-      <a class="btn" href="subsidiaries/dadaba-estate.html" style="display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;border-radius:999px;border:1.5px solid var(--brand);font-weight:800;color:var(--brand)">View all subsidiaries</a>
-    </div>
+    <!-- Removed the "View all subsidiaries" button per request -->
   </main>
 
   <!-- ===== Partners ===== -->
@@ -719,6 +741,7 @@
     addIndex('Core: Dadaba Mining Ltd', 'subsidiaries/dadaba-mining.html', 'Responsible minerals development.');
     addIndex('Core: Dadaba Prestige (Smart Farming)', 'subsidiaries/dadaba-prestige.html', 'Precision agriculture & value chains.');
     addIndex('Core: Dadaba Foundation', 'dadaba-foundation.html', 'Education, health and livelihoods.');
+    addIndex('Core: Dadaba Recruitment Agency', 'subsidiaries/dadaba-recruitment.html', 'Talent & workforce solutions.'); // NEW
 
     [['#infrastructure','Infrastructure'],['#energy','Energy & Utilities'],['#football','Football'],['#d2c','Direct to Consumer'],['#digital','Media & Digital']]
       .forEach(([sel,title])=>{
@@ -745,7 +768,7 @@
     const hits = q
       ? searchIndex.filter(it => (it.title + ' ' + it.excerpt).toLowerCase().includes(q)).slice(0,10)
       : [
-          {title:'Core Businesses', url:'#core', excerpt:'Estate, Carbon Hub, Mining, Prestige, Foundation'},
+          {title:'Core Businesses', url:'#core', excerpt:'Estate, Carbon Hub, Mining, Prestige, Foundation, Recruitment'},
           {title:'About', url:'about.html', excerpt:'Overview, leadership and journey'},
           {title:'Sustainability', url:'sustainability.html', excerpt:'ESG pillars and disclosures'},
           {title:'Contact', url:'contact.html', excerpt:'Get in touch'}
