@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Terms of Use — Dadaba Group</title>
+  <meta name="description" content="Terms of Use for Dadaba Group websites and services." />
+
+  <!-- Font perf -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --font:"Manrope",system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      --brand:#0f4a13; --brand-600:#0b3a0e; --accent:#d6ff3f;
+      --ink:#0f1a14; --muted:#5c5f63; --bg:#ffffff;
+      --line:#ece9df; --line-strong:#dddcd7;
+      --container:1160px; --nav-h:78px; --radius:16px; --shadow:0 12px 28px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{margin:0;padding:0;max-width:100vw;overflow-x:hidden}
+    body{font-family:var(--font); color:var(--ink); background:var(--bg); line-height:1.6}
+    img{max-width:100%; display:block}
+    a{color:inherit; text-decoration:none}
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+
+    .container{width:min(var(--container), 100% - 32px); margin-inline:auto}
+    .auto-visibility{content-visibility:auto; contain-intrinsic-size:800px}
+    .scroll-progress{position:fixed; inset:0 0 auto 0; height:3px; background:linear-gradient(90deg,var(--accent),#baff7a); width:0%; z-index:300; transform-origin:left center}
+
+    /* Header / Nav (matched to previous page) */
+    header{position:sticky; top:0; z-index:280; background:#fff; border-bottom:1px solid var(--line); transition:box-shadow .25s ease, background .25s ease; padding-top:env(safe-area-inset-top)}
+    header.scrolled{box-shadow:0 10px 24px rgba(0,0,0,.06)}
+    .nav{height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:900}
+    .logo-img{ width:84px; height:84px; border-radius:8px; object-fit:cover }
+    .logo-img.small{ width:80px; height:80px }
+    .menu{display:flex; align-items:center; gap:18px; list-style:none; padding:0; margin:0}
+    .menu>li{position:relative}
+    .menu a, .menu button{font-weight:700; color:#18201b}
+    .menu a[aria-current="page"]{color:var(--brand)}
+    .menu button{display:flex; align-items:center; gap:6px; border:0; background:transparent; padding:10px 8px; border-radius:10px; cursor:pointer}
+    .menu button:hover, .menu a:hover{background:#f6f7f4}
+    .menu svg{width:14px; height:14px; stroke:currentColor; fill:none}
+    .mega{display:none; position:absolute; top:calc(100% + 6px); left:0; background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:18px; min-width:520px; grid-template-columns:1fr 1fr; gap:18px; z-index:290}
+    .has-mega>button[aria-expanded="true"] + .mega{display:grid}
+    .mega .col h4{margin:0 0 8px; font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); font-weight:800}
+    .mega .col a{display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-radius:10px; color:#132017; border:1px solid transparent; font-weight:700}
+    .mega .col a:hover{background:#f6f7f4; border-color:#eef0ea}
+    .mega .col a svg{width:18px; height:18px}
+    .utils{display:flex; align-items:center; gap:10px}
+    .btn-icon{display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:12px; border:1px solid var(--line); background:#fff; cursor:pointer}
+    .btn-icon:hover{background:#f6f7f4}
+
+    /* Overlays */
+    .search-overlay{position:fixed; inset:0; background:rgba(0,0,0,.48); display:none; align-items:center; justify-content:center; padding:20px; z-index:400}
+    .search-box{background:#fff; width:min(720px, 94%); border-radius:16px; padding:16px; border:1px solid var(--line)}
+    .search-box form{display:grid; grid-template-columns:1fr auto auto; gap:10px; align-items:center}
+    .search-box input{height:48px; border-radius:999px; border:1px solid var(--line); padding:0 14px}
+    .search-box button{height:48px; border-radius:999px; border:0; padding:0 18px; font-weight:900; cursor:pointer}
+    .search-box button[type="submit"]{background:var(--brand); color:#fff}
+    .search-box .btn{background:#f1f5ec}
+    .results{margin-top:12px; border-top:1px solid var(--line); padding-top:10px; max-height:52vh; overflow:auto}
+    .result{display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border:1px solid #f0f1ec; border-radius:12px; margin:8px 0; color:#0f1a14; font-weight:700}
+    .result:hover{background:#f6f7f4; border-color:#e8ebe4}
+
+    .drawer{position:fixed; inset:0; display:none; z-index:380}
+    .drawer::before{content:""; position:absolute; inset:0; background:rgba(0,0,0,.48)}
+    .drawer-panel{position:absolute; right:0; top:0; bottom:0; width:min(92vw, 380px); background:#fff; padding:16px; border-left:1px solid var(--line); overflow:auto; padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+    .drawer .badge{display:block; padding:12px 10px; margin:4px 0; border:1px solid var(--line); border-radius:12px; font-weight:800}
+    .drawer .btn{height:40px; padding:0 14px; border-radius:10px; border:1px solid var(--line); background:#f6f7f4; font-weight:800; cursor:pointer}
+    .accordion details{border:1px solid var(--line); border-radius:12px; padding:6px 10px; margin:8px 0}
+    .accordion summary{cursor:pointer; font-weight:800}
+    .accordion a{display:block; padding:8px 6px; border-radius:8px; font-weight:700}
+    .accordion a:hover{background:#f6f7f4}
+
+    /* Hero */
+    .hero{position:relative; background:#0b2726; color:#fff; overflow:hidden}
+    .hero .media{position:relative; width:100%; min-height:46vh; background:#0b2726; overflow:hidden}
+    .hero .media img.cover{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; will-change:transform; transform:translateY(var(--parallax,0px)) scale(1.05)}
+    .hero .media::after{content:""; position:absolute; inset:0; background:linear-gradient(120deg, rgba(18,71,1,.55), rgba(11,39,38,.55))}
+    .hero .content{position:absolute; inset:0; display:flex; align-items:center; z-index:2}
+    .hero .inner{width:min(1100px,92%); margin:0 auto; display:grid; gap:8px; padding: clamp(18px,3.6vw,32px)}
+    .hero .eyebrow{letter-spacing:.18em; text-transform:uppercase; opacity:.92; font-weight:800; font-size:12px}
+    .hero .headline{font-size:clamp(26px,4vw,44px); line-height:1.15; font-weight:900; margin:2px 0}
+    .hero .subhead{max-width:62ch; opacity:.98}
+
+    /* Page layout */
+    .section{padding: clamp(26px,4vw,40px) 0}
+    .legal-wrap{display:grid; grid-template-columns: 280px 1fr; gap:20px}
+    .toc{position:sticky; top:calc(var(--nav-h) + 16px); align-self:start; border:1px solid var(--line); border-radius:14px; padding:12px; background:#fff}
+    .toc h3{margin:4px 0 8px; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+    .toc a{display:block; padding:8px 10px; border-radius:10px; font-weight:800; color:#0f1a14}
+    .toc a:hover{background:#f6f7f4}
+    .toc a[aria-current="true"]{background:#e8f7ea; border:1px solid #d5f2d7}
+    .last-updated{color:#3a3d40}
+    .legal h2{margin:4px 0 10px; font-size:22px}
+    .legal h3{margin:14px 0 6px; font-size:18px}
+    .legal p{margin:8px 0; color:#333}
+    .inline-list{margin:8px 0; padding-left:18px}
+    .inline-list li{margin:4px 0}
+    .note{background:#f9faf7; border:1px solid var(--line); border-radius:12px; padding:12px}
+    .callout{border-left:4px solid var(--brand); padding:8px 12px; background:#f6fbf6; border-radius:8px}
+
+    .btn{display:inline-flex; align-items:center; justify-content:center; padding:10px 14px; border-radius:999px; border:1.5px solid var(--brand); background:#fff; color:#0f1a14; font-weight:900; cursor:pointer}
+    .btn.primary{background:var(--brand); color:#fff}
+    .btn.neutral{border-color:var(--line)}
+    .btn.backtotop{position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom)); display:none; z-index:260}
+
+    /* Partners + Footer */
+    .partners{ padding: 16px 0 clamp(40px,6vw,64px) }
+    .partners-head{text-align:center; font-weight:800; letter-spacing:.18em; color:#5c5f63; font-size:12px; margin-bottom:16px}
+    .partners-grid{display:grid; gap:14px; grid-template-columns: repeat(6,1fr)}
+    .partner-tile{background:#fff; border:1px solid var(--line); border-radius:12px; display:flex; align-items:center; justify-content:center; height:76px; padding:12px; transition:transform .25s ease}
+    .partner-tile:hover{transform:translateY(-2px)}
+    .partner-tile img{ max-height:42px; max-width:100%; object-fit:contain }
+
+    .site-footer{ color:#e6f4ea }
+    .footer-main{ background:var(--brand); padding: clamp(28px,5vw,48px) 0 }
+    .footer-grid{display:grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: clamp(16px,2.8vw,32px); align-items:start}
+    .foot-col h4{font-size:16px; margin: 6px 0 12px; color:#eaf8ee; font-weight:800}
+    .foot-brand{ display:flex; align-items:center; gap:10px; margin-bottom:8px }
+    .foot-brand strong{ font-weight:900; font-size:18px }
+    .foot-tag{ color:#cfe8d2; margin:0 0 12px }
+    .foot-links{ list-style:none; padding:0; margin:0 }
+    .foot-links li{ margin: 8px 0 }
+    .foot-links a{ color:#e6f4ea; text-decoration:none }
+    .foot-links a:hover{ text-decoration:underline }
+    .newsletter-wide{ margin-top: clamp(20px,3vw,28px); background:var(--brand-600); border:1px solid rgba(255,255,255,.10); border-radius:16px; padding:12px }
+    .newsletter-row{ display:grid; grid-template-columns: 1fr auto auto; gap:12px; align-items:center }
+    .newsletter-row .nl-label{ font-weight:800; white-space:nowrap; font-size:14px }
+    .newsletter-row input{ min-width: 260px; height:48px; border-radius:999px; border:0; padding:0 16px; color:#111; background:#fff }
+    .newsletter-row button{ height:48px; border-radius:999px; border:0; padding:0 22px; font-weight:900; cursor:pointer; background:var(--accent); color:#0b2b08 }
+    .newsletter-row button:hover{ filter:brightness(.95) }
+    .footer-bottom{ background:var(--brand-600) }
+    .foot-bottom-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding: 14px 0; color:#cfe8d2; flex-wrap:wrap }
+    .foot-legal a{ color:#cfe8d2; text-decoration:none; margin-left:14px }
+    .foot-legal a:hover{ text-decoration:underline }
+
+    /* Reveal & Print & Responsive */
+    [data-reveal]{opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1)}
+    .is-visible{opacity:1; transform:translateY(0)}
+    @media print{
+      header, .partners, .footer-main, .footer-bottom, .btn.backtotop, .scroll-progress {display:none !important}
+      .toc{position:static; border:none; padding:0}
+      .legal-wrap{grid-template-columns:1fr}
+      a{color:#000; text-decoration:underline}
+      body{background:#fff}
+    }
+    @media (prefers-reduced-motion: reduce){ [data-reveal]{transition:none} .hero .media img.cover{transform:none} }
+    @media (max-width:980px){ .legal-wrap{grid-template-columns:1fr} .toc{position:static} }
+    @media (max-width:900px){
+      .menu{display:none} .utils .hamburger{display:inline-flex}
+      .btn-icon{ background:var(--brand); color:#fff; border-color:var(--brand) }
+      .btn-icon svg{ stroke:#fff }
+      .btn-icon:hover{ filter:brightness(.95) }
+    }
+    @media (min-width:901px){ .utils .hamburger{display:none} }
+    @media (max-width:640px){
+      :root{ --nav-h: 68px; }
+      .logo-img{ width:64px; height:64px }
+      .partners-grid{grid-template-columns:repeat(3,1fr)}
+      .foot-bottom-row{flex-direction:column; text-align:center}
+      .hero .media{min-height:42vh}
+      .btn.backtotop{ background:var(--brand); color:#fff; border-color:var(--brand) }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll progress -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header id="siteHeader">
+    <div class="container nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="index.html" aria-label="Dadaba Group Home">
+        <img class="logo-img" src="assets/img/logo1.png" alt="Dadaba Group logo" width="80" height="80" loading="eager" decoding="async" fetchpriority="high">
+        <span>Dadaba Group</span>
+      </a>
+
+      <ul class="menu" aria-label="Main menu">
+        <li class="has-mega">
+          <button aria-expanded="false" aria-controls="mega-about">About
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+          </button>
+          <div class="mega" id="mega-about" role="menu">
+            <div class="col">
+              <h4>Overview</h4>
+              <a href="about.html">About Dadaba <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a>
+              <a href="about.html#leadership">Leadership <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a>
+              <a href="about.html#foundation">Dadaba Foundation <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a>
+            </div>
+            <div class="col">
+              <h4>Governance</h4>
+              <a href="sustainability.html#governance">Policies & Disclosures</a>
+              <a href="sustainability.html#reports">ESG Report (PDF)</a>
+            </div>
+          </div>
+        </li>
+
+        <li class="has-mega">
+          <button aria-expanded="false" aria-controls="mega-business">Businesses
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+          </button>
+          <div class="mega" id="mega-business" role="menu">
+            <div class="col">
+              <h4>Core</h4>
+              <a href="subsidiaries/dadaba-estate.html">Dadaba Estate</a>
+              <a href="subsidiaries/dadaba-carbon-hub.html">Carbon Hub</a>
+              <a href="subsidiaries/dadaba-mining.html">Mining</a>
+              <a href="subsidiaries/dadaba-prestige.html">Dadaba Prestige</a>
+              <a href="about.html#foundation">Foundation</a>
+            </div>
+            <div class="col">
+              <h4>Other Verticals</h4>
+              <a href="businesses.html#infrastructure">Infrastructure</a>
+              <a href="businesses.html#energy">Energy & Utilities</a>
+              <a href="businesses.html#logistics">Transport & Logistics</a>
+              <a href="businesses.html#d2c">Direct to Consumer</a>
+              <a href="businesses.html#digital">Media & Digital</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Sustainability mega -->
+        <li class="has-mega">
+          <button aria-expanded="false" aria-controls="mega-sus">Sustainability
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+          </button>
+          <div class="mega" id="mega-sus" role="menu">
+            <div class="col">
+              <h4>ESG</h4>
+              <a href="sustainability.html#pillars">Overview & Pillars</a>
+              <a href="sustainability.html#climate">Climate Action</a>
+              <a href="sustainability.html#communities">Communities</a>
+            </div>
+            <div class="col">
+              <h4>Reports</h4>
+              <a href="sustainability.html#reports">Reports & Disclosures</a>
+              <a href="sustainability.html#policies">Policies & Statements</a>
+            </div>
+          </div>
+        </li>
+
+        <li><a href="investors.html">Investors</a></li>
+        <li><a href="media.html">Newsroom</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="utils">
+        <button class="btn-icon" id="openSearch" aria-label="Open search">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.2-3.2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+        <button class="btn-icon hamburger" id="openDrawer" aria-expanded="false" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search overlay -->
+  <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-labelledby="searchLabel">
+    <div class="search-box" role="document">
+      <form id="searchForm" action="#">
+        <label id="searchLabel" class="sr-only" for="q">Search</label>
+        <input type="search" name="q" id="q" placeholder="Search Terms topics..." autocomplete="off" />
+        <button type="submit">Search</button>
+        <button type="button" class="btn" id="closeSearch" aria-label="Close search">Close</button>
+      </form>
+      <div class="results" id="searchResults" role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-panel" role="dialog" aria-label="Mobile menu">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="brand" style="gap:8px; font-weight:900">
+          <img src="assets/img/logo2.png" width="32" height="32" alt="Dadaba Group logo" style="border-radius:8px">
+          Dadaba Group
+        </div>
+        <button class="btn" id="closeDrawer">Close</button>
+      </div>
+      <div class="accordion" style="margin-top:10px">
+        <details open>
+          <summary>On this page</summary>
+          <a href="#acceptance" class="badge" onclick="toggleDrawer(false)">Acceptance</a>
+          <a href="#eligibility" class="badge" onclick="toggleDrawer(false)">Eligibility & Accounts</a>
+          <a href="#use" class="badge" onclick="toggleDrawer(false)">Permitted Use</a>
+          <a href="#prohibited" class="badge" onclick="toggleDrawer(false)">Prohibited Conduct</a>
+          <a href="#ip" class="badge" onclick="toggleDrawer(false)">Intellectual Property</a>
+          <a href="#usercontent" class="badge" onclick="toggleDrawer(false)">User Content</a>
+          <a href="#thirdparty" class="badge" onclick="toggleDrawer(false)">Third-Party Links</a>
+          <a href="#disclaimers" class="badge" onclick="toggleDrawer(false)">Disclaimers</a>
+          <a href="#liability" class="badge" onclick="toggleDrawer(false)">Liability</a>
+          <a href="#indemnity" class="badge" onclick="toggleDrawer(false)">Indemnity</a>
+          <a href="#governinglaw" class="badge" onclick="toggleDrawer(false)">Governing Law</a>
+          <a href="#disputes" class="badge" onclick="toggleDrawer(false)">Disputes</a>
+          <a href="#changes" class="badge" onclick="toggleDrawer(false)">Changes</a>
+          <a href="#termination" class="badge" onclick="toggleDrawer(false)">Termination</a>
+          <a href="#misc" class="badge" onclick="toggleDrawer(false)">Miscellaneous</a>
+          <a href="#contact" class="badge" onclick="toggleDrawer(false)">Contact</a>
+        </details>
+        <details>
+          <summary>Navigate</summary>
+          <a href="about.html" class="badge" onclick="toggleDrawer(false)">About</a>
+          <a href="businesses.html" class="badge" onclick="toggleDrawer(false)">Businesses</a>
+          <a href="sustainability.html" class="badge" onclick="toggleDrawer(false)">Sustainability</a>
+          <a href="investors.html" class="badge" onclick="toggleDrawer(false)">Investors</a>
+          <a href="media.html" class="badge" onclick="toggleDrawer(false)">Newsroom</a>
+          <a href="careers.html" class="badge" onclick="toggleDrawer(false)">Careers</a>
+          <a href="contact.html" class="badge" onclick="toggleDrawer(false)">Contact</a>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero auto-visibility" aria-label="Page intro">
+    <div class="media">
+      <img class="cover" src="assets/img/TERMS.jpg" alt="Terms and conditions" loading="eager" decoding="async" fetchpriority="high">
+    </div>
+    <div class="content">
+      <div class="inner">
+        <span class="eyebrow">Terms</span>
+        <h1 class="headline">Website Terms of Use</h1>
+        <p class="subhead">Please read these Terms carefully. By using our websites or services, you agree to them.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main -->
+  <section class="section container auto-visibility">
+    <div class="legal-wrap">
+      <!-- TOC -->
+      <nav class="toc" aria-label="On this page">
+        <h3>On this page</h3>
+        <a href="#acceptance" id="toc-acceptance">Acceptance</a>
+        <a href="#eligibility" id="toc-eligibility">Eligibility & Accounts</a>
+        <a href="#use" id="toc-use">Permitted Use</a>
+        <a href="#prohibited" id="toc-prohibited">Prohibited Conduct</a>
+        <a href="#ip" id="toc-ip">Intellectual Property</a>
+        <a href="#usercontent" id="toc-usercontent">User Content</a>
+        <a href="#thirdparty" id="toc-thirdparty">Third-Party Links</a>
+        <a href="#disclaimers" id="toc-disclaimers">Disclaimers</a>
+        <a href="#liability" id="toc-liability">Limitation of Liability</a>
+        <a href="#indemnity" id="toc-indemnity">Indemnity</a>
+        <a href="#governinglaw" id="toc-law">Governing Law</a>
+        <a href="#disputes" id="toc-disputes">Dispute Resolution</a>
+        <a href="#changes" id="toc-changes">Changes to the Terms</a>
+        <a href="#termination" id="toc-termination">Termination</a>
+        <a href="#misc" id="toc-misc">Miscellaneous</a>
+        <a href="#contact" id="toc-contact">Contact</a>
+        <div class="note" style="margin-top:10px">
+          <small class="last-updated">Last updated: <span id="lastUpdated"></span></small>
+        </div>
+        <div style="display:flex; gap:8px; margin-top:10px">
+          <button class="btn primary" onclick="window.print()">Print</button>
+          <a class="btn" href="privacy.html">Privacy Policy</a>
+        </div>
+      </nav>
+
+      <!-- Content -->
+      <article class="legal" id="termsContent">
+        <section id="acceptance" data-reveal>
+          <h2>1) Acceptance of Terms</h2>
+          <p>These Terms of Use (“Terms”) govern your access to and use of websites and online pages operated by Dadaba Group and its subsidiaries (collectively, “Dadaba”, “we”, “our”, “us”). By accessing or using our sites, you agree to these Terms and our <a href="privacy.html">Privacy Policy</a>. If you do not agree, please do not use the sites.</p>
+          <p>Some products or services offered by our subsidiaries (e.g., Dadaba Estate, Dadaba Carbon Hub, Dadaba Mining, Dadaba Prestige, Dadaba Foundation) may have additional terms. Where there is a conflict, the product-specific terms prevail for that product.</p>
+        </section>
+
+        <section id="eligibility" data-reveal>
+          <h2>2) Eligibility & Accounts</h2>
+          <p>You must be at least 16 years old (or the age of digital consent in your country) to use our sites. If you create an account, you are responsible for safeguarding your credentials and for all activity under your account. Notify us promptly of any unauthorized use.</p>
+        </section>
+
+        <section id="use" data-reveal>
+          <h2>3) Permitted Use</h2>
+          <p>You may use the sites for lawful, informational purposes and to engage with Dadaba, including careers, investor relations, sustainability reports, and news. We reserve the right to modify, suspend or discontinue any part of the sites without notice.</p>
+        </section>
+
+        <section id="prohibited" data-reveal>
+          <h2>4) Prohibited Conduct</h2>
+          <ul class="inline-list">
+            <li>Violating any applicable law, regulation or rights of others.</li>
+            <li>Reverse engineering, scraping, automated harvesting or rate-limiting circumvention.</li>
+            <li>Introducing malware or interfering with site security or availability.</li>
+            <li>Impersonation, misrepresentation, or uploading unlawful, infringing, or harmful content.</li>
+            <li>Using the sites for unsolicited marketing, spam or scams.</li>
+          </ul>
+        </section>
+
+        <section id="ip" data-reveal>
+          <h2>5) Intellectual Property</h2>
+          <p>The sites and their content (text, graphics, logos, images, video, code and arrangements) are owned by or licensed to Dadaba and are protected by IP laws. Subject to these Terms, we grant you a limited, non-exclusive, non-transferable, revocable license to access and use the sites for personal or internal business purposes. No other rights are granted. Trademarks, service marks and logos of Dadaba and our partners may not be used without prior written permission.</p>
+        </section>
+
+        <section id="usercontent" data-reveal>
+          <h2>6) User Content & Feedback</h2>
+          <p>If you submit or upload content (e.g., enquiries, CVs, comments), you represent that you have the necessary rights and that the content is accurate and lawful. You grant Dadaba a non-exclusive, worldwide, royalty-free license to use, reproduce, display and distribute such content for the purpose of operating and improving the sites and responding to your requests. You agree that we may use feedback or suggestions without restriction.</p>
+          <p>We may remove content that we believe violates these Terms or applicable law.</p>
+        </section>
+
+        <section id="thirdparty" data-reveal>
+          <h2>7) Third-Party Links & Tools</h2>
+          <p>The sites may link to third-party websites or tools. We are not responsible for third-party content, products or services and provide links for convenience only. Your use of third-party resources is at your own risk and subject to their terms and policies.</p>
+        </section>
+
+        <section id="disclaimers" data-reveal>
+          <h2>8) Disclaimers</h2>
+          <p>The sites are provided on an “as is” and “as available” basis. To the maximum extent permitted by law, Dadaba disclaims all warranties, express or implied, including merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that the sites will be uninterrupted, secure, error-free, or free of viruses.</p>
+          <p>Information on the sites may include forward-looking statements or general information and does not constitute investment, legal or professional advice. Decisions based on information presented are your responsibility.</p>
+        </section>
+
+        <section id="liability" data-reveal>
+          <h2>9) Limitation of Liability</h2>
+          <p>To the maximum extent permitted by law, Dadaba and our directors, officers, employees and affiliates will not be liable for any indirect, incidental, special, consequential or punitive damages, or for loss of profits, revenues, data, goodwill or business interruption, arising out of or related to your use of the sites, even if advised of the possibility of such damages.</p>
+          <p>Nothing in these Terms excludes or limits liability where such exclusion or limitation is not permitted by law.</p>
+        </section>
+
+        <section id="indemnity" data-reveal>
+          <h2>10) Indemnity</h2>
+          <p>You agree to indemnify and hold harmless Dadaba and our affiliates from any claims, liabilities, damages, losses and expenses (including reasonable legal fees) arising from your use of the sites, your content, or your violation of these Terms or applicable law.</p>
+        </section>
+
+        <section id="governinglaw" data-reveal>
+          <h2>11) Governing Law</h2>
+          <p>These Terms are governed by the laws of the Republic of Ghana, without regard to conflict-of-laws principles.</p>
+        </section>
+
+        <section id="disputes" data-reveal>
+          <h2>12) Dispute Resolution</h2>
+          <p>We encourage you to contact us first to resolve concerns. If a dispute cannot be resolved informally, it will be submitted to the competent courts in Accra, Ghana. You agree to the personal jurisdiction and venue of those courts. Where applicable law requires, you may have the right to bring claims in your local courts.</p>
+        </section>
+
+        <section id="changes" data-reveal>
+          <h2>13) Changes to the Terms</h2>
+          <p>We may update these Terms from time to time. The “Last updated” date reflects the latest change. Continued use of the sites after changes become effective constitutes acceptance of the updated Terms.</p>
+        </section>
+
+        <section id="termination" data-reveal>
+          <h2>14) Suspension & Termination</h2>
+          <p>We may suspend or terminate your access to the sites at any time, with or without notice, if we believe you have violated these Terms or to protect the sites, users or third parties.</p>
+        </section>
+
+        <section id="misc" data-reveal>
+          <h2>15) Miscellaneous</h2>
+          <ul class="inline-list">
+            <li><strong>Entire agreement:</strong> These Terms and any referenced policies (e.g., <a href="privacy.html">Privacy Policy</a>, <a href="legal.html#cookies">Cookie Policy</a>) are the entire agreement regarding site use.</li>
+            <li><strong>Severability:</strong> If any provision is unenforceable, the remainder remains in effect.</li>
+            <li><strong>No waiver:</strong> Failure to enforce a provision is not a waiver.</li>
+            <li><strong>Assignment:</strong> You may not assign these Terms without our consent; we may assign to an affiliate or in connection with a reorganization.</li>
+            <li><strong>Electronic communications:</strong> You consent to receive communications electronically.</li>
+          </ul>
+        </section>
+
+        <section id="contact" data-reveal>
+          <h2>16) Contact</h2>
+          <p>Dadaba Group — Head Office, East Legon, Boundary Rd, Accra • P.O. Box LG 1234, Legon</p>
+          <ul class="inline-list">
+            <li>General enquiries: <a href="mailto:info@dadabagroup.com">info@dadabagroup.com</a></li>
+            <li>IP & takedown: <a href="mailto:ip@dadabagroup.com">ip@dadabagroup.com</a></li>
+            <li>Privacy: <a href="mailto:privacy@dadabagroup.com">privacy@dadabagroup.com</a></li>
+          </ul>
+          <div class="callout">
+            <p>For cookie preferences, visit <a href="legal.html#cookies">Cookie Policy & Preferences</a>.</p>
+          </div>
+        </section>
+      </article>
+    </div>
+  </section>
+
+  <!-- Partners (optional) -->
+  <section class="partners auto-visibility">
+    <div class="container">
+      <div class="partners-head" data-reveal="fade">FEATURED PARTNERS AND SPONSORS</div>
+      <div class="partners-grid" id="partnersGrid">
+        <div class="partner-tile" data-reveal><img src="assets/img/NYA.webp" alt="Partner 1"></div>
+        <div class="partner-tile" data-reveal><img src="assets/img/sbpafricalogo2.png" alt="Partner 2"></div>
+        <div class="partner-tile" data-reveal><img src="assets/img/ghb.png" alt="Partner 3"></div>
+        <div class="partner-tile" data-reveal><img src="assets/img/COP28_BrandMark_Horizontal_2line_English+(1).png" alt="Partner 4"></div>
+        <div class="partner-tile" data-reveal><img src="assets/img/gro.jpg" alt="Partner 5"></div>
+        <div class="partner-tile" data-reveal><img src="assets/img/ampath.webp" alt="Partner 6"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer auto-visibility" role="contentinfo">
+    <div class="footer-main">
+      <div class="container">
+        <div class="footer-grid" id="footerGrid">
+          <div class="foot-col" data-reveal>
+            <div class="foot-brand">
+              <img class="logo-img small" src="assets/img/logo2.png" alt="Dadaba Group logo" width="64" height="64" decoding="async">
+              <strong>Dadaba Group</strong>
+            </div>
+            <p class="foot-tag">A diversified group advancing sustainable development across Africa and the world.</p>
+          </div>
+          <div class="foot-col" data-reveal>
+            <h4>Head Office — Ghana</h4>
+            <ul class="foot-links">
+              <li>East Legon, Boundary Rd, Accra</li>
+              <li>P.O. Box GP 4567, Legon</li>
+              <li><a href="tel:+233597294288">+233 (0) 597294288</a></li>
+              <li><a href="mailto:info@dadabagroup.com">info@dadabagroup.com</a></li>
+            </ul>
+          </div>
+          <div class="foot-col" data-reveal>
+            <h4>Quick Links</h4>
+            <ul class="foot-links">
+              <li><a href="about.html">About</a></li>
+              <li><a href="businesses.html">Businesses</a></li>
+              <li><a href="media.html">Newsroom</a></li>
+              <li><a href="careers.html">Careers</a></li>
+            </ul>
+          </div>
+          <div class="foot-col" data-reveal>
+            <h4>Reach Us</h4>
+            <ul class="foot-links">
+              <li>Mon–Fri, 9:00–17:00</li>
+              <li><a href="investors.html">Investors</a></li>
+              <li><a href="sustainability.html#reports">ESG Reports</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <form class="newsletter-wide" action="#" onsubmit="event.preventDefault(); alert('Subscribed: ' + this.email.value)" data-reveal>
+          <div class="newsletter-row">
+            <span class="nl-label">Subscribe To Our Newsletter</span>
+            <input type="email" name="email" required placeholder="Enter your email" aria-label="Email" />
+            <button type="submit">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container foot-bottom-row">
+        <div>© <span id="year"></span> Dadaba Group — All rights reserved</div>
+        <nav class="foot-legal">
+          <a href="legal.html">Legal</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <button class="btn backtotop" id="backToTop" aria-label="Back to top">↑ Top</button>
+
+<script>
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Year & Last updated
+  (function(){
+    const y = document.getElementById('year');
+    if(y && !y.textContent) y.textContent = new Date().getFullYear();
+    const lu = document.getElementById('lastUpdated');
+    if(lu) lu.textContent = new Date().toLocaleDateString(undefined, {year:'numeric', month:'long', day:'numeric'});
+  })();
+
+  // Header shadow + progress bar
+  const header = document.getElementById('siteHeader');
+  const progress = document.getElementById('scrollProgress');
+  const onScrollDecor = ()=>{
+    const y = window.scrollY || document.documentElement.scrollTop;
+    header.classList.toggle('scrolled', y>4);
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (h>0 ? (y / h) * 100 : 0) + '%';
+  };
+  window.addEventListener('scroll', onScrollDecor, {passive:true});
+  onScrollDecor();
+
+  // Mega menu toggles + global closers
+  const megaButtons = Array.from(document.querySelectorAll('.has-mega > button'));
+  function closeAllMegas(except){ megaButtons.forEach(b => { if(b !== except) b.setAttribute('aria-expanded','false'); }); }
+  megaButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      closeAllMegas(btn);
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      e.stopPropagation();
+    });
+  });
+  document.addEventListener('click', (e)=>{ if(!e.target.closest('.has-mega')) closeAllMegas(); });
+  window.addEventListener('scroll', ()=>closeAllMegas(), {passive:true});
+  window.addEventListener('resize', ()=>closeAllMegas(), {passive:true});
+
+  // Search & Drawer with body scroll lock
+  const body = document.body;
+  function lockScroll(){ body.style.overflow='hidden'; body.style.touchAction='none'; }
+  function unlockScroll(){ body.style.overflow=''; body.style.touchAction=''; }
+  function toggleSearch(show){
+    const el = document.getElementById('searchOverlay'); if(!el) return;
+    el.style.display = show ? 'flex' : 'none';
+    if(show){ lockScroll(); setTimeout(()=>document.getElementById('q')?.focus(), 20); renderResults(''); }
+    else unlockScroll();
+  }
+  function toggleDrawer(show){
+    const el = document.getElementById('drawer'); if(!el) return;
+    el.style.display = show ? 'block' : 'none';
+    el.setAttribute('aria-hidden', show? 'false':'true');
+    document.getElementById('openDrawer')?.setAttribute('aria-expanded', show? 'true':'false');
+    show ? lockScroll() : unlockScroll();
+  }
+  document.getElementById('openSearch')?.addEventListener('click', ()=>toggleSearch(true));
+  document.getElementById('closeSearch')?.addEventListener('click', ()=>toggleSearch(false));
+  document.getElementById('searchOverlay')?.addEventListener('click', (e)=>{ if(e.target.id==='searchOverlay') toggleSearch(false) });
+  document.getElementById('openDrawer')?.addEventListener('click', ()=>toggleDrawer(true));
+  document.getElementById('closeDrawer')?.addEventListener('click', ()=>toggleDrawer(false));
+  document.getElementById('drawer')?.addEventListener('click', (e)=>{ if(e.target.id==='drawer') toggleDrawer(false) });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ toggleSearch(false); toggleDrawer(false); closeAllMegas(); } });
+
+  // Simple page search index
+  const searchIndex = [];
+  function addIndex(title, url, excerpt){ searchIndex.push({title, url, excerpt:(excerpt||'').replace(/\s+/g,' ').trim()}); }
+  (function buildIndex(){
+    addIndex('Acceptance of Terms', '#acceptance', 'Agreement & scope');
+    addIndex('Eligibility & Accounts', '#eligibility', 'Age, accounts, security');
+    addIndex('Permitted Use', '#use', 'Lawful, informational');
+    addIndex('Prohibited Conduct', '#prohibited', 'Scraping, malware, impersonation');
+    addIndex('Intellectual Property', '#ip', 'Ownership & license');
+    addIndex('User Content', '#usercontent', 'Licenses & responsibilities');
+    addIndex('Third-Party Links', '#thirdparty', 'External sites');
+    addIndex('Disclaimers', '#disclaimers', 'No warranties');
+    addIndex('Limitation of Liability', '#liability', 'Damages cap');
+    addIndex('Indemnity', '#indemnity', 'Your obligations');
+    addIndex('Governing Law', '#governinglaw', 'Ghana law');
+    addIndex('Dispute Resolution', '#disputes', 'Courts in Accra');
+    addIndex('Changes', '#changes', 'Updates to terms');
+    addIndex('Suspension & Termination', '#termination', 'Suspension/termination');
+    addIndex('Miscellaneous', '#misc', 'Entire agreement, severability');
+    addIndex('Contact', '#contact', 'How to reach us');
+  })();
+  const resultsBox = document.getElementById('searchResults');
+  function renderResults(query){
+    const q = (query||'').toLowerCase().trim();
+    const hits = q
+      ? searchIndex.filter(it => (it.title + ' ' + it.excerpt).toLowerCase().includes(q)).slice(0,10)
+      : [
+          {title:'Acceptance of Terms', url:'#acceptance', excerpt:'Agreement & scope'},
+          {title:'Disclaimers', url:'#disclaimers', excerpt:'As-is, as-available'}
+        ];
+    resultsBox.innerHTML = hits.map(h =>
+      `<a class="result" href="${h.url}" role="option"><span>${h.title}</span><small>${h.excerpt||''}</small></a>`
+    ).join('') || `<div class="result" tabindex="-1"><span>No results</span><small>Try a different term</small></div>`;
+  }
+  const qInput = document.getElementById('q');
+  qInput?.addEventListener('input', (e)=> renderResults(e.target.value));
+  document.getElementById('searchForm')?.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const first = resultsBox.querySelector('.result');
+    if(first && first.getAttribute('href')){
+      const href = first.getAttribute('href');
+      toggleSearch(false);
+      if(href.startsWith('#')){
+        document.querySelector(href)?.scrollIntoView({behavior:'smooth', block:'start'});
+      }else{
+        location.href = href;
+      }
+    }
+  });
+
+  // Parallax on hero image
+  (function(){
+    const heroImg = document.querySelector('.hero .media img.cover');
+    const heroSection = document.querySelector('.hero');
+    function parallaxTick(){
+      if(!heroImg || !heroSection || prefersReduced){ return; }
+      const rect = heroSection.getBoundingClientRect();
+      const viewH = window.innerHeight || 0;
+      const prog = 1 - Math.min(Math.max((rect.bottom) / (rect.height + viewH), 0), 1);
+      heroImg.style.setProperty('--parallax', (prog * 24).toFixed(1)+'px');
+    }
+    window.addEventListener('scroll', ()=>{ requestAnimationFrame(parallaxTick); }, {passive:true});
+    window.addEventListener('resize', parallaxTick, {passive:true});
+    parallaxTick();
+  })();
+
+  // Reveal on scroll
+  const revealEls = Array.from(document.querySelectorAll('[data-reveal]'));
+  const ioReveal = new IntersectionObserver((entries, obs)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){ entry.target.classList.add('is-visible'); obs.unobserve(entry.target); }
+    });
+  }, {threshold:0.16, rootMargin:'0px 0px -40px 0px'});
+  revealEls.forEach(el=> ioReveal.observe(el));
+
+  // Back to top
+  const btt = document.getElementById('backToTop');
+  window.addEventListener('scroll', ()=>{ btt.style.display = window.scrollY>600 ? 'inline-flex':'none'; }, {passive:true});
+  btt.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
+
+  // Robust image fallback (all <img>)
+  (function(){
+    function fallbackChain(src){
+      if(!src) return [];
+      const url = new URL(src, location.href);
+      const name = url.pathname.split('/').pop() || '';
+      const dot = name.lastIndexOf('.');
+      const base = dot > -1 ? name.slice(0, dot) : name;
+      const ext  = dot > -1 ? name.slice(dot+1).toLowerCase() : '';
+      const exts = ['webp','jpg','jpeg','png'];
+      const ordered = [ext, ...exts.filter(e=>e!==ext)];
+      const folder = url.pathname.slice(0, url.pathname.length - name.length);
+      return ordered.map(e => folder + base + '.' + e);
+    }
+    function wireImage(img){
+      if(!img) return;
+      const tried = new Set([img.getAttribute('src')]);
+      const candidates = fallbackChain(img.getAttribute('src'));
+      img.addEventListener('error', ()=>{
+        let next = null;
+        for(const cand of candidates){
+          const abs = new URL(cand, location.href).pathname;
+          if(!tried.has(abs)){ next = cand; break; }
+        }
+        if(next){ tried.add(next); img.src = next; }
+      });
+    }
+    document.querySelectorAll('img').forEach(wireImage);
+  })();
+</script>
+</body>
+</html>

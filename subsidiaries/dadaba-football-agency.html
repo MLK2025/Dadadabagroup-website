@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Dadaba Football — Investor Relations | Dadaba Group</title>
+  <meta name="description" content="Dadaba Football is building an Africa-first football platform — academies, club partnerships and data-driven talent development — designed for resilient returns and impact." />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --font:"Manrope",system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      --brand:#0f4a13; --brand-600:#0b3a0e; --accent:#d6ff3f;
+      --ink:#0f1a14; --muted:#5c5f63; --bg:#ffffff;
+      --line:#ece9df; --line-strong:#dddcd7;
+      --container:1160px; --nav-h:64px; --radius:16px; --shadow:0 12px 28px rgba(0,0,0,.08)
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{margin:0;padding:0}
+    body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.6}
+    img{max-width:100%;display:block}
+    a{color:inherit}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+    .container{width:min(var(--container), 100% - 32px); margin-inline:auto}
+    .scroll-progress{position:fixed; inset:0 0 auto 0; height:3px; background:linear-gradient(90deg,var(--accent),#baff7a); width:0%; z-index:300; transform-origin:left center}
+
+    /* ===== Header (matches previous page) ===== */
+    header{position:sticky; top:0; z-index:280; background:#fff; border-bottom:1px solid var(--line); transition:box-shadow .25s ease, background .25s ease; padding-top:env(safe-area-inset-top)}
+    header.scrolled{box-shadow:0 10px 24px rgba(0,0,0,.06)}
+    .nav{height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .brand{display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:900}
+    .logo-img{ width:36px; height:36px; object-fit:contain }
+    .menu{display:flex; align-items:center; gap:22px; list-style:none; padding:0; margin:0}
+    .menu>li{position:relative}
+    .menu a,.menu button{font-weight:700; text-decoration:none; color:#18201b; padding:8px 0; line-height:1}
+    .menu a[aria-current="page"]{color:var(--brand)}
+    .menu button{display:inline-flex; align-items:center; gap:6px; border:0; background:transparent; cursor:pointer}
+    .menu button:hover,.menu a:hover{color:var(--brand)}
+    .menu svg{width:14px; height:14px; stroke:currentColor; fill:none}
+
+    .mega{display:none; position:absolute; top:calc(100% + 10px); left:0; background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:14px; min-width:320px; grid-template-columns:1fr 1fr; gap:14px; max-height:70vh; overflow:auto; z-index:10}
+    .has-mega>button[aria-expanded="true"] + .mega{display:grid}
+    .mega .col h4{margin:0 0 8px; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); font-weight:800}
+    .mega .col a{display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-radius:10px; color:#132017; text-decoration:none; border:1px solid transparent; font-weight:700}
+    .mega .col a:hover{background:#f6f7f4; border-color:#eef0ea}
+    .mega .col a svg{width:16px; height:16px}
+
+    .utils{display:flex; align-items:center; gap:10px}
+    .btn-icon{display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:12px; border:1px solid var(--line); background:#fff; cursor:pointer}
+    .btn-icon:hover{background:#f6f7f4}
+    .hamburger{display:none}
+
+    /* Mobile */
+    @media (max-width:900px){ .menu{display:none} .hamburger{display:inline-flex} .mega{display:none !important} }
+    @media (min-width:901px){ .hamburger{display:none} }
+
+    /* Search overlay */
+    .search-overlay{position:fixed; inset:0; background:rgba(0,0,0,.48); display:none; align-items:flex-start; justify-content:center; padding:80px 16px 16px; z-index:400}
+    .search-box{background:#fff; width:min(760px, 94%); border-radius:16px; padding:16px; border:1px solid var(--line); box-shadow:var(--shadow)}
+    .search-box form{display:grid; grid-template-columns:1fr auto auto; gap:10px; align-items:center}
+    .search-box input{height:48px; border-radius:999px; border:1px solid var(--line); padding:0 14px}
+    .search-box button{height:48px; border-radius:999px; border:0; padding:0 18px; font-weight:900; cursor:pointer}
+    .results{margin-top:12px; border-top:1px solid var(--line); padding-top:10px; max-height:52vh; overflow:auto}
+    .result{display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border:1px solid #f0f1ec; border-radius:12px; margin:8px 0; text-decoration:none; color:#0f1a14; font-weight:700}
+    .result:hover{background:#f6f7f4; border-color:#e8ebe4}
+
+    /* Drawer */
+    .drawer{position:fixed; inset:0; display:none; z-index:380}
+    .drawer::before{content:""; position:absolute; inset:0; background:rgba(0,0,0,.48)}
+    .drawer-panel{position:absolute; right:0; top:0; bottom:0; width:min(92vw, 380px); background:#fff; padding:16px; border-left:1px solid var(--line); overflow:auto}
+    .drawer .badge{display:block; padding:12px 10px; margin:4px 0; border:1px solid var(--line); border-radius:12px; text-decoration:none; font-weight:800}
+    .drawer .btn{height:40px; padding:0 14px; border-radius:10px; border:1px solid var(--line); background:#f6f7f4; font-weight:800; cursor:pointer}
+
+    /* Hero */
+    .hero{position:relative; background:#0a1a1f; color:#fff; overflow:hidden}
+    .hero .media{position:relative; width:100%; min-height:56vh; background:#0a1a1f}
+    .hero .media img.cover{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; will-change:transform; transform:translateY(var(--parallax,0px)) scale(1.05)}
+    .hero .media::after{content:""; position:absolute; inset:0; background:linear-gradient(120deg, rgba(7,29,21,.52), rgba(10,26,31,.55))}
+    .hero .content{position:absolute; inset:0; display:flex; align-items:center; z-index:2}
+    .hero .inner{width:min(1100px,92%); margin:0 auto; display:grid; gap:12px; padding: clamp(18px,3.6vw,32px)}
+    .hero .eyebrow{letter-spacing:.18em; text-transform:uppercase; opacity:.92; font-weight:800; font-size:12px}
+    .hero .headline{font-size:clamp(28px,4.4vw,48px); line-height:1.15; font-weight:900; margin:2px 0}
+    .hero .subhead{max-width:68ch; opacity:.98}
+    .hero .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:6px}
+    .hero .btn{display:inline-flex; align-items:center; justify-content:center; padding:12px 20px; border-radius:999px; border:1.5px solid var(--accent); background:transparent; color:var(--accent); font-weight:800; text-decoration:none}
+    .hero .btn.primary{background:var(--accent); color:#0b2b08; border-color:var(--accent)}
+
+    /* Sections */
+    .section{padding: clamp(28px,4.8vw,48px) 0}
+    .section-title{font-size: clamp(24px,3.2vw,34px); margin:0 0 10px; font-weight:900}
+    .lead{color:#3a3d40; margin:0 0 14px}
+    .grid{display:grid; grid-template-columns: repeat(3,1fr); gap:16px}
+    .card{border:1px solid var(--line); border-radius:16px; background:#fff; overflow:hidden; display:grid}
+    .thumb{aspect-ratio:16/9; overflow:hidden}
+    .thumb img{width:100%; height:100%; object-fit:cover}
+    .body{padding:16px}
+    .badge{display:inline-flex; align-items:center; height:26px; padding:0 10px; border-radius:999px; font-size:12px; font-weight:900; border:1px solid #e6eadf; background:#fff; margin-right:6px}
+    .badge.core{background:var(--accent); color:#0b2b08; border-color:var(--accent)}
+    .chip-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px}
+    .chip{font-size:12px; padding:6px 10px; background:#f6f7f4; border-radius:999px; border:1px solid #eef0ea; font-weight:800}
+
+    /* KPI */
+    .kpis{display:grid; grid-template-columns: repeat(4,1fr); gap:12px}
+    .kpi{border:1px solid var(--line); border-radius:16px; padding:16px; background:#fff}
+    .kpi .big{font-weight:900; font-size:clamp(22px,3.6vw,34px)}
+    .kpi .small{color:#3a3d40}
+
+    /* Docs/tiles */
+    .doc-grid{display:grid; grid-template-columns: repeat(3,1fr); gap:16px}
+    .doc{border:1px solid var(--line); border-radius:16px; background:#fff; padding:16px}
+    .doc .meta{color:#3a3d40; font-size:13px}
+    .doc .actions{display:flex; gap:8px; margin-top:8px}
+
+    .btn{display:inline-flex; align-items:center; justify-content:center; padding:10px 14px; border-radius:999px; border:1.5px solid var(--brand); background:#fff; color:#0f1a14; font-weight:900; text-decoration:none; cursor:pointer}
+    .btn.primary{background:var(--brand); color:#fff}
+    .btn.neutral{border-color:#e6eadf}
+    .btn.block{width:100%}
+    .btn.backtotop{position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom)); display:none; z-index:260}
+
+    /* Partners & Footer */
+    .partners{ padding: 16px 0 clamp(40px,6vw,64px) }
+    .partners-head{text-align:center; font-weight:800; letter-spacing:.18em; color:#5c5f63; font-size:12px; margin-bottom:16px}
+    .partners-grid{display:grid; gap:14px; grid-template-columns: repeat(6,1fr)}
+    .partner-tile{background:#fff; border:1px solid var(--line); border-radius:12px; display:flex; align-items:center; justify-content:center; height:76px; padding:12px; transition:transform .25s ease}
+    .partner-tile:hover{transform:translateY(-2px)}
+    .partner-tile img{ max-height:42px; max-width:100%; object-fit:contain }
+
+    .site-footer{ color:#e6f4ea }
+    .footer-main{ background:var(--brand); padding: clamp(28px,5vw,48px) 0 }
+    .footer-grid{display:grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: clamp(16px,2.8vw,32px); align-items:start}
+    .foot-col h4{font-size:16px; margin: 6px 0 12px; color:#eaf8ee; font-weight:800}
+    .foot-brand{ display:flex; align-items:center; gap:10px; margin-bottom:8px }
+    .foot-brand strong{ font-weight:900; font-size:18px }
+    .foot-tag{ color:#cfe8d2; margin:0 0 12px }
+    .foot-links{ list-style:none; padding:0; margin:0 }
+    .foot-links li{ margin: 8px 0 }
+    .foot-links a{ color:#e6f4ea; text-decoration:none }
+    .foot-links a:hover{ text-decoration:underline }
+    .newsletter-wide{ margin-top: clamp(20px,3vw,28px); background:var(--brand-600); border:1px solid rgba(255,255,255,.10); border-radius:16px; padding:12px }
+    .newsletter-row{ display:grid; grid-template-columns: 1fr auto auto; gap:12px; align-items:center }
+    .newsletter-row .nl-label{ font-weight:800; white-space:nowrap; font-size:14px }
+    .newsletter-row input{ min-width: 260px; height:48px; border-radius:999px; border:0; padding:0 16px; color:#111; background:#fff }
+    .newsletter-row button{ height:48px; border-radius:999px; border:0; padding:0 22px; font-weight:900; cursor:pointer; background:var(--accent); color:#0b2b08 }
+    .newsletter-row button:hover{ filter:brightness(.95) }
+    .footer-bottom{ background:var(--brand-600) }
+    .foot-bottom-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding: 14px 0; color:#cfe8d2 }
+    .foot-legal a{ color:#cfe8d2; text-decoration:none; margin-left:14px }
+    .foot-legal a:hover{ text-decoration:underline }
+
+    /* Reveal & Responsive */
+    [data-reveal]{opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1)}
+    .is-visible{opacity:1; transform:translateY(0)}
+    @media (prefers-reduced-motion: reduce){ [data-reveal]{transition:none} .hero .media img.cover{transform:none} }
+    @media (max-width:1120px){ .kpis{grid-template-columns: repeat(2,1fr)} .grid{grid-template-columns: repeat(2,1fr)} .doc-grid{grid-template-columns: repeat(2,1fr)} }
+    @media (max-width:640px){
+      .grid{grid-template-columns: 1fr}
+      .doc-grid{grid-template-columns: 1fr}
+      .partners-grid{ grid-template-columns: repeat(3,1fr) }
+      .foot-bottom-row{ flex-direction:column; text-align:center }
+      .hero .media{ min-height:48vh }
+      .newsletter-row{grid-template-columns:1fr}
+    }
+  </style>
+
+<style>
+
+/* ===== Phone overrides copied from About page (do not affect desktop) ===== */
+@media (max-width: 900px){
+  /* Hide desktop menu; show hamburger */
+  .menu{ display:none; }
+  .utils .hamburger{ display:inline-flex; }
+
+  /* PHONE: make top icons green (search & menu buttons) */
+  .btn-icon{ background:var(--brand); color:#fff; border-color:var(--brand); }
+  .btn-icon svg{ stroke:#fff; }
+  .btn-icon:hover{ filter:brightness(.95); }
+
+  /* PHONE: newsletter becomes single column and never overflows */
+  .newsletter-row{ grid-template-columns: 1fr; }
+  .newsletter-row input{ min-width:0; width:100%; }
+  .newsletter-row button{ width:100%; }
+
+  /* PHONE: footer 2-column grid like About page */
+  .footer-grid{ grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px){
+  /* Container padding to match About page */
+  .container{ width:min(var(--container), 100%); padding-inline:16px; }
+
+  /* Footer bottom stacks and centers text */
+  .foot-bottom-row{ flex-direction:column; text-align:center; }
+
+  /* PHONE: back-to-top becomes green */
+  .btn.backtotop{ background:var(--brand); color:#fff; border-color:var(--brand); }
+}
+
+</style>
+<meta name="theme-color" content="#0f4a13" />
+
+<style id="mobile-ux-enhancements">
+/* ===== Universal Mobile UX Enhancements (injected) ===== */
+:root{ --tap:48px; }
+@media (max-width:900px){
+  html,body{font-size:16px;}
+  .container{ width:min(var(--container, 1160px), 100%); padding-inline:16px; }
+  .hero .headline{ font-size: clamp(22px, 7vw, 32px); line-height:1.2; }
+  .hero .subhead{ font-size:15px; }
+  .cta-row .btn{ min-height:var(--tap); padding-inline:16px; }
+  .cta-row .btn, .btn.block{ width:100%; }
+  .grid, .doc-grid, .kpis{ grid-template-columns:1fr !important; }
+  .newsletter-row{ grid-template-columns:1fr !important; }
+  .newsletter-row input{ width:100%; min-width:0; }
+  .footer-grid{ grid-template-columns:1fr 1fr !important; }
+  .btn-icon{ width:var(--tap); height:var(--tap); }
+  .menu{ display:none !important; }
+  .utils .hamburger{ display:inline-flex !important; }
+  .hero .media{ min-height:50vh; }
+  section.section{ content-visibility:auto; contain-intrinsic-size:800px; }
+}
+@supports (height: env(safe-area-inset-bottom)){
+  .btn.backtotop{ bottom: calc(16px + env(safe-area-inset-bottom)); }
+}
+a,button{ touch-action:manipulation; }
+</style>
+
+
+
+/* PHONE: make top icons green (search & menu buttons) */
+@media (max-width: 900px){
+  .btn-icon{ background:var(--brand); color:#fff; border-color:var(--brand); }
+  .btn-icon svg{ stroke:#fff; }
+  .btn-icon:hover{ filter:brightness(.95); }
+}
+
+<style id="ux-patches">
+  /* Accessible focus outlines */
+  :focus-visible{outline:2px solid var(--accent,#bff266); outline-offset:2px; border-radius:8px}
+  /* Better tap targets on mobile */
+  @media (max-width:640px){
+    a, button{min-height:44px}
+    .menu a, .menu button{padding:12px 10px}
+  }
+</style>
+
+  <link rel="stylesheet" href="assets/css/global.css">
+</head>
+<body>
+
+  <!-- Scroll progress -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header id="siteHeader">
+    <div class="container nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="index.html" aria-label="Dadaba Group Home">
+        <img class="logo-img" src="../assets/img/logo1.png" alt="Dadaba Group logo" width="36" height="36" loading="eager">
+        <span>Dadaba Group</span>
+      </a>
+
+      <!-- Menu aligned to the reference: About, Businesses, Sustainability, Investors, Newsroom, Careers, Contact -->
+      <ul class="menu" aria-label="Main menu">
+        <li class="has-mega">
+          <button aria-expanded="false" aria-controls="mega-about">About
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+          </button>
+          <div class="mega" id="mega-about" role="menu">
+            <div class="col">
+              <h4>Overview</h4>
+              <a href="about.html">About Dadaba</a>
+              <a href="../about.html#leadership">Leadership</a>
+              <a href="./dadaba-foundation.html">Foundation</a>
+            </div>
+            <div class="col">
+              <h4>Governance</h4>
+              <a href="../sustainability.html#governance">Policies & Disclosures</a>
+              <a href="../sustainability.html#reports">ESG Report (PDF)</a>
+            </div>
+          </div>
+        </li>
+
+        <li class="has-mega">
+          <button aria-expanded="false" aria-controls="mega-business">Businesses
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+          </button>
+          <div class="mega" id="mega-business" role="menu">
+            <div class="col">
+              <h4>Core</h4>
+              <a href="./dadaba-estate.html">Dadaba Estate</a>
+              <a href="./dadaba-carbon-hub.html">Carbon Hub</a>
+              <a href="./dadaba-mining.html">Mining</a>
+              <a href="./dadaba-prestige.html">Dadaba Prestige</a>
+              <a href="./dadaba-foundation.html">Foundation</a>
+            </div>
+            <div class="col">
+              <h4>Other Verticals</h4>
+              <a href="./dadaba-entertainment.html">Media & Digital</a>
+              <a href="./dadaba-football-agency.html" aria-current="page">Football</a>
+              <a href="../businesses.html#infrastructure">Infrastructure</a>
+              <a href="../businesses.html#energy">Energy & Utilities</a>
+              <a href="../businesses.html#logistics">Transport & Logistics</a>
+              <a href="../businesses.html#d2c">Direct to Consumer</a>
+            </div>
+          </div>
+        </li>
+
+        <li class="has-mega">
+          <button aria-expanded="false" aria-controls="mega-sus">Sustainability
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+          </button>
+          <div class="mega" id="mega-sus" role="menu">
+            <div class="col">
+              <h4>Strategy</h4>
+              <a href="../sustainability.html#overview">Overview</a>
+              <a href="../sustainability.html#governance">Governance</a>
+            </div>
+            <div class="col">
+              <h4>Disclosures</h4>
+              <a href="../sustainability.html#reports">ESG Reports</a>
+              <a href="../sustainability.html#impact">Impact</a>
+            </div>
+          </div>
+        </li>
+
+        <li><a href="investors.html">Investors</a></li>
+        <li><a href="media.html">Newsroom</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="utils">
+        <button class="btn-icon" id="openSearch" aria-label="Open search">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.2-3.2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+        <button class="btn-icon hamburger" id="openDrawer" aria-expanded="false" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search overlay -->
+  <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-labelledby="searchLabel">
+    <div class="search-box" role="document">
+      <form id="searchForm" action="#">
+        <label id="searchLabel" class="sr-only" for="q">Search</label>
+        <input type="search" name="q" id="q" placeholder="Search investor topics..." autocomplete="off" />
+        <button type="submit">Search</button>
+        <button type="button" class="btn" id="closeSearch" aria-label="Close search">Close</button>
+      </form>
+      <div class="results" id="searchResults" role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-panel" role="dialog" aria-label="Mobile menu">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="brand">
+          <img class="logo-img" src="../assets/img/logo2.png" alt="Dadaba Group logo" width="36" height="36" loading="lazy" decoding="async">
+          <strong>Dadaba Group</strong>
+        </div>
+        <button class="btn" id="closeDrawer">Close</button>
+      </div>
+      <div class="accordion" style="margin-top:10px">
+        <details open>
+          <summary>Subsidiaries</summary>
+          <a href="./dadaba-estate.html" class="badge" onclick="toggleDrawer(false)">Dadaba Estate</a>
+          <a href="./dadaba-carbon-hub.html" class="badge" onclick="toggleDrawer(false)">Carbon Hub</a>
+          <a href="./dadaba-mining.html" class="badge" onclick="toggleDrawer(false)">Mining</a>
+          <a href="./dadaba-prestige.html" class="badge" onclick="toggleDrawer(false)">Dadaba Prestige</a>
+          <a href="./dadaba-entertainment.html" class="badge" onclick="toggleDrawer(false)">Media & Digital</a>
+          <a href="./dadaba-football-agency.html" class="badge" onclick="toggleDrawer(false)">Football</a>
+        </details>
+        <a href="sustainability.html" class="badge" onclick="toggleDrawer(false)">Sustainability</a>
+        <a href="media.html" class="badge" onclick="toggleDrawer(false)">Newsroom</a>
+        <a href="careers.html" class="badge" onclick="toggleDrawer(false)">Careers</a>
+        <a href="contact.html" class="badge" onclick="toggleDrawer(false)">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" aria-label="Page intro">
+    <div class="media">
+      <img class="cover" src="../assets/img/football2.jpg" alt="Football pitch under lights with strategy graphics overlay" loading="lazy" decoding="async">
+    </div>
+    <div class="content">
+      <div class="inner">
+        <span class="eyebrow">Investor Relations</span>
+        <h1 class="headline">Dadaba Football</h1>
+        <p class="subhead">Building an Africa-first football platform — academies, club partnerships and data-driven talent development — aligned to financial discipline and community impact.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#contact">Contact Investor Relations</a>
+          <a class="btn" href="#materials">View investor materials</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KPIs (illustrative) -->
+  <section class="section container">
+    <div class="kpis" id="kpis" data-reveal>
+      <div class="kpi"><div class="big" data-count="35">0</div><div class="small"> targets</div><p class="small">Opportunities screened (last 12 months)*</p></div>
+      <div class="kpi"><div class="big" data-count="6">0</div><div class="small"> regions</div><p class="small">Active scouting & diligence footprint*</p></div>
+      <div class="kpi"><div class="big" data-count="3">0</div><div class="small"> pillars</div><p class="small">Academy • Club stakes • Data*</p></div>
+    </div>
+    <p class="lead" style="margin-top:10px"></p>
+  </section>
+
+  <!-- Investment thesis -->
+  <section class="section container" id="thesis">
+    <h2 class="section-title" data-reveal>Investment thesis</h2>
+    <p class="lead" data-reveal>Our strategy targets durable cash generation and asset growth by cultivating African talent and optimizing football operations with data and disciplined capital allocation.</p>
+    <div class="grid" data-reveal>
+      <article class="card"><div class="body"><div><span class="badge core">Thesis</span></div><h3>Talent arbitrage</h3><p>Develop undervalued youth talent in Africa and realize value through on-field performance, transfers, and sell-on clauses.</p><div class="chip-row"><span class="chip">Academies</span><span class="chip">Sell-on</span><span class="chip">Solidarity</span></div></div></article>
+      <article class="card"><div class="body"><div><span class="badge core">Thesis</span></div><h3>Multi-club synergies</h3><p>Structured pathways via partner clubs for minutes, loans and work-permit solutions; shared scouting and performance IP.</p><div class="chip-row"><span class="chip">Loans</span><span class="chip">Pathways</span><span class="chip">Shared ops</span></div></div></article>
+      <article class="card"><div class="body"><div><span class="badge core">Thesis</span></div><h3>Data advantage</h3><p>Scouting & performance models, injury risk flagging, and contract value analytics to improve hit-rate and exits.</p><div class="chip-row"><span class="chip">Analytics</span><span class="chip">Biomech</span><span class="chip">Contracting</span></div></div></article>
+    </div>
+  </section>
+
+  <!-- Operating model -->
+  <section class="section container" id="model">
+    <h2 class="section-title" data-reveal>Operating model</h2>
+    <p class="lead" data-reveal>Capital-efficient growth via three pillars with rigorous governance.</p>
+    <div class="grid" data-reveal>
+      <article class="card"><figure class="thumb"><img src="../assets/img/football3.jpg" alt="Academies & Education" loading="lazy"></figure><div class="body"><div><span class="badge">Pillar</span></div><h3>Academies & education</h3><p>Residential academies with dual-pathway education; safeguarding, nutrition and sports science integrated.</p><div class="chip-row"><span class="chip">Safeguarding</span><span class="chip">Education</span><span class="chip">Sports science</span></div></div></article>
+      <article class="card"><figure class="thumb"><img src="../assets/img/football5.jpg" alt="Club stakes & partnerships" loading="lazy"></figure><div class="body"><div><span class="badge">Pillar</span></div><h3>Club stakes & partnerships</h3><p>Minority control positions with governance rights; operational playbooks across recruitment, coaching and medical.</p><div class="chip-row"><span class="chip">Licensing</span><span class="chip">Playbooks</span><span class="chip">Governance</span></div></div></article>
+      <article class="card"><figure class="thumb"><img src="../assets/img/football6.jpg" alt="Data & Performance" loading="lazy"></figure><div class="body"><div><span class="badge">Pillar</span></div><h3>Data & performance</h3><p>Video and event data, GPS/IMU telemetry, readiness scores; objective decision support from academy to first team.</p><div class="chip-row"><span class="chip">Video</span><span class="chip">Tracking</span><span class="chip">Readiness</span></div></div></article>
+    </div>
+  </section>
+
+  <!-- Governance & compliance -->
+  <section class="section container" id="governance">
+    <h2 class="section-title" data-reveal>Governance & compliance</h2>
+    <p class="lead" data-reveal>We align with global football regulations and best practice corporate governance.</p>
+    <div class="doc-grid" data-reveal>
+      <div class="doc"><h3>Football regulations</h3><p class="meta">FIFA, CAF and domestic league rules</p><p>Compliance with player status & transfers (RSTP), intermediary regulations, and bans on third-party ownership (TPO). Club licensing standards applied across partner entities.</p></div>
+      <div class="doc"><h3>Safeguarding & welfare</h3><p class="meta">Minors protection, education, wellbeing</p><p>FPIC for guardians, background checks, grievance channels, mental health support, and independent safeguarding audits.</p></div>
+      <div class="doc"><h3>ESG & community</h3><p class="meta">Facilities, inclusion, and impact</p><p>Local hiring, accessible venues, grassroots programs, and transparent reporting of community benefits and incidents.</p></div>
+    </div>
+  </section>
+
+  <!-- Selection criteria -->
+  <section class="section container" id="criteria">
+    <h2 class="section-title" data-reveal>Target selection criteria</h2>
+    <div class="grid" data-reveal>
+      <article class="card"><div class="body"><h3>Clubs</h3><ul style="margin:0 0 0 18px"><li>Tier-2 to top-flight clubs with clear fan base and academy linkages</li><li>Governance openness to operational playbooks</li><li>Clear path to licensing and infrastructure standards</li></ul></div></article>
+      <article class="card"><div class="body"><h3>Academies</h3><ul style="margin:0 0 0 18px"><li>Catchment near urban hubs and school partners</li><li>Safeguarding readiness and education pathways</li><li>Facilities with upgrade feasibility</li></ul></div></article>
+      <article class="card"><div class="body"><h3>Financial</h3><ul style="margin:0 0 0 18px"><li>Disciplined entry valuations; aligned incentives</li><li>Revenue diversification: matchday, media, sponsorship, player trading</li><li>Currency and working-capital stress tests</li></ul></div></article>
+    </div>
+  </section>
+
+  <!-- Investor materials -->
+  <section class="section container" id="materials">
+    <h2 class="section-title" data-reveal>Investor materials</h2>
+    <div class="doc-grid" data-reveal>
+      <div class="doc"><h3>Investor deck</h3><p class="meta">PDF • Updated 2025</p><p>Strategy, returns framework, pipeline hygiene and governance.</p><div class="actions"><a class="btn primary" href="../assets/brochures/Dadaba-Football-Investor-Deck.pdf" download>Download deck</a><a class="btn neutral" href="#contact">Request data room</a></div></div>
+      <div class="doc"><h3>One-pager</h3><p class="meta">PDF • Updated 2025</p><p>Thesis snapshot and three-pillar model at a glance.</p><div class="actions"><a class="btn" href="../assets/brochures/Dadaba-Football-OnePager.pdf" download>Download one-pager</a></div></div>
+      <div class="doc"><h3>Policies</h3><p class="meta">Safeguarding • ESG • Code of conduct</p><p>Key policies that guide operations and partner expectations.</p><div class="actions"><a class="btn" href="../sustainability.html#governance">View policies</a></div></div>
+    </div>
+  </section>
+
+  <!-- Risks -->
+  <section class="section container" id="risks">
+    <h2 class="section-title" data-reveal>Key risks & mitigations</h2>
+    <div class="grid" data-reveal>
+      <article class="card"><div class="body"><h3>Regulatory & licensing</h3><p>League & federation approvals, foreign player quotas.</p><div class="chip-row"><span class="chip">Mitigation: Early engagement</span><span class="chip">Compliance officers</span></div></div></article>
+      <article class="card"><div class="body"><h3>Talent & injury</h3><p>Player development variance and injury shocks.</p><div class="chip-row"><span class="chip">Mitigation: Diversified cohorts</span><span class="chip">Sports science</span></div></div></article>
+      <article class="card"><div class="body"><h3>FX & liquidity</h3><p>Currency and transfer-market cyclicality.</p><div class="chip-row"><span class="chip">Mitigation: Hedging bands</span><span class="chip">Cash discipline</span></div></div></article>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <section class="section container" id="faqs">
+    <h2 class="section-title" data-reveal>Investor FAQs</h2>
+    <div class="accordion" data-reveal>
+      <details><summary><strong>What investment structures are you considering?</strong></summary><div class="body">Mixture of HoldCo equity and SPV-level co-invest for specific club or academy transactions, subject to jurisdictional approvals.</div></details>
+      <details><summary><strong>What are the primary return drivers?</strong></summary><div class="body">Operating cash flow improvement, player trading gains & sell-ons, media/sponsorship growth, and multiple expansion at exit.</div></details>
+      <details><summary><strong>Minimum ticket and timeline?</strong></summary><div class="body">Indicative minimums shared under NDA. Typical transaction timeline 3–6 months including licensing and closing conditions.</div></details>
+    </div>
+  </section>
+
+  <!-- Contact IR -->
+  <section class="section container" id="contact">
+    <h2 class="section-title" data-reveal>Contact Investor Relations</h2>
+    <p class="lead" data-reveal>Request a meeting, data room access or co-investment discussion.</p>
+    <div class="grid" data-reveal>
+      <article class="card"><div class="body"><h3>Send a message</h3>
+        <form onsubmit="event.preventDefault(); alert('Thanks, our IR team will contact you at ' + this.email.value)" style="display:grid; gap:10px">
+          <input required name="name" placeholder="Full name" aria-label="Full name" style="height:46px;border:1px solid var(--line);border-radius:12px;padding:0 12px;font-weight:700">
+          <input required type="email" name="email" placeholder="Work email" aria-label="Email" style="height:46px;border:1px solid var(--line);border-radius:12px;padding:0 12px;font-weight:700">
+          <input name="org" placeholder="Organization / Fund" aria-label="Organization" style="height:46px;border:1px solid var(--line);border-radius:12px;padding:0 12px;font-weight:700">
+          <select name="topic" aria-label="Interest" style="height:46px;border:1px solid var(--line);border-radius:12px;padding:0 12px;font-weight:700">
+            <option>Equity investment</option>
+            <option>Co-invest / SPV</option>
+            <option>Partnership</option>
+            <option>Other</option>
+          </select>
+          <textarea name="msg" rows="4" placeholder="Add context — mandate, ticket, timeline…" aria-label="Message" style="border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-weight:700"></textarea>
+          <button class="btn primary" type="submit">Send</button>
+        </form></div></article>
+      <article class="card"><div class="body"><h3>Direct contact</h3>
+        <p>Email: <a href="mailto:football@dadabagroup.com">football@dadabagroup.com</a></p>
+        <p>Head Office: East Legon, Boundary Rd,Legon</p>
+        <p>Hours: Mon–Fri, 9:00–17:00</p>
+        <a class="btn" href="investors.html">More for investors</a>
+      </div></article>
+    </div>
+    <p class="lead" style="margin-top:12px">This page does not constitute an offer or solicitation to sell securities. Any offering will be made via formal documentation to qualified investors.</p>
+  </section>
+
+  <!-- Partners -->
+  <section class="partners">
+    <div class="container">
+      <div class="partners-head" data-reveal="fade">SELECTED PARTNERS & ADVISERS</div>
+      <div class="partners-grid" id="partnersGrid">
+        <div class="partner-tile" data-reveal><img src="../assets/img/NYA.webp" alt="Partner 1" loading="lazy"></div>
+        <div class="partner-tile" data-reveal><img src="../assets/img/sbpafricalogo2.png" alt="Partner 2" loading="lazy" decoding="async"></div>
+        <div class="partner-tile" data-reveal><img src="../assets/img/ghb.png" alt="Partner 3" loading="lazy"></div>
+        <div class="partner-tile" data-reveal><img src="../assets/img/COP28_BrandMark_Horizontal_2line_English+(1).png" alt="Partner 4" loading="lazy"></div>
+        <div class="partner-tile" data-reveal><img src="../assets/img/gro.jpg" alt="Partner 5" loading="lazy"></div>
+        <div class="partner-tile" data-reveal><img src="../assets/img/ampath.webp" alt="Partner 6" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-main">
+      <div class="container">
+        <div class="footer-grid" id="footerGrid">
+          <div class="foot-col" data-reveal>
+            <div class="foot-brand">
+              <img class="logo-img" src="../assets/img/logo2.png" alt="Dadaba Group logo" width="36" height="36" loading="lazy" decoding="async">
+              <strong>Dadaba Group</strong>
+            </div>
+            <p class="foot-tag">A diversified group advancing sustainable development across Africa and the world.</p>
+          </div>
+          <div class="foot-col" data-reveal>
+            <h4>Head Office — Ghana</h4>
+            <ul class="foot-links">
+             <li>East Legon, Boundary Rd, Accra</li>
+              <li>P.O. Box GP 4567, Legon</li>
+              <li><a href="tel:+233597294288">+233 (0) 597294288</a></li>
+              <li><a href="mailto:info@dadabagroup.com">info@dadabagroup.com</a></li>
+            </ul>
+          </div>
+          <div class="foot-col" data-reveal>
+            <h4>Quick Links</h4>
+            <ul class="foot-links">
+              <li><a href="about.html">About</a></li>
+              <li><a href="businesses.html">Businesses</a></li>
+              <li><a href="media.html">Newsroom</a></li>
+              <li><a href="careers.html">Careers</a></li>
+            </ul>
+          </div>
+          <div class="foot-col" data-reveal>
+            <h4>Reach Us</h4>
+            <ul class="foot-links">
+              <li>Mon–Fri, 9:00–17:00</li>
+              <li><a href="investors.html">Investors</a></li>
+              <li><a href="../sustainability.html#reports">ESG Reports</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <form class="newsletter-wide" action="#" onsubmit="event.preventDefault(); alert('Subscribed: ' + this.email.value)" data-reveal>
+          <div class="newsletter-row">
+            <span class="nl-label">Subscribe To Our Newsletter</span>
+            <input type="email" name="email" required placeholder="Enter your email" aria-label="Email" />
+            <button type="submit">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container foot-bottom-row">
+        <div>© <span id="year"></span> Dadaba Group — All rights reserved</div>
+        <header class="site-header">
+  <div class="container header__bar">
+    <a class="logo" href="index.html" aria-label="Dadaba Group home">
+      <span>Dadaba Group</span>
+    </a>
+
+    <button class="nav-toggle" aria-controls="nav" aria-expanded="false" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    </button>
+
+    <nav id="nav" class="nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="about.html">About</a></li>
+
+        <li class="has-sub">
+          <a href="businesses.html" class="nav__link" data-toggle="#nav-businesses" aria-haspopup="true" aria-expanded="false" aria-controls="nav-businesses">
+            Businesses <span class="chev">▾</span>
+          </a>
+          <div id="nav-businesses" class="submenu" role="menu" aria-label="Businesses">
+            <div class="submenu__grid">
+              <a href="businesses.html"><strong>Overview</strong></a>
+              <a href="dadaba-mining.html">Dadaba Mining</a>
+              <a href="dadaba-estate.html">Dadaba Estate</a>
+              <a href="dadaba-prestige.html">Dadaba Prestige (AgriTech)</a>
+              <a href="dadaba-entertainment.html">Dadaba Entertainment</a>
+              <a href="dadaba-recruitment.html">Dadaba Recruitment</a>
+              <a href="dadaba-carbon-hub.html">Dadaba Carbon Hub</a>
+              <a href="dadaba-football.html">Dadaba Football Agency</a>
+            </div>
+          </div>
+        </li>
+
+        <li><a class="nav__link" href="investors.html">Investors</a></li>
+
+        <li class="has-sub">
+          <a href="media.html" class="nav__link" data-toggle="#nav-media" aria-haspopup="true" aria-expanded="false" aria-controls="nav-media">
+            Media <span class="chev">▾</span>
+          </a>
+          <div id="nav-media" class="submenu" role="menu" aria-label="Media">
+            <div class="submenu__grid">
+              <a href="media.html"><strong>News & Updates</strong></a>
+              <a href="media.html#videos">Videos</a>
+              <a href="media.html#gallery">Gallery</a>
+              <a href="media.html#press">Press Kit</a>
+            </div>
+          </div>
+        </li>
+
+        <li><a class="nav__link" href="careers.html">Careers</a></li>
+        <li><a class="nav__link" href="dadaba-foundation.html">Foundation</a></li>
+
+        <li class="has-sub">
+          <a href="legal.html" class="nav__link" data-toggle="#nav-legal" aria-haspopup="true" aria-expanded="false" aria-controls="nav-legal">
+            Legal <span class="chev">▾</span>
+          </a>
+          <div id="nav-legal" class="submenu" role="menu" aria-label="Legal">
+            <div class="submenu__grid">
+              <a href="legal.html">Legal Overview</a>
+              <a href="terms.html">Terms of Use</a>
+              <a href="privacy.html">Privacy Policy</a>
+              <a href="sustainability.html">Sustainability</a>
+            </div>
+          </div>
+        </li>
+
+        <li><a class="nav__link" href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+      </div>
+    </div>
+  </footer>
+
+  <button class="btn backtotop" id="backToTop" aria-label="Back to top">↑ Top</button>
+
+<script>
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Year + progress bar
+  (function(){ const y = document.getElementById('year'); if(y && !y.textContent) y.textContent = new Date().getFullYear(); })();
+  const header = document.getElementById('siteHeader');
+  const progress = document.getElementById('scrollProgress');
+  const onScrollDecor = ()=>{
+    const y = window.scrollY || document.documentElement.scrollTop;
+    header.classList.toggle('scrolled', y>4);
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (h>0 ? (y / h) * 100 : 0) + '%';
+  };
+  window.addEventListener('scroll', onScrollDecor, {passive:true});
+  onScrollDecor();
+
+  // Mega menu toggle with global closers
+  const megaButtons = document.querySelectorAll('.has-mega > button');
+  function closeAllMegas(){ megaButtons.forEach(b => b.setAttribute('aria-expanded','false')); }
+  megaButtons.forEach(btn => {
+    btn.setAttribute('aria-expanded','false');
+    btn.addEventListener('click', (e) => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      closeAllMegas();
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      e.stopPropagation();
+    });
+    btn.addEventListener('keydown',(e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); btn.click(); } if(e.key==='Escape'){ btn.setAttribute('aria-expanded','false'); }});
+  });
+  document.addEventListener('click', ()=> closeAllMegas());
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ closeAllMegas(); toggleSearch(false); toggleDrawer(false); } });
+  window.addEventListener('scroll', ()=> closeAllMegas(), {passive:true});
+  window.addEventListener('resize', ()=>{ if(window.innerWidth <= 900) closeAllMegas(); }, {passive:true});
+
+  // Search & Drawer with body scroll lock
+  const body = document.body;
+  function lockScroll(){ body.style.overflow='hidden'; body.style.touchAction='none'; }
+  function unlockScroll(){ body.style.overflow=''; body.style.touchAction=''; }
+  function toggleSearch(show){
+    const el = document.getElementById('searchOverlay'); if(!el) return;
+    el.style.display = show ? 'flex' : 'none';
+    if(show){
+      lockScroll();
+      setTimeout(()=>document.getElementById('q')?.focus(), 20);
+      renderResults('');
+      closeAllMegas();
+    } else { unlockScroll(); }
+  }
+  function toggleDrawer(show){
+    const el = document.getElementById('drawer'); if(!el) return;
+    el.style.display = show ? 'block' : 'none';
+    el.setAttribute('aria-hidden', show? 'false':'true');
+    document.getElementById('openDrawer')?.setAttribute('aria-expanded', show? 'true':'false');
+    show ? (lockScroll(), closeAllMegas()) : unlockScroll();
+  }
+  document.getElementById('openSearch')?.addEventListener('click', ()=>toggleSearch(true));
+  document.getElementById('closeSearch')?.addEventListener('click', ()=>toggleSearch(false));
+  document.getElementById('searchOverlay')?.addEventListener('click', (e)=>{ if(e.target.id==='searchOverlay') toggleSearch(false) });
+
+  document.getElementById('openDrawer')?.addEventListener('click', ()=>toggleDrawer(true));
+  document.getElementById('closeDrawer')?.addEventListener('click', ()=>toggleDrawer(false));
+  document.getElementById('drawer')?.addEventListener('click', (e)=>{ if(e.target.id==='drawer') toggleDrawer(false) });
+
+  // Simple page search index (investor focus)
+  const searchIndex = [];
+  function addIndex(title, url, excerpt){ searchIndex.push({title, url, excerpt:(excerpt||'').replace(/\s+/g,' ').trim()}); }
+  (function buildIndex(){
+    addIndex('Investment thesis', '#thesis', 'Talent arbitrage, multi-club, data');
+    addIndex('Operating model', '#model', 'Academies, club stakes, data');
+    addIndex('Governance & compliance', '#governance', 'FIFA, CAF, safeguarding, ESG');
+    addIndex('Target selection criteria', '#criteria', 'Clubs, academies, financial');
+    addIndex('Investor materials', '#materials', 'Deck, one-pager, policies');
+    addIndex('Key risks & mitigations', '#risks', 'Regulatory, injury, FX');
+    addIndex('Investor FAQs', '#faqs', 'Structures, returns, timelines');
+    addIndex('Contact Investor Relations', '#contact', 'Meetings, data room');
+  })();
+  const resultsBox = document.getElementById('searchResults');
+  function renderResults(query){
+    const q = (query||'').toLowerCase().trim();
+    const hits = q
+      ? searchIndex.filter(it => (it.title + ' ' + it.excerpt).toLowerCase().includes(q)).slice(0,10)
+      : [
+          {title:'Investor materials', url:'#materials', excerpt:'Deck & policies'},
+          {title:'Contact Investor Relations', url:'#contact', excerpt:'Meetings & data room'}
+        ];
+    resultsBox.innerHTML = hits.map(h =>
+      `<a class="result" href="${h.url}" role="option"><span>${h.title}</span><small>${h.excerpt||''}</small></a>`
+    ).join('') || `<div class="result" tabindex="-1"><span>No results</span><small>Try a different term</small></div>`;
+  }
+  const qInput = document.getElementById('q');
+  qInput?.addEventListener('input', (e)=> renderResults(e.target.value));
+  document.getElementById('searchForm')?.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const first = resultsBox.querySelector('.result');
+    if(first && first.getAttribute('href')){
+      const href = first.getAttribute('href');
+      toggleSearch(false);
+      if(href.startsWith('#')){
+        document.querySelector(href)?.scrollIntoView({behavior:'smooth', block:'start'});
+      }else{
+        location.href = href;
+      }
+    }
+  });
+
+  // Parallax on hero image
+  (function(){
+    const heroImg = document.querySelector('.hero .media img.cover');
+    const heroSection = document.querySelector('.hero');
+    function parallaxTick(){
+      if(!heroImg || !heroSection || prefersReduced){ return; }
+      const rect = heroSection.getBoundingClientRect();
+      const viewH = window.innerHeight || 0;
+      const prog = 1 - Math.min(Math.max((rect.bottom) / (rect.height + viewH), 0), 1);
+      heroImg.style.setProperty('--parallax', (prog * 24).toFixed(1)+'px');
+    }
+    window.addEventListener('scroll', ()=>{ requestAnimationFrame(parallaxTick); }, {passive:true});
+    window.addEventListener('resize', parallaxTick);
+    parallaxTick();
+  })();
+
+  // Reveal on scroll
+  const revealEls = Array.from(document.querySelectorAll('[data-reveal]'));
+  function applyStagger(selectors){
+    document.querySelectorAll(selectors).forEach(group=>{
+      const kids = Array.from(group.querySelectorAll('[data-reveal]'));
+      kids.forEach((el,i)=> el.style.setProperty('--d', (i*60)+'ms'));
+    });
+  }
+  applyStagger('#partnersGrid, #footerGrid');
+  const ioReveal = new IntersectionObserver((entries, obs)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){ entry.target.classList.add('is-visible'); obs.unobserve(entry.target); }
+    });
+  }, {threshold:0.16, rootMargin:'0px 0px -40px 0px'});
+  revealEls.forEach(el=> ioReveal.observe(el));
+
+  // KPI count-up
+  (function(){
+    const kpis = document.getElementById('kpis');
+    if(!kpis) return;
+    const nums = kpis.querySelectorAll('[data-count]');
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          nums.forEach(n=>{
+            const target = parseFloat(n.getAttribute('data-count')); let cur = 0;
+            const step = Math.max(target/60, 0.1);
+            const tick = ()=>{ cur = Math.min(target, cur+step); n.textContent = (Math.round(cur*10)/10).toString(); if(cur<target) requestAnimationFrame(tick); };
+            tick();
+          });
+          obs.disconnect();
+        }
+      });
+    }, {threshold:0.4});
+    obs.observe(kpis);
+  })();
+
+  // Back to top
+  const btt = document.getElementById('backToTop');
+  window.addEventListener('scroll', ()=>{ btt.style.display = window.scrollY>600 ? 'inline-flex':'none'; });
+  btt.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
+
+  // Image fallbacks
+  (function(){
+    function fallbackChain(src){
+      const url = new URL(src, location.href);
+      const name = url.pathname.split('/').pop() || '';
+      const dot = name.lastIndexOf('.');
+      const base = dot > -1 ? name.slice(0, dot) : name;
+      const ext  = dot > -1 ? name.slice(dot+1).toLowerCase() : '';
+      const exts = ['webp','jpg','jpeg','png'];
+      const ordered = [ext, ...exts.filter(e=>e!==ext)];
+      const folder = url.pathname.slice(0, url.pathname.length - name.length);
+      return ordered.map(e => folder + base + '.' + e);
+    }
+    function wire(img){
+      if(!img) return;
+      if(img.complete && img.naturalWidth) return;
+      const tried = new Set([img.getAttribute('src')]);
+      const candidates = fallbackChain(img.getAttribute('src'));
+      img.addEventListener('error', ()=>{
+        let next = null;
+        for(const cand of candidates){
+          const abs = new URL(cand, location.href).pathname;
+          if(!tried.has(abs)){ next = cand; break; }
+        }
+        if(next){ tried.add(next); img.src = next; }
+      });
+    }
+    document.querySelectorAll('img').forEach(wire);
+  })();
+</script>
+
+<script>
+(function(){
+  var btt = document.getElementById('backToTop');
+  if(!btt) return;
+  function toggleBtt(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    btt.style.display = y > 600 ? 'inline-flex' : 'none';
+  }
+  window.addEventListener('scroll', toggleBtt, {passive:true});
+  toggleBtt();
+  btt.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+</script>
+
+<script id="site-js">
+document.addEventListener('DOMContentLoaded', function(){
+  const header = document.getElementById('siteHeader');
+  const progress = document.getElementById('scrollProgress');
+  const backBtn = document.querySelector('.btn.backtotop') || (function(){
+    const b = document.createElement('button');
+    b.className = 'btn backtotop';
+    b.textContent = 'Back to top';
+    document.body.appendChild(b);
+    return b;
+  })();
+  function onScroll(){
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const p = Math.max(0, Math.min(1, window.scrollY / (max || 1)));
+    if(progress) progress.style.width = (p*100).toFixed(2) + '%';
+    if(header) header.classList.toggle('scrolled', window.scrollY > 10);
+    backBtn.style.display = window.scrollY > 400 ? 'inline-flex' : 'none';
+    // parallax
+    document.querySelectorAll('.hero .media img.cover').forEach(img=>{
+      img.style.setProperty('--parallax', (window.scrollY * -0.08).toFixed(1) + 'px');
+    });
+  }
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+  backBtn.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
+
+  // Reveal animations
+  const io = ('IntersectionObserver' in window) ? new IntersectionObserver((entries)=>{
+    for(const e of entries){
+      if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+    }
+  }, {rootMargin:'0px 0px -10% 0px'}) : null;
+  if(io){ document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el)); }
+  else{ document.querySelectorAll('[data-reveal]').forEach(el=>el.classList.add('is-visible')); }
+
+  // Search overlay (if present)
+  const openSearch = document.getElementById('openSearch');
+  const closeSearch = document.getElementById('closeSearch');
+  const searchOverlay = document.querySelector('.search-overlay');
+  function toggleSearch(show){
+    if(!searchOverlay) return;
+    searchOverlay.style.display = show ? 'flex' : 'none';
+    document.body.style.overflow = show ? 'hidden' : '';
+  }
+  if(openSearch) openSearch.addEventListener('click', ()=>toggleSearch(true));
+  if(closeSearch) closeSearch.addEventListener('click', ()=>toggleSearch(false));
+  if(searchOverlay) searchOverlay.addEventListener('click', (e)=>{ if(e.target === searchOverlay) toggleSearch(false); });
+
+  // Mobile drawer (hamburger) setup
+  const utils = document.querySelector('.utils');
+  let hamburger = utils ? utils.querySelector('.hamburger') : null;
+  if(!hamburger && utils){
+    hamburger = document.createElement('button');
+    hamburger.className = 'btn-icon hamburger';
+    hamburger.setAttribute('aria-label','Open menu');
+    hamburger.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
+    utils.appendChild(hamburger);
+  }
+  const drawer = document.querySelector('.drawer');
+  const drawerPanel = drawer ? drawer.querySelector('.drawer-panel') : null;
+  function toggleDrawer(show){
+    if(!drawer) return;
+    drawer.style.display = show ? 'block' : 'none';
+    document.body.style.overflow = show ? 'hidden' : '';
+  }
+  if(hamburger) hamburger.addEventListener('click', ()=>toggleDrawer(true));
+  if(drawer) drawer.addEventListener('click', (e)=>{ if(e.target === drawer) toggleDrawer(false); });
+  if(drawerPanel){
+    // close buttons inside drawer
+    drawerPanel.querySelectorAll('[data-close-drawer]').forEach(btn=>btn.addEventListener('click', ()=>toggleDrawer(false)));
+  }
+
+  // Mega menus open/close on button click; close when clicking elsewhere
+  document.querySelectorAll('.has-mega > button').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.has-mega > button[aria-expanded="true"]').forEach(b=>b.setAttribute('aria-expanded','false'));
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      e.stopPropagation();
+    });
+  });
+  document.addEventListener('click', ()=>{
+    document.querySelectorAll('.has-mega > button[aria-expanded="true"]').forEach(b=>b.setAttribute('aria-expanded','false'));
+  });
+
+  // Highlight current page link
+  const file = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  document.querySelectorAll('a[href]').forEach(a=>{
+    const href = a.getAttribute('href'); if(!href) return;
+    const matchFile = href.split('#')[0].split('?')[0].toLowerCase();
+    if(matchFile && matchFile === file){ a.setAttribute('aria-current','page'); }
+  });
+});
+</script>
+
+  <script defer src="assets/js/enhance.js"></script>
+</body>
+</html>

@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Dadaba Prestige — Smart Farming & Investors | Dadaba Group</title>
+  <meta name="description" content="Dadaba Prestige scales climate-smart farming across Africa — precision irrigation, greenhouse clusters, and data-led agronomy. Explore our investor case, ROI snapshot, and ESG commitments." />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--font:"Manrope",system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;--brand:#0f4a13;--brand-600:#0b3a0e;--accent:#d6ff3f;--ink:#0f1a14;--muted:#5c5f63;--bg:#ffffff;--line:#ece9df;--line-strong:#dddcd7;--container:1160px;--nav-h:64px;--radius:16px;--shadow:0 12px 28px rgba(0,0,0,.08)}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{margin:0;padding:0}
+    body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.6}
+    img{max-width:100%;display:block}
+    a{color:inherit}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+    .container{width:min(var(--container), 100% - 32px); margin-inline:auto}
+    .scroll-progress{position:fixed; inset:0 0 auto 0; height:3px; background:linear-gradient(90deg,var(--accent),#baff7a); width:0%; z-index:300; transform-origin:left center}
+
+    /* Header (aligned with previous page) */
+    header{position:sticky; top:0; z-index:280; background:#fff; border-bottom:1px solid var(--line); transition:box-shadow .25s ease, background .25s ease; padding-top:env(safe-area-inset-top); overflow:visible}
+    header.scrolled{box-shadow:0 10px 24px rgba(0,0,0,.06)}
+    .nav{height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .brand{display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:900}
+    .logo-img{ width:36px; height:36px; object-fit:contain }
+    .menu{display:flex; align-items:center; gap:22px; list-style:none; padding:0; margin:0}
+    .menu>li{position:relative}
+    .menu a,.menu button{font-weight:700; text-decoration:none; color:#18201b; padding:8px 0; line-height:1}
+    .menu a[aria-current="page"]{color:var(--brand)}
+    .menu button{display:inline-flex; align-items:center; gap:6px; border:0; background:transparent; cursor:pointer}
+    .menu button:hover,.menu a:hover{color:var(--brand)}
+    .menu svg{width:14px; height:14px; stroke:currentColor; fill:none}
+    .mega{display:none; position:absolute; top:calc(100% + 10px); left:0; background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:14px; min-width:320px; grid-template-columns:1fr 1fr; gap:14px; max-height:70vh; overflow:auto; z-index:290}
+    .has-mega>button[aria-expanded="true"] + .mega{display:grid}
+    .mega .col h4{margin:0 0 8px; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#a1a5a7; font-weight:800}
+    .mega .col a{display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-radius:10px; color:#132017; text-decoration:none; border:1px solid transparent; font-weight:700}
+    .mega .col a:hover{background:#f6f7f4; border-color:#eef0ea}
+    .mega .col a svg{width:16px; height:16px}
+    .utils{display:flex; align-items:center; gap:10px}
+    .btn-icon{display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:12px; border:1px solid var(--line); background:#fff; cursor:pointer}
+    .btn-icon:hover{background:#f6f7f4}
+
+    /* Overlays */
+    .search-overlay{position:fixed; inset:0; background:rgba(0,0,0,.48); display:none; align-items:center; justify-content:center; padding:20px; z-index:400}
+    .search-box{background:#fff; width:min(720px, 94%); border-radius:16px; padding:16px; border:1px solid var(--line)}
+    .search-box form{display:grid; grid-template-columns:1fr auto auto; gap:10px; align-items:center}
+    .search-box input{height:48px; border-radius:999px; border:1px solid var(--line); padding:0 14px}
+    .search-box button{height:48px; border-radius:999px; border:0; padding:0 18px; font-weight:900; cursor:pointer}
+    .search-box button[type="submit"]{background:var(--brand); color:#fff}
+    .search-box .btn{background:#f1f5ec}
+    .results{margin-top:12px; border-top:1px solid var(--line); padding-top:10px; max-height:52vh; overflow:auto}
+    .result{display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border:1px solid #f0f1ec; border-radius:12px; margin:8px 0; text-decoration:none; color:#0f1a14; font-weight:700}
+    .result:hover{background:#f6f7f4; border-color:#e8ebe4}
+
+    /* Drawer */
+    .drawer{position:fixed; inset:0; display:none; z-index:380}
+    .drawer::before{content:""; position:absolute; inset:0; background:rgba(0,0,0,.48)}
+    .drawer-panel{position:absolute; right:0; top:0; bottom:0; width:min(92vw, 380px); background:#fff; padding:16px; border-left:1px solid var(--line); overflow:auto}
+    .drawer .badge{display:block; padding:12px 10px; margin:4px 0; border:1px solid var(--line); border-radius:12px; text-decoration:none; font-weight:800}
+    .drawer .btn{height:40px; padding:0 14px; border-radius:10px; border:1px solid var(--line); background:#f6f7f4; font-weight:800; cursor:pointer}
+
+    /* Hero */
+    .hero{position:relative; background:#0b2b14; color:#fff; overflow:hidden}
+    .hero .media{position:relative; width:100%; min-height:56vh; background:#0b2b14}
+    .hero .media img.cover{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; will-change:transform; transform:translateY(var(--parallax,0px)) scale(1.05)}
+    .hero .media::after{content:""; position:absolute; inset:0; background:linear-gradient(120deg, rgba(11,43,20,.55), rgba(15,74,19,.55))}
+    .hero .content{position:absolute; inset:0; display:flex; align-items:center; z-index:2}
+    .hero .inner{width:min(1100px,92%); margin:0 auto; display:grid; gap:12px; padding: clamp(18px,3.6vw,32px)}
+    .hero .eyebrow{letter-spacing:.18em; text-transform:uppercase; opacity:.92; font-weight:800; font-size:12px}
+    .hero .headline{font-size:clamp(28px,4.4vw,48px); line-height:1.15; font-weight:900; margin:2px 0}
+    .hero .subhead{max-width:68ch; opacity:.98}
+    .hero .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:6px}
+    .hero .btn{display:inline-flex; align-items:center; justify-content:center; padding:12px 20px; border-radius:999px; border:1.5px solid var(--accent); background:transparent; color:var(--accent); font-weight:800; text-decoration:none}
+    .hero .btn.primary{background:var(--accent); color:#0b2b08; border-color:var(--accent)}
+
+    /* Sections */
+    .section{padding: clamp(28px,4.8vw,48px) 0}
+    .section-title{font-size: clamp(24px,3.2vw,34px); margin:0 0 10px; font-weight:900}
+    .lead{color:#3a3d40; margin:0 0 14px}
+    .grid{display:grid; grid-template-columns: repeat(3,1fr); gap:16px}
+    .card{border:1px solid var(--line); border-radius:16px; background:#fff; overflow:hidden; display:grid}
+    .thumb{aspect-ratio:16/9; overflow:hidden}
+    .thumb img{width:100%; height:100%; object-fit:cover}
+    .body{padding:16px}
+    .badge{display:inline-flex; align-items:center; height:26px; padding:0 10px; border-radius:999px; font-size:12px; font-weight:900; border:1px solid #e6eadf; background:#fff; margin-right:6px}
+    .badge.core{background:var(--accent); color:#0b2b08; border-color:var(--accent)}
+    .chip-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px}
+    .chip{font-size:12px; padding:6px 10px; background:#f6f7f4; border-radius:999px; border:1px solid #eef0ea; font-weight:800}
+
+    /* KPI */
+    .kpis{display:grid; grid-template-columns: repeat(4,1fr); gap:12px}
+    .kpi{border:1px solid var(--line); border-radius:16px; padding:16px; background:#fff}
+    .kpi .big{font-weight:900; font-size:clamp(22px,3.6vw,34px)}
+    .kpi .small{color:#3a3d40}
+
+    /* Filters & docs (kept in case of reuse) */
+    .filters{display:grid; gap:12px; grid-template-columns: 1fr auto auto auto; align-items:end; margin-top:8px}
+    .filters .field{display:grid; gap:6px}
+    .filters label{font-weight:800; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:#9aa09b}
+    .filters input[type="search"], .filters select{height:44px; border-radius:12px; border:1px solid var(--line); padding:0 12px; font-weight:700; color:#0f1a14; background:#fff}
+    .filters .btn{height:44px; border-radius:12px; border:1px solid var(--line); background:#f6f7f4; font-weight:900; padding:0 14px; cursor:pointer}
+    .filter-chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
+
+    .doc-grid{display:grid; grid-template-columns: repeat(3,1fr); gap:16px}
+    .doc{border:1px solid var(--line); border-radius:16px; background:#fff; padding:16px}
+    .doc .meta{color:#3a3d40; font-size:13px}
+    .doc .actions{display:flex; gap:8px; margin-top:8px}
+
+    .btn{display:inline-flex; align-items:center; justify-content:center; padding:10px 14px; border-radius:999px; border:1.5px solid var(--brand); background:#fff; color:#0f1a14; font-weight:900; text-decoration:none; cursor:pointer}
+    .btn.primary{background:var(--brand); color:#fff}
+    .btn.neutral{border-color:#e6eadf}
+    .btn.block{width:100%}
+    .btn.backtotop{position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom)); display:none; z-index:260}
+
+    /* Partners & Footer */
+    .partners{ padding: 16px 0 clamp(40px,6vw,64px) }
+    .partners-head{text-align:center; font-weight:800; letter-spacing:.18em; color:#5c5f63; font-size:12px; margin-bottom:16px}
+    .partners-grid{display:grid; gap:14px; grid-template-columns: repeat(6,1fr)}
+    .partner-tile{background:#fff; border:1px solid var(--line); border-radius:12px; display:flex; align-items:center; justify-content:center; height:76px; padding:12px; transition:transform .25s ease}
+    .partner-tile:hover{transform:translateY(-2px)}
+    .partner-tile img{ max-height:42px; max-width:100%; object-fit:contain }
+
+    .site-footer{ color:#e6f4ea }
+    .footer-main{ background:var(--brand); padding: clamp(28px,5vw,48px) 0 }
+    .footer-grid{display:grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: clamp(16px,2.8vw,32px); align-items:start}
+    .foot-col h4{font-size:16px; margin: 6px 0 12px; color:#eaf8ee; font-weight:800}
+    .foot-brand{ display:flex; align-items:center; gap:10px; margin-bottom:8px }
+    .foot-brand strong{ font-weight:900; font-size:18px }
+    .foot-tag{ color:#cfe8d2; margin:0 0 12px }
+    .foot-links{ list-style:none; padding:0; margin:0 }
+    .foot-links li{ margin: 8px 0 }
+    .foot-links a{ color:#e6f4ea; text-decoration:none }
+    .foot-links a:hover{ text-decoration:underline }
+    .newsletter-wide{ margin-top: clamp(20px,3vw,28px); background:var(--brand-600); border:1px solid rgba(255,255,255,.10); border-radius:16px; padding:12px }
+    .newsletter-row{ display:grid; grid-template-columns: 1fr auto auto; gap:12px; align-items:center }
+    .newsletter-row .nl-label{ font-weight:800; white-space:nowrap; font-size:14px }
+    .newsletter-row input{ min-width: 260px; height:48px; border-radius:999px; border:0; padding:0 16px; color:#111; background:#fff }
+    .newsletter-row button{ height:48px; border-radius:999px; border:0; padding:0 22px; font-weight:900; cursor:pointer; background:var(--accent); color:#0b2b08 }
+    .newsletter-row button:hover{ filter:brightness(.95) }
+    .footer-bottom{ background:var(--brand-600) }
+    .foot-bottom-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding: 14px 0; color:#cfe8d2 }
+    .foot-legal a{ color:#cfe8d2; text-decoration:none; margin-left:14px }
+    .foot-legal a:hover{ text-decoration:underline }
+
+    /* Reveal & Responsive */
+    [data-reveal]{opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1)}
+    .is-visible{opacity:1; transform:translateY(0)}
+
+    @media (prefers-reduced-motion: reduce){ [data-reveal]{transition:none} .hero .media img.cover{transform:none} }
+    @media (max-width:1120px){ .kpis{grid-template-columns: repeat(2,1fr)} .grid{grid-template-columns: repeat(2,1fr)} .doc-grid{grid-template-columns: repeat(2,1fr)} .filters{grid-template-columns:1fr auto auto auto} }
+    @media (max-width:900px){ .menu{display:none} .utils .hamburger{display:inline-flex} .mega{display:none !important} }
+    @media (min-width:901px){ .utils .hamburger{display:none} }
+    @media (max-width:640px){
+      .grid{grid-template-columns: 1fr}
+      .doc-grid{grid-template-columns: 1fr}
+      .partners-grid{ grid-template-columns: repeat(3,1fr) }
+      .foot-bottom-row{ flex-direction:column; text-align:center }
+      .hero .media{ min-height:48vh }
+      .newsletter-row{grid-template-columns:1fr}
+    }
+  </style>
+
+<style>
+
+/* ===== Phone overrides copied from About page (do not affect desktop) ===== */
+@media (max-width: 900px){
+  /* Hide desktop menu; show hamburger */
+  .menu{ display:none; }
+  .utils .hamburger{ display:inline-flex; }
+
+  /* PHONE: make top icons green (search & menu buttons) */
+  .btn-icon{ background:var(--brand); color:#fff; border-color:var(--brand); }
+  .btn-icon svg{ stroke:#fff; }
+  .btn-icon:hover{ filter:brightness(.95); }
+
+  /* PHONE: newsletter becomes single column and never overflows */
+  .newsletter-row{ grid-template-columns: 1fr; }
+  .newsletter-row input{ min-width:0; width:100%; }
+  .newsletter-row button{ width:100%; }
+
+  /* PHONE: footer 2-column grid like About page */
+  .footer-grid{ grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px){
+  /* Container padding to match About page */
+  .container{ width:min(var(--container), 100%); padding-inline:16px; }
+
+  /* Footer bottom stacks and centers text */
+  .foot-bottom-row{ flex-direction:column; text-align:center; }
+
+  /* PHONE: back-to-top becomes green */
+  .btn.backtotop{ background:var(--brand); color:#fff; border-color:var(--brand); }
+}
+
+</style>
+<meta name="theme-color" content="#0f4a13" />
+
+<style id="mobile-ux-enhancements">
+/* ===== Universal Mobile UX Enhancements (injected) ===== */
+:root{ --tap:48px; }
+@media (max-width:900px){
+  html,body{font-size:16px;}
+  .container{ width:min(var(--container, 1160px), 100%); padding-inline:16px; }
+  .hero .headline{ font-size: clamp(22px, 7vw, 32px); line-height:1.2; }
+  .hero .subhead{ font-size:15px; }
+  .cta-row .btn{ min-height:var(--tap); padding-inline:16px; }
+  .cta-row .btn, .btn.block{ width:100%; }
+  .grid, .doc-grid, .kpis{ grid-template-columns:1fr !important; }
+  .newsletter-row{ grid-template-columns:1fr !important; }
+  .newsletter-row input{ width:100%; min-width:0; }
+  .footer-grid{ grid-template-columns:1fr 1fr !important; }
+  .btn-icon{ width:var(--tap); height:var(--tap); }
+  .menu{ display:none !important; }
+  .utils .hamburger{ display:inline-flex !important; }
+  .hero .media{ min-height:50vh; }
+  section.section{ content-visibility:auto; contain-intrinsic-size:800px; }
+}
+@supports (height: env(safe-area-inset-bottom)){
+  .btn.backtotop{ bottom: calc(16px + env(safe-area-inset-bottom)); }
+}
+a,button{ touch-action:manipulation; }
+</style>
+
+
+
+/* PHONE: make top icons green (search & menu buttons) */
+@media (max-width: 900px){
+  .btn-icon{ background:var(--brand); color:#fff; border-color:var(--brand); }
+  .btn-icon svg{ stroke:#fff; }
+  .btn-icon:hover{ filter:brightness(.95); }
+}
+
+<style id="ux-patches">
+  /* Accessible focus outlines */
+  :focus-visible{outline:2px solid var(--accent,#bff266); outline-offset:2px; border-radius:8px}
+  /* Better tap targets on mobile */
+  @media (max-width:640px){
+    a, button{min-height:44px}
+    .menu a, .menu button{padding:12px 10px}
+  }
+</style>
+
+  <link rel="stylesheet" href="assets/css/global.css">
+</head>
+<body>
+
+  <!-- Scroll progress -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header id="siteHeader">
+    <div class="container nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="index.html" aria-label="Dadaba Group Home">
+        <img class="logo-img" src="../assets/img/logo1.png" alt="Dadaba Group logo" width="36" height="36" loading="eager">
+        <span>Dadaba Group</span>
+      </a>
+      <ul class="menu" aria-label="Main menu">
+        <li class="has-mega">
+          <button aria-expanded="false" aria-controls="mega-about">About
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+          </button>
+          <div class="mega" id="mega-about" role="menu">
+            <div class="col">
+              <h4>Overview</h4>
+              <a href="about.html">About Dadaba</a>
+              <a href="../about.html#leadership">Leadership</a>
+              <a href="./dadaba-foundation.html">Foundation</a>
+            </div>
+            <div class="col">
+              <h4>Governance</h4>
+              <a href="../sustainability.html#governance">Policies & Disclosures</a>
+              <a href="../sustainability.html#reports">ESG Report (PDF)</a>
+            </div>
+          </div>
+        </li>
+
+        <li class="has-mega">
+          <button aria-expanded="false" aria-controls="mega-business">Businesses
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+          </button>
+          <div class="mega" id="mega-business" role="menu">
+            <div class="col">
+              <h4>Core</h4>
+              <a href="./dadaba-estate.html">Dadaba Estate</a>
+              <a href="./dadaba-carbon-hub.html">Carbon Hub</a>
+              <a href="./dadaba-mining.html">Mining</a>
+              <a href="./dadaba-prestige.html" aria-current="page">Dadaba Prestige</a>
+              <a href="./dadaba-foundation.html">Foundation</a>
+            </div>
+            <div class="col">
+              <h4>Other Verticals</h4>
+              <a href="./dadaba-entertainment.html">Media & Digital</a>
+              <a href="./dadaba-football-agency.html">Football</a>
+              <a href="../businesses.html#infrastructure">Infrastructure</a>
+              <a href="../businesses.html#energy">Energy & Utilities</a>
+              <a href="../businesses.html#logistics">Transport & Logistics</a>
+              <a href="../businesses.html#d2c">Direct to Consumer</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- New Sustainability mega (like previous page) -->
+        <li class="has-mega">
+          <button aria-expanded="false" aria-controls="mega-sus">Sustainability
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+          </button>
+          <div class="mega" id="mega-sus" role="menu">
+            <div class="col">
+              <h4>Strategy</h4>
+              <a href="../sustainability.html#overview">Overview</a>
+              <a href="../sustainability.html#governance">Governance</a>
+            </div>
+            <div class="col">
+              <h4>Disclosures</h4>
+              <a href="../sustainability.html#reports">ESG Reports</a>
+              <a href="../sustainability.html#impact">Impact</a>
+            </div>
+          </div>
+        </li>
+
+        <li><a href="investors.html">Investors</a></li>
+        <li><a href="media.html">Newsroom</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="utils">
+        <button class="btn-icon" id="openSearch" aria-label="Open search">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.2-3.2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+        <button class="btn-icon hamburger" id="openDrawer" aria-expanded="false" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search overlay -->
+  <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-labelledby="searchLabel">
+    <div class="search-box" role="document">
+      <form id="searchForm" action="#">
+        <label id="searchLabel" class="sr-only" for="q">Search</label>
+        <input type="search" name="q" id="q" placeholder="Search smart farming, investors…" autocomplete="off" />
+        <button type="submit">Search</button>
+        <button type="button" class="btn" id="closeSearch" aria-label="Close search">Close</button>
+      </form>
+      <div class="results" id="searchResults" role="listbox" aria-label="Search results"></div>
+    </div>
+  </div>
+
+  <!-- Drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-panel" role="dialog" aria-label="Mobile menu">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="brand"><img class="logo-img" src="../assets/img/logo2.png" alt="Dadaba Group logo" width="36" height="36" loading="lazy" decoding="async"><strong>Dadaba Group</strong></div>
+        <button class="btn" id="closeDrawer">Close</button>
+      </div>
+      <div class="accordion" style="margin-top:10px">
+        <details open>
+          <summary>Subsidiaries</summary>
+          <a href="./dadaba-estate.html" class="badge" onclick="toggleDrawer(false)">Dadaba Estate</a>
+          <a href="./dadaba-carbon-hub.html" class="badge" onclick="toggleDrawer(false)">Carbon Hub</a>
+          <a href="./dadaba-mining.html" class="badge" onclick="toggleDrawer(false)">Mining</a>
+          <a href="./dadaba-prestige.html" class="badge" onclick="toggleDrawer(false)">Dadaba Prestige</a>
+          <a href="./dadaba-entertainment.html" class="badge" onclick="toggleDrawer(false)">Media & Digital</a>
+          <a href="./dadaba-football-agency.html" class="badge" onclick="toggleDrawer(false)">Football</a>
+        </details>
+        <a href="sustainability.html" class="badge" onclick="toggleDrawer(false)">Sustainability</a>
+        <a href="media.html" class="badge" onclick="toggleDrawer(false)">Newsroom</a>
+        <a href="careers.html" class="badge" onclick="toggleDrawer(false)">Careers</a>
+        <a href="contact.html" class="badge" onclick="toggleDrawer(false)">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" aria-label="Page intro">
+    <div class="media">
+      <img class="cover" src="../assets/img/farmland.jpg" alt="Greenhouse cluster with drip irrigation and solar pumping" loading="lazy" decoding="async">
+    </div>
+    <div class="content">
+      <div class="inner">
+        <span class="eyebrow">Subsidiary</span>
+        <h1 class="headline">Dadaba Prestige — Smart Farming at Scale</h1>
+        <p class="subhead">We build climate-smart, high-yield farms using precision irrigation, protected cultivation, data-led agronomy, and market access. For investors: disciplined unit economics, scalable clusters, and robust ESG.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#invest-case">Investor highlights</a>
+          <a class="btn" href="#roi">ROI snapshot</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KPIs -->
+  <section class="section container">
+    <div class="kpis" id="kpis" data-reveal>
+      <div class="kpi"><div class="big" data-count="1200">0</div><div class="small"> ha</div><p class="small">Hectares under development*</p></div>
+      <div class="kpi"><div class="big" data-count="35">0</div><div class="small"> %</div><p class="small">Avg. yield uplift vs baseline*</p></div>
+      <div class="kpi"><div class="big" data-count="50">0</div><div class="small"> %</div><p class="small">Water savings with drip & scheduling*</p></div>
+      <div class="kpi"><div class="big" data-count="3">0</div><div class="small"> markets</div><p class="small">Active & export channels*</p></div>
+    </div>
+    <p class="lead" style="margin-top:10px">*Illustrative placeholders — replace with verified values from your latest disclosure.</p>
+  </section>
+
+  <!-- Investor case -->
+  <section class="section container" id="invest-case">
+    <h2 class="section-title" data-reveal>Why invest in Dadaba Prestige</h2>
+    <p class="lead" data-reveal>High-margin crops, efficient capex, and de-risked operations.</p>
+    <div class="grid" data-reveal>
+      <article class="card"><div class="body"><h3>Protected cultivation</h3><p>Greenhouse clusters deliver predictable yields and premium quality.</p><div class="chip-row"><span class="chip">Tomato</span><span class="chip">Pepper</span><span class="chip">Leafy</span></div></div></article>
+      <article class="card"><div class="body"><h3>Precision irrigation</h3><p>Drip + fertigation + IoT scheduling to cut water and inputs.</p><div class="chip-row"><span class="chip">Drip</span><span class="chip">Solar pumps</span></div></div></article>
+      <article class="card"><div class="body"><h3>Data-led agronomy</h3><p>Sensors, satellite, and field analytics; SOPs & training.</p><div class="chip-row"><span class="chip">Soil</span><span class="chip">NDVI</span></div></div></article>
+      <article class="card"><div class="body"><h3>Market access</h3><p>Packhouse, cold-chain, and offtake MOUs for stable cashflows.</p><div class="chip-row"><span class="chip">HACCP-ready</span><span class="chip">Export</span></div></div></article>
+      <article class="card"><div class="body"><h3>Outgrower model</h3><p>Smallholder onboarding with inputs, buy-back and training.</p><div class="chip-row"><span class="chip">Inputs</span><span class="chip">Finance</span></div></div></article>
+      <article class="card"><div class="body"><h3>ESG & carbon</h3><p>Regenerative practices; carbon programs via Dadaba Carbon Hub.</p><div class="chip-row"><span class="chip">Soil carbon</span><span class="chip">Biodiversity</span></div></div></article>
+    </div>
+
+    <div class="doc" style="margin-top:16px" data-reveal>
+      <h3>Investor materials</h3>
+      <p class="meta">PDFs • Updated 2025</p>
+      <div class="actions">
+        <a class="btn primary" href="../assets/brochures/Dadaba-Prestige-Investor-Deck.pdf" download>Download investor deck</a>
+        <a class="btn neutral" href="../assets/brochures/Dadaba-Prestige-Overview.pdf" download>Company overview</a>
+        <a class="btn neutral" href="./dadaba-carbon-hub.html">Carbon Hub synergy</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Smart farming stack -->
+  <section class="section container" id="solutions">
+    <h2 class="section-title" data-reveal>Our smart farming stack</h2>
+    <p class="lead" data-reveal>Integrated technology, operations and market access.</p>
+    <div class="grid" data-reveal>
+      <article class="card"><figure class="thumb"><img src="../assets/img/greenhouse.jpg" alt="Greenhouse clusters" loading="lazy"></figure><div class="body"><div><span class="badge core">Core</span></div><h3>Greenhouse clusters</h3><p>Protected cultivation for high-value crops with climate control and IPM.</p></div></article>
+      <article class="card"><figure class="thumb"><img src="../assets/img/drip.jpg" alt="Drip irrigation & fertigation" loading="lazy"></figure><div class="body"><div><span class="badge core">Core</span></div><h3>Drip & fertigation</h3><p>Precise water and nutrients to maximize yield per drop.</p></div></article>
+      <article class="card"><figure class="thumb"><img src="../assets/img/iot.jpg" alt="IoT sensors & scheduling" loading="lazy"></figure><div class="body"><div><span class="badge">Tech</span></div><h3>IoT monitoring</h3><p>Soil moisture, climate sensors and satellite imagery for decisions.</p></div></article>
+      <article class="card"><figure class="thumb"><img src="../assets/img/drone2.jpg" alt="Drones & scouting" loading="lazy"></figure><div class="body"><div><span class="badge">Ops</span></div><h3>Drones & scouting</h3><p>Rapid diagnostics, mapping and variable-rate actions.</p></div></article>
+      <article class="card"><figure class="thumb"><img src="../assets/img/packhouse.jpg" alt="Packhouse" loading="lazy"></figure><div class="body"><div><span class="badge">Post-harvest</span></div><h3>Packhouse & cold chain</h3><p>Sorting, grading, cold storage and quality control for exports.</p></div></article>
+      <article class="card"><figure class="thumb"><img src="../assets/img/network.jpg" alt="Outgrower network" loading="lazy"></figure><div class="body"><div><span class="badge">Impact</span></div><h3>Outgrower network</h3><p>Local procurement, training and guaranteed offtake for farmers.</p></div></article>
+    </div>
+  </section>
+
+  <!-- Compliance & standards -->
+  <section class="section container" id="standards">
+    <h2 class="section-title" data-reveal>Compliance, safety & traceability</h2>
+    <p class="lead" data-reveal>We align with recognized food safety and sustainability standards.</p>
+    <div class="doc-grid" data-reveal>
+      <div class="doc"><h3>Food safety & QA</h3><p class="meta">Protocols & documentation</p><p>GAP-aligned field practices, residue testing, and SOPs from farm to packhouse.</p></div>
+      <div class="doc"><h3>Worker welfare</h3><p class="meta">H&S and training</p><p>Protective equipment, safety drills, and continuous capacity building.</p></div>
+      <div class="doc"><h3>Traceability</h3><p class="meta">Lot tracking</p><p>Farm-to-market traceability with digital logs and batch-level records.</p></div>
+    </div>
+  </section>
+
+  <!-- ROI Calculator -->
+  <section class="section container" id="roi">
+    <h2 class="section-title" data-reveal>ROI snapshot</h2>
+    <p class="lead" data-reveal>Indicative payback based on configurable unit economics (illustrative only).</p>
+    <div class="grid" data-reveal>
+      <article class="card"><div class="body">
+        <h3>Inputs</h3>
+        <div style="display:grid; grid-template-columns: repeat(2,1fr); gap:10px">
+          <label>Hectares <input id="riHectares" type="number" min="0" value="10" style="height:40px;border:1px solid var(--line);border-radius:10px;padding:0 10px;font-weight:700"></label>
+          <label>Capex per ha (USD) <input id="riCapex" type="number" min="0" value="18000" style="height:40px;border:1px solid var(--line);border-radius:10px;padding:0 10px;font-weight:700"></label>
+          <label>Yield uplift (t/ha) <input id="riUplift" type="number" min="0" value="40" style="height:40px;border:1px solid var(--line);border-radius:10px;padding:0 10px;font-weight:700"></label>
+          <label>Price (USD/t) <input id="riPrice" type="number" min="0" value="350" style="height:40px;border:1px solid var(--line);border-radius:10px;padding:0 10px;font-weight:700"></label>
+          <label>Gross margin % <input id="riMargin" type="number" min="0" max="100" value="35" style="height:40px;border:1px solid var(--line);border-radius:10px;padding:0 10px;font-weight:700"></label>
+          <label>Opex per ha (USD) <input id="riOpex" type="number" min="0" value="4500" style="height:40px;border:1px solid var(--line);border-radius:10px;padding:0 10px;font-weight:700"></label>
+        </div>
+        <button class="btn primary" id="riCalc" style="margin-top:10px">Calculate</button>
+      </div></article>
+      <article class="card"><div class="body">
+        <h3>Outputs</h3>
+        <p id="riOut1"><strong>Capex:</strong> —</p>
+        <p id="riOut2"><strong>Annual revenue uplift:</strong> —</p>
+        <p id="riOut3"><strong>Gross profit (after opex):</strong> —</p>
+        <p id="riOut4"><strong>Simple payback:</strong> —</p>
+        <p class="meta">Note: For illustration only. Replace with verified budgets, agronomy plans and offtake pricing.</p>
+      </div></article>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <section class="section container" id="faqs">
+    <h2 class="section-title" data-reveal>FAQs</h2>
+    <div class="accordion" data-reveal>
+      <details><summary><strong>What crops do you prioritize?</strong></summary><div class="body">High-value horticulture (tomato, pepper, leafy greens, berries), plus maize/rice pilots where irrigation economics are favorable.</div></details>
+      <details><summary><strong>How do investors participate?</strong></summary><div class="body">Equity at project/cluster SPVs, JV structures, or yield-linked instruments with offtake security and ESG reporting.</div></details>
+      <details><summary><strong>How is impact measured?</strong></summary><div class="body">Yield uplift, water productivity, farmer income, jobs, and GHG/soil carbon where applicable (with third-party audits).</div></details>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section container" id="contact">
+    <h2 class="section-title" data-reveal>Partner with Dadaba Prestige</h2>
+    <p class="lead" data-reveal>JV capital, cluster development, or offtake partnerships.</p>
+    <div class="grid" data-reveal>
+      <article class="card"><div class="body"><h3>Send a message</h3>
+        <form onsubmit="event.preventDefault(); alert('Thanks, we will contact you at ' + this.email.value)" style="display:grid;gap:10px">
+          <input required name="name" placeholder="Full name" aria-label="Full name" style="height:46px;border:1px solid var(--line);border-radius:12px;padding:0 12px;font-weight:700">
+          <input required type="email" name="email" placeholder="Work email" aria-label="Email" style="height:46px;border:1px solid var(--line);border-radius:12px;padding:0 12px;font-weight:700">
+          <input name="org" placeholder="Organization" aria-label="Organization" style="height:46px;border:1px solid var(--line);border-radius:12px;padding:0 12px;font-weight:700">
+          <select name="topic" aria-label="Topic" style="height:46px;border:1px solid var(--line);border-radius:12px;padding:0 12px;font-weight:700">
+            <option>Equity / JV</option>
+            <option>Offtake</option>
+            <option>Development services</option>
+            <option>ESG / impact</option>
+            <option>Other</option>
+          </select>
+          <textarea name="msg" rows="4" placeholder="Tell us more…" aria-label="Message" style="border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-weight:700"></textarea>
+          <button class="btn primary" type="submit">Send</button>
+        </form></div></article>
+      <article class="card"><div class="body"><h3>Direct contact</h3>
+        <p>Email: <a href="mailto:prestige@dadabagroup.com">prestige@dadabagroup.com</a></p>
+        <p>Head Office: East Legon, Boundary Rd, Accra — P.O. Box GP 4567, Legon</p>
+        <p>Hours: Mon–Fri, 9:00–17:00</p>
+        <a class="btn" href="./dadaba-carbon-hub.html">Explore Carbon Hub</a>
+      </div></article>
+    </div>
+    <p class="lead" style="margin-top:12px">Note: Numbers are indicative and subject to agronomy plans, permits and market conditions.</p>
+  </section>
+
+  <!-- Partners -->
+  <section class="partners">
+    <div class="container">
+      <div class="partners-head" data-reveal="fade">FEATURED PARTNERS AND OFFTAKERS</div>
+      <div class="partners-grid" id="partnersGrid">
+        <div class="partner-tile" data-reveal><img src="../assets/img/NYA.webp" alt="Partner 1" loading="lazy"></div>
+        <div class="partner-tile" data-reveal><img src="../assets/img/sbpafricalogo2.png" alt="Partner 2" loading="lazy" decoding="async"></div>
+        <div class="partner-tile" data-reveal><img src="../assets/img/ghb.png" alt="Partner 3" loading="lazy"></div>
+        <div class="partner-tile" data-reveal><img src="../assets/img/COP28_BrandMark_Horizontal_2line_English+(1).png" alt="Partner 4" loading="lazy"></div>
+        <div class="partner-tile" data-reveal><img src="../assets/img/gro.jpg" alt="Partner 5" loading="lazy"></div>
+        <div class="partner-tile" data-reveal><img src="../assets/img/ampath.webp" alt="Partner 6" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-main">
+      <div class="container">
+        <div class="footer-grid" id="footerGrid">
+          <div class="foot-col" data-reveal><div class="foot-brand"><img class="logo-img" src="../assets/img/logo2.png" alt="Dadaba Group logo" width="36" height="36" loading="lazy" decoding="async"><strong>Dadaba Group</strong></div><p class="foot-tag">A diversified group advancing sustainable development across Africa and the world.</p></div>
+          <div class="foot-col" data-reveal><h4>Head Office — Ghana</h4><ul class="foot-links"><li>East Legon, Boundary Rd, Accra</li><li>P.O. Box LG 1234, Legon</li><li><a href="tel:+233597294288">+233 (0) 597294288</a></li><li><a href="mailto:info@dadabagroup.com">info@dadabagroup.com</a></li></ul></div>
+          <div class="foot-col" data-reveal><h4>Quick Links</h4><ul class="foot-links"><li><a href="about.html">About</a></li><li><a href="businesses.html">Businesses</a></li><li><a href="media.html">Newsroom</a></li><li><a href="careers.html">Careers</a></li></ul></div>
+          <div class="foot-col" data-reveal><h4>Reach Us</h4><ul class="foot-links"><li>Mon–Fri, 9:00–17:00</li><li><a href="investors.html">Investors</a></li><li><a href="../sustainability.html#reports">ESG Reports</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        </div>
+        <form class="newsletter-wide" action="#" onsubmit="event.preventDefault(); alert('Subscribed: ' + this.email.value)" data-reveal>
+          <div class="newsletter-row"><span class="nl-label">Subscribe To Our Newsletter</span><input type="email" name="email" required placeholder="Enter your email" aria-label="Email" /><button type="submit">Subscribe</button></div>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container foot-bottom-row">
+        <div>© <span id="year"></span> Dadaba Group — All rights reserved</div>
+        <header class="site-header">
+  <div class="container header__bar">
+    <a class="logo" href="index.html" aria-label="Dadaba Group home">
+      <span>Dadaba Group</span>
+    </a>
+
+    <button class="nav-toggle" aria-controls="nav" aria-expanded="false" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+    </button>
+
+    <nav id="nav" class="nav" aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="about.html">About</a></li>
+
+        <li class="has-sub">
+          <a href="businesses.html" class="nav__link" data-toggle="#nav-businesses" aria-haspopup="true" aria-expanded="false" aria-controls="nav-businesses">
+            Businesses <span class="chev">▾</span>
+          </a>
+          <div id="nav-businesses" class="submenu" role="menu" aria-label="Businesses">
+            <div class="submenu__grid">
+              <a href="businesses.html"><strong>Overview</strong></a>
+              <a href="dadaba-mining.html">Dadaba Mining</a>
+              <a href="dadaba-estate.html">Dadaba Estate</a>
+              <a href="dadaba-prestige.html">Dadaba Prestige (AgriTech)</a>
+              <a href="dadaba-entertainment.html">Dadaba Entertainment</a>
+              <a href="dadaba-recruitment.html">Dadaba Recruitment</a>
+              <a href="dadaba-carbon-hub.html">Dadaba Carbon Hub</a>
+              <a href="dadaba-football.html">Dadaba Football Agency</a>
+            </div>
+          </div>
+        </li>
+
+        <li><a class="nav__link" href="investors.html">Investors</a></li>
+
+        <li class="has-sub">
+          <a href="media.html" class="nav__link" data-toggle="#nav-media" aria-haspopup="true" aria-expanded="false" aria-controls="nav-media">
+            Media <span class="chev">▾</span>
+          </a>
+          <div id="nav-media" class="submenu" role="menu" aria-label="Media">
+            <div class="submenu__grid">
+              <a href="media.html"><strong>News & Updates</strong></a>
+              <a href="media.html#videos">Videos</a>
+              <a href="media.html#gallery">Gallery</a>
+              <a href="media.html#press">Press Kit</a>
+            </div>
+          </div>
+        </li>
+
+        <li><a class="nav__link" href="careers.html">Careers</a></li>
+        <li><a class="nav__link" href="dadaba-foundation.html">Foundation</a></li>
+
+        <li class="has-sub">
+          <a href="legal.html" class="nav__link" data-toggle="#nav-legal" aria-haspopup="true" aria-expanded="false" aria-controls="nav-legal">
+            Legal <span class="chev">▾</span>
+          </a>
+          <div id="nav-legal" class="submenu" role="menu" aria-label="Legal">
+            <div class="submenu__grid">
+              <a href="legal.html">Legal Overview</a>
+              <a href="terms.html">Terms of Use</a>
+              <a href="privacy.html">Privacy Policy</a>
+              <a href="sustainability.html">Sustainability</a>
+            </div>
+          </div>
+        </li>
+
+        <li><a class="nav__link" href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+      </div>
+    </div>
+  </footer>
+
+  <button class="btn backtotop" id="backToTop" aria-label="Back to top">↑ Top</button>
+
+<script>
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  (function(){ const y=document.getElementById('year'); if(y && !y.textContent) y.textContent=new Date().getFullYear(); })();
+  const header=document.getElementById('siteHeader'); const progress=document.getElementById('scrollProgress');
+  const onScrollDecor=()=>{const y=window.scrollY||document.documentElement.scrollTop; header.classList.toggle('scrolled', y>4); const h=document.documentElement.scrollHeight-window.innerHeight; progress.style.width=(h>0?(y/h)*100:0)+'%';};
+  window.addEventListener('scroll', onScrollDecor, {passive:true}); onScrollDecor();
+
+  // Mega menu toggle with global closers (default CLOSED)
+  const megaButtons=document.querySelectorAll('.has-mega > button');
+  function closeAllMegas(){ megaButtons.forEach(b=>b.setAttribute('aria-expanded','false')); }
+  megaButtons.forEach(btn=>{
+    btn.setAttribute('aria-expanded','false');
+    btn.addEventListener('click',(e)=>{
+      const ex=btn.getAttribute('aria-expanded')==='true';
+      closeAllMegas();
+      btn.setAttribute('aria-expanded', ex?'false':'true');
+      e.stopPropagation();
+    });
+  });
+  document.addEventListener('click', ()=> closeAllMegas());
+  document.addEventListener('keydown',(e)=>{ if(e.key==='Escape'){ closeAllMegas(); toggleSearch(false); toggleDrawer(false);} });
+  window.addEventListener('scroll', ()=> closeAllMegas(), {passive:true});
+  window.addEventListener('resize', ()=>{ if(window.innerWidth<=900) closeAllMegas(); }, {passive:true});
+
+  const body=document.body; function lockScroll(){body.style.overflow='hidden';body.style.touchAction='none';} function unlockScroll(){body.style.overflow='';body.style.touchAction='';}
+  function toggleSearch(show){const el=document.getElementById('searchOverlay'); if(!el) return; el.style.display=show?'flex':'none'; if(show){lockScroll(); setTimeout(()=>document.getElementById('q')?.focus(),20); renderResults(''); closeAllMegas();}else{unlockScroll();}}
+  function toggleDrawer(show){const el=document.getElementById('drawer'); if(!el) return; el.style.display=show?'block':'none'; el.setAttribute('aria-hidden', show?'false':'true'); document.getElementById('openDrawer')?.setAttribute('aria-expanded', show?'true':'false'); show? (lockScroll(), closeAllMegas()) : unlockScroll();}
+  document.getElementById('openSearch')?.addEventListener('click', ()=>toggleSearch(true));
+  document.getElementById('closeSearch')?.addEventListener('click', ()=>toggleSearch(false));
+  document.getElementById('searchOverlay')?.addEventListener('click',(e)=>{ if(e.target.id==='searchOverlay') toggleSearch(false) });
+  document.getElementById('openDrawer')?.addEventListener('click', ()=>toggleDrawer(true));
+  document.getElementById('closeDrawer')?.addEventListener('click', ()=>toggleDrawer(false));
+  document.getElementById('drawer')?.addEventListener('click',(e)=>{ if(e.target.id==='drawer') toggleDrawer(false) });
+
+  // Search index (removed portfolio entry)
+  const searchIndex=[]; function addIndex(title,url,excerpt){searchIndex.push({title,url,excerpt:(excerpt||'').replace(/\s+/g,' ').trim()});}
+  (function buildIndex(){
+    addIndex('Investor highlights','#invest-case','Deck, economics, ESG');
+    addIndex('Smart farming stack','#solutions','Greenhouse, drip, IoT, packhouse');
+    addIndex('Compliance & traceability','#standards','Food safety, worker welfare');
+    addIndex('ROI snapshot','#roi','Payback calculator');
+    addIndex('Contact','#contact','JV, offtake, development');
+  })();
+  const resultsBox=document.getElementById('searchResults');
+  function renderResults(qry){
+    const q=(qry||'').toLowerCase().trim();
+    const hits=q?searchIndex.filter(it=>(it.title+' '+it.excerpt).toLowerCase().includes(q)).slice(0,10)
+      :[{title:'Investor highlights',url:'#invest-case',excerpt:'Deck & economics'},{title:'ROI snapshot',url:'#roi',excerpt:'Payback calculator'}];
+    resultsBox.innerHTML=hits.map(h=>`<a class="result" href="${h.url}" role="option"><span>${h.title}</span><small>${h.excerpt||''}</small></a>`).join('')||`<div class="result" tabindex="-1"><span>No results</span><small>Try a different term</small></div>`;
+  }
+  const qInput=document.getElementById('q'); qInput?.addEventListener('input',(e)=>renderResults(e.target.value));
+  document.getElementById('searchForm')?.addEventListener('submit',(e)=>{
+    e.preventDefault(); const first=resultsBox.querySelector('.result');
+    if(first && first.getAttribute('href')){ const href=first.getAttribute('href'); toggleSearch(false);
+      if(href.startsWith('#')){document.querySelector(href)?.scrollIntoView({behavior:'smooth',block:'start'});} else {location.href=href;}
+    }
+  });
+
+  // Parallax hero
+  (function(){
+    const heroImg=document.querySelector('.hero .media img.cover'); const heroSection=document.querySelector('.hero');
+    function parallaxTick(){if(!heroImg||!heroSection||prefersReduced){return;}
+      const rect=heroSection.getBoundingClientRect(); const viewH=window.innerHeight||0;
+      const prog=1-Math.min(Math.max((rect.bottom)/(rect.height+viewH),0),1);
+      heroImg.style.setProperty('--parallax',(prog*24).toFixed(1)+'px');
+    }
+    window.addEventListener('scroll',()=>{requestAnimationFrame(parallaxTick);},{passive:true});
+    window.addEventListener('resize',parallaxTick); parallaxTick();
+  })();
+
+  // Reveal
+  const revealEls=Array.from(document.querySelectorAll('[data-reveal]'));
+  function applyStagger(sel){document.querySelectorAll(sel).forEach(g=>{Array.from(g.querySelectorAll('[data-reveal]')).forEach((el,i)=>el.style.setProperty('--d',(i*60)+'ms'));});}
+  applyStagger('#partnersGrid, #footerGrid');
+  const ioReveal=new IntersectionObserver((entries,obs)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible'); obs.unobserve(entry.target);}});},{threshold:0.16,rootMargin:'0px 0px -40px 0px'}); revealEls.forEach(el=>ioReveal.observe(el));
+
+  // KPI animate
+  (function(){
+    const k=document.getElementById('kpis'); if(!k) return; const nums=k.querySelectorAll('[data-count]');
+    const obs=new IntersectionObserver((en)=>{
+      en.forEach(e=>{
+        if(e.isIntersecting){
+          nums.forEach(n=>{
+            const t=parseFloat(n.getAttribute('data-count')); let c=0; const step=Math.max(t/60,0.1);
+            const tick=()=>{c=Math.min(t,c+step); n.textContent=(Math.round(c*10)/10).toString(); if(c<t) requestAnimationFrame(tick);};
+            tick();
+          });
+          obs.disconnect();
+        }
+      });
+    },{threshold:0.4});
+    obs.observe(k);
+  })();
+
+  // ROI calculator
+  function fmtUSD(n){return isFinite(n)?'$'+n.toLocaleString(undefined,{maximumFractionDigits:0}):'—';}
+  document.getElementById('riCalc')?.addEventListener('click', ()=>{
+    const ha=+document.getElementById('riHectares').value||0;
+    const capex=+document.getElementById('riCapex').value||0;
+    const uplift=+document.getElementById('riUplift').value||0;
+    const price=+document.getElementById('riPrice').value||0;
+    const margin=(+document.getElementById('riMargin').value||0)/100;
+    const opex=+document.getElementById('riOpex').value||0;
+
+    const totalCapex=ha*capex;
+    const revenue=ha*uplift*price;
+    const gross= revenue*margin - (ha*opex);
+    const payback = gross>0 ? (totalCapex/gross) : Infinity;
+
+    document.getElementById('riOut1').innerHTML='<strong>Capex:</strong> '+fmtUSD(totalCapex);
+    document.getElementById('riOut2').innerHTML='<strong>Annual revenue uplift:</strong> '+fmtUSD(revenue);
+    document.getElementById('riOut3').innerHTML='<strong>Gross profit (after opex):</strong> '+fmtUSD(gross);
+    document.getElementById('riOut4').innerHTML='<strong>Simple payback:</strong> '+(isFinite(payback)? payback.toFixed(1)+' years' : 'n/a');
+  });
+
+  // Back to top + image fallback
+  const btt=document.getElementById('backToTop');
+  window.addEventListener('scroll', ()=>{ btt.style.display=window.scrollY>600?'inline-flex':'none';});
+  btt.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+  (function(){
+    function fallbackChain(src){
+      const url=new URL(src,location.href); const name=url.pathname.split('/').pop()||'';
+      const dot=name.lastIndexOf('.'); const base=dot>-1?name.slice(0,dot):name; const ext=dot>-1?name.slice(dot+1).toLowerCase():'';
+      const exts=['webp','jpg','jpeg','png']; const ordered=[ext,...exts.filter(e=>e!==ext)];
+      const folder=url.pathname.slice(0,url.pathname.length-name.length);
+      return ordered.map(e=>folder+base+'.'+e);
+    }
+    function wire(img){
+      if(!img) return; if(img.complete&&img.naturalWidth) return;
+      const tried=new Set([img.getAttribute('src')]); const candidates=fallbackChain(img.getAttribute('src'));
+      img.addEventListener('error',()=>{
+        let next=null; for(const cand of candidates){const abs=new URL(cand,location.href).pathname; if(!tried.has(abs)){next=cand; break;}}
+        if(next){tried.add(next); img.src=next;}
+      });
+    }
+    document.querySelectorAll('img').forEach(wire);
+  })();
+</script>
+
+<script>
+(function(){
+  var btt = document.getElementById('backToTop');
+  if(!btt) return;
+  function toggleBtt(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    btt.style.display = y > 600 ? 'inline-flex' : 'none';
+  }
+  window.addEventListener('scroll', toggleBtt, {passive:true});
+  toggleBtt();
+  btt.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+</script>
+
+<script id="site-js">
+document.addEventListener('DOMContentLoaded', function(){
+  const header = document.getElementById('siteHeader');
+  const progress = document.getElementById('scrollProgress');
+  const backBtn = document.querySelector('.btn.backtotop') || (function(){
+    const b = document.createElement('button');
+    b.className = 'btn backtotop';
+    b.textContent = 'Back to top';
+    document.body.appendChild(b);
+    return b;
+  })();
+  function onScroll(){
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const p = Math.max(0, Math.min(1, window.scrollY / (max || 1)));
+    if(progress) progress.style.width = (p*100).toFixed(2) + '%';
+    if(header) header.classList.toggle('scrolled', window.scrollY > 10);
+    backBtn.style.display = window.scrollY > 400 ? 'inline-flex' : 'none';
+    // parallax
+    document.querySelectorAll('.hero .media img.cover').forEach(img=>{
+      img.style.setProperty('--parallax', (window.scrollY * -0.08).toFixed(1) + 'px');
+    });
+  }
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+  backBtn.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
+
+  // Reveal animations
+  const io = ('IntersectionObserver' in window) ? new IntersectionObserver((entries)=>{
+    for(const e of entries){
+      if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+    }
+  }, {rootMargin:'0px 0px -10% 0px'}) : null;
+  if(io){ document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el)); }
+  else{ document.querySelectorAll('[data-reveal]').forEach(el=>el.classList.add('is-visible')); }
+
+  // Search overlay (if present)
+  const openSearch = document.getElementById('openSearch');
+  const closeSearch = document.getElementById('closeSearch');
+  const searchOverlay = document.querySelector('.search-overlay');
+  function toggleSearch(show){
+    if(!searchOverlay) return;
+    searchOverlay.style.display = show ? 'flex' : 'none';
+    document.body.style.overflow = show ? 'hidden' : '';
+  }
+  if(openSearch) openSearch.addEventListener('click', ()=>toggleSearch(true));
+  if(closeSearch) closeSearch.addEventListener('click', ()=>toggleSearch(false));
+  if(searchOverlay) searchOverlay.addEventListener('click', (e)=>{ if(e.target === searchOverlay) toggleSearch(false); });
+
+  // Mobile drawer (hamburger) setup
+  const utils = document.querySelector('.utils');
+  let hamburger = utils ? utils.querySelector('.hamburger') : null;
+  if(!hamburger && utils){
+    hamburger = document.createElement('button');
+    hamburger.className = 'btn-icon hamburger';
+    hamburger.setAttribute('aria-label','Open menu');
+    hamburger.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
+    utils.appendChild(hamburger);
+  }
+  const drawer = document.querySelector('.drawer');
+  const drawerPanel = drawer ? drawer.querySelector('.drawer-panel') : null;
+  function toggleDrawer(show){
+    if(!drawer) return;
+    drawer.style.display = show ? 'block' : 'none';
+    document.body.style.overflow = show ? 'hidden' : '';
+  }
+  if(hamburger) hamburger.addEventListener('click', ()=>toggleDrawer(true));
+  if(drawer) drawer.addEventListener('click', (e)=>{ if(e.target === drawer) toggleDrawer(false); });
+  if(drawerPanel){
+    // close buttons inside drawer
+    drawerPanel.querySelectorAll('[data-close-drawer]').forEach(btn=>btn.addEventListener('click', ()=>toggleDrawer(false)));
+  }
+
+  // Mega menus open/close on button click; close when clicking elsewhere
+  document.querySelectorAll('.has-mega > button').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.has-mega > button[aria-expanded="true"]').forEach(b=>b.setAttribute('aria-expanded','false'));
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      e.stopPropagation();
+    });
+  });
+  document.addEventListener('click', ()=>{
+    document.querySelectorAll('.has-mega > button[aria-expanded="true"]').forEach(b=>b.setAttribute('aria-expanded','false'));
+  });
+
+  // Highlight current page link
+  const file = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  document.querySelectorAll('a[href]').forEach(a=>{
+    const href = a.getAttribute('href'); if(!href) return;
+    const matchFile = href.split('#')[0].split('?')[0].toLowerCase();
+    if(matchFile && matchFile === file){ a.setAttribute('aria-current','page'); }
+  });
+});
+</script>
+
+  <script defer src="assets/js/enhance.js"></script>
+</body>
+</html>

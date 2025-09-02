@@ -1,0 +1,1028 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About — Dadaba Group</title>
+  <meta name="description" content="About Dadaba Group — vision, leadership, journey, foundation and governance." />
+  <!-- Font perf -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================== RESET + THEME ================== */
+    :root{
+      --font: "Manrope",system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+
+      /* Brand */
+      --brand:#0f4a13; --brand-600:#0b3a0e; --accent:#d6ff3f;
+
+      /* Neutrals */
+      --ink:#0f1a14; --muted:#5c5f63; --bg:#ffffff; --paper:#ffffff;
+      --line:#ece9df; --line-strong:#dddcd7;
+
+      /* Brand tints */
+      --brand-surface:#f3f8f2; --brand-surface-2:#ecf5ea; --brand-border:#d5e6d2;
+
+      --container:1160px; --nav-h:78px; --radius:16px; --shadow:0 12px 28px rgba(0,0,0,.08);
+      --reveal-dist:22px; --reveal-dur:.7s; --reveal-ease:cubic-bezier(.22,.61,.36,1);
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:var(--font); color:var(--ink); background:var(--bg); line-height:1.55;
+      -webkit-text-size-adjust:100%;
+    }
+    img{max-width:100%; display:block}
+    a{color:inherit; text-decoration:none}
+    .sr-only{position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+
+    /* Prevent grid children from creating overflow on small screens */
+    .card, .leader, .news-card, .partner-tile { min-width: 0 }
+    /* Long strings wrap safely */
+    p, h1, h2, h3, h4, h5, h6, li { overflow-wrap:anywhere }
+
+    /* container: calc() prevents rounding overflow; margin gives the gutters */
+    .container{width:min(var(--container), calc(100% - 32px)); margin-inline:auto}
+
+    /* ================== SCROLL PROGRESS ================== */
+    .scroll-progress{position:fixed; inset:0 0 auto 0; height:3px; background:linear-gradient(90deg,var(--accent),#baff7a); width:0%; z-index:300; transform-origin:left center}
+
+    /* ================== HEADER / NAV — matched to screenshot ================== */
+    header{position:sticky; top:0; z-index:280; background:#fff; border-bottom:1px solid var(--line); transition:box-shadow .25s ease, background .25s ease; padding-top:env(safe-area-inset-top)}
+    header.scrolled{box-shadow:0 10px 24px rgba(0,0,0,.06)}
+    .nav{height:var(--nav-h); display:flex; align-items:center; justify-content:space-between; gap:16px}
+
+    .brand{display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:900}
+    .logo-img{ width:84px; height:84px; border-radius:8px; flex:0 0 84px; object-fit:cover }
+    /* Fixed size scale: default 84, small 64, tiny 32 */
+    .logo-img.small{ width:64px; height:64px; flex:0 0 64px }
+    .logo-img.tiny{ width:32px; height:32px; flex:0 0 32px }
+
+    .menu{display:flex; align-items:center; gap:22px; list-style:none; padding:0; margin:0}
+    .menu>li{position:relative}
+    .menu a, .menu button{font-weight:700; text-decoration:none; color:#18201b}
+    .menu button{display:flex; align-items:center; gap:6px; border:0; background:transparent; padding:10px 8px; border-radius:10px; cursor:pointer}
+    .menu button:hover, .menu a:hover{background:#f6f7f4}
+    .menu svg{width:16px; height:16px; stroke:currentColor; fill:none}
+
+    /* active link hint */
+    .menu a.active{color:var(--brand); position:relative}
+    .menu a.active::after{content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px; background:var(--brand);}
+
+    /* mega menu */
+    .mega{display:none; position:absolute; top:calc(100% + 6px); left:0; background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:18px; min-width:520px; grid-template-columns:1fr 1fr; gap:18px}
+    .has-mega>button[aria-expanded="true"] + .mega{display:grid}
+    .mega .col h4{margin:0 0 8px; font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); font-weight:800}
+    .mega .col a{display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-radius:10px; color:#132017; border:1px solid transparent; font-weight:700}
+    .mega .col a:hover{background:#f6f7f4; border-color:#eef0ea}
+    .mega .col a svg{width:18px; height:18px}
+
+    .utils{display:flex; align-items:center; gap:10px}
+    .btn-icon{display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:12px; border:1px solid var(--line); background:#fff; cursor:pointer}
+    .btn-icon:hover{background:#f6f7f4}
+
+    /* ======= Overlays (z-index above header) ======= */
+    .search-overlay{position:fixed; inset:0; background:rgba(0,0,0,.48); display:none; align-items:center; justify-content:center; padding:20px; z-index:400}
+    .search-box{background:#fff; width:min(720px, 94%); border-radius:16px; padding:16px; border:1px solid var(--line)}
+    .search-box form{display:grid; grid-template-columns:1fr auto auto; gap:10px; align-items:center}
+    .search-box input{height:48px; border-radius:999px; border:1px solid var(--line); padding:0 14px}
+    .search-box button{height:48px; border-radius:999px; border:0; padding:0 18px; font-weight:900; cursor:pointer}
+    .search-box button[type="submit"]{background:var(--brand); color:#fff}
+    .search-box .btn{background:#f1f5ec}
+
+    .results{margin-top:12px; border-top:1px solid var(--line); padding-top:10px; max-height:52vh; overflow:auto}
+    .result{display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border:1px solid #f0f1ec; border-radius:12px; margin:8px 0; text-decoration:none; color:#0f1a14; font-weight:700}
+    .result:hover{background:#f6f7f4; border-color:#e8ebe4}
+    .result small{color:var(--muted); font-weight:700}
+
+    .drawer{position:fixed; inset:0; display:none; z-index:380}
+    .drawer::before{content:""; position:absolute; inset:0; background:rgba(0,0,0,.48)}
+    .drawer-panel{position:absolute; right:0; top:0; bottom:0; width:min(94vw, 400px); background:#fff; padding:16px; border-left:1px solid var(--line); overflow:auto; padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+    .drawer .badge{display:block; padding:12px 10px; margin:4px 0; border:1px solid var(--line); border-radius:12px; text-decoration:none; font-weight:800}
+    .drawer .btn{height:40px; padding:0 14px; border-radius:10px; border:1px solid var(--line); background:#f6f7f4; font-weight:800; cursor:pointer}
+    .accordion details{border:1px solid var(--line); border-radius:12px; padding:6px 10px; margin:8px 0}
+    .accordion summary{cursor:pointer; font-weight:800}
+    .accordion a{display:block; padding:8px 6px; text-decoration:none; border-radius:8px; font-weight:700}
+    .accordion a:hover{background:#f6f7f4}
+
+    /* ================== HERO ================== */
+    .hero{position:relative; background:#0b2726; color:#fff; overflow:hidden}
+    .hero .slides{display:flex; transition:transform .5s ease; overflow:hidden}
+    .hero .slide{position:relative; min-width:100%}
+    .hero .media{position:relative; width:100%; min-height:58vh; background:#0b2726; overflow:hidden}
+    .hero .media img.cover{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; will-change:transform; transform:translateY(var(--parallax,0px)) scale(1.05)}
+    .hero .media::after{content:""; position:absolute; inset:0; background: var(--overlay, linear-gradient(120deg, rgba(18,71,1,.55), rgba(11,39,38,.55))); pointer-events:none}
+    .hero .ph{position:absolute; inset:12px; display:flex; align-items:center; justify-content:center; text-align:center; padding:28px; color:#d9e8df; font-weight:800; font-size:clamp(14px,2vw,18px); border:2px dashed rgba(255,255,255,.4); border-radius:14px; background:repeating-linear-gradient(45deg, rgba(255,255,255,.06) 0 16px, rgba(255,255,255,.08) 16px 32px)}
+    .hero .media.has-image .ph{display:none}
+    .hero .content{position:absolute; inset:0; display:flex; align-items:center; z-index:2}
+    .hero .content .inner{width:min(1100px,92%); margin:0 auto; display:grid; gap:12px; padding: clamp(18px,3.6vw,32px)}
+    .hero .eyebrow{letter-spacing:.18em; text-transform:uppercase; opacity:.92; font-weight:800; font-size:12px}
+    .hero .headline{font-size:clamp(26px,4vw,44px); line-height:1.15; font-weight:900; margin:2px 0}
+    .hero .subhead{max-width:60ch; font-size:clamp(14px,2.2vw,18px); opacity:.98}
+    .hero .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:6px}
+    .hero .btn{display:inline-flex; align-items:center; justify-content:center; padding:12px 20px; border-radius:999px; border:1.5px solid var(--accent); background:transparent; color:var(--accent); font-weight:800}
+    .hero .btn.primary{background:var(--accent); color:#0b2b08; border-color:var(--accent)}
+    .hero .btn:hover{filter:brightness(.95)}
+
+    .hero[data-one="true"] .dots, .hero[data-one="true"] .arrows{display:none}
+    .hero .dots{position:absolute; left:0; right:0; z-index:5; bottom:calc(18px + env(safe-area-inset-bottom)); display:flex; gap:12px; justify-content:center; align-items:center}
+    .hero .dots button{width:14px; height:14px; border-radius:999px; border:0; background:#ffffff66; cursor:pointer}
+    .hero .dots button[aria-current="true"]{background:#fff}
+    .hero .arrows{position:absolute; left:0; right:0; z-index:5; bottom:calc(62px + env(safe-area-inset-bottom)); display:flex; gap:10px; justify-content:center; align-items:center; pointer-events:none}
+    .hero .arrows button{pointer-events:auto; border:1px solid #ffffff55; background:#00000033; color:#fff; padding:10px 14px; border-radius:999px; font-weight:800; cursor:pointer; backdrop-filter: blur(4px)}
+    .hero .arrows button:hover{background:#00000055}
+
+    /* ================== STATS ================== */
+    .stats{background:#f7f8f5; border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+    .wrap{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; padding:20px 0}
+    .stat{display:flex; flex-direction:column; align-items:center; gap:6px; padding:10px 6px}
+    .stat .num{font-size:clamp(24px,4.2vw,36px); font-weight:900}
+    .stat .label{color:var(--muted); font-weight:700; font-size:13px; text-align:center}
+
+    /* ================== PAGE SECTIONS ================== */
+    .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:16px; padding:34px 0}
+    section[id]{scroll-margin-top:calc(var(--nav-h) + 64px)}
+    .split{display:grid; grid-template-columns: 1.2fr .8fr; gap:22px}
+    .card{border:1px solid var(--line); border-radius:16px; background:#fff; box-shadow:0 10px 24px rgba(0,0,0,.04)}
+    .pad{padding:18px}
+
+    .values{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:12px}
+    .value-tile{position:relative; padding:18px 18px 16px 24px; border-radius:16px; background:var(--brand-surface); border:1.5px solid var(--brand-border)}
+    .value-tile::before{content:""; position:absolute; left:0; top:0; bottom:0; width:6px; border-radius:16px 0 0 16px; background:linear-gradient(180deg,var(--brand), var(--brand-600))}
+    .value-tile .h{font-weight:900; color:var(--brand); margin:2px 0 6px}
+
+    .leaders{display:grid; grid-template-columns: repeat(4,1fr); gap:18px}
+    .leader{overflow:hidden; border-radius:16px; border:1px solid var(--line); background:#fff; display:grid; grid-template-rows:auto auto}
+    .leader .photo{position:relative; aspect-ratio:4/3; background:#eef4ee; overflow:hidden}
+    .leader .photo img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .5s ease, opacity .35s ease; opacity:0}
+    .leader .photo.has-image img{opacity:1}
+    .leader:hover .photo img{transform:scale(1.06)}
+    .leader .meta{padding:14px 16px}
+    .leader .name{font-weight:900}
+    .leader .role{color:var(--muted); font-weight:700; font-size:13px}
+
+    .timeline{position:relative; padding-left:22px}
+    .timeline::before{content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background:linear-gradient(#dfe8e0,#cfe2d1)}
+    .milestone{position:relative; margin:0 0 18px; padding-left:8px}
+    .milestone::before{content:""; position:absolute; left:-22px; top:4px; width:14px; height:14px; border-radius:50%; border:2px solid #cfe2d1; background:#fff}
+    .milestone strong{display:block; font-weight:900}
+
+    .govern-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+    .policy-list{list-style:none; padding-left:0; margin:10px 0 0}
+    .policy-list li{padding:8px 10px; border:1px dashed var(--brand-border); border-radius:12px; margin:6px 0; background:#f9fbf8; font-weight:700}
+
+    /* ================== NEWS / PARTNERS / FOOTER ================== */
+    .news-section{background:#f7f8f5; padding: clamp(36px,5vw,64px) 0}
+    .news-title{font-size: clamp(24px,3.2vw,34px); text-align:center; margin: 0 0 22px; font-weight: 900}
+    .news-grid{display:grid; grid-template-columns: repeat(3,1fr); gap: clamp(16px,2.4vw,24px)}
+    .news-card{background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow: var(--shadow); display:flex; flex-direction:column}
+    .news-media{ aspect-ratio: 16/9; overflow:hidden; margin:0 }
+    .news-media img{ width:100%; height:100%; object-fit:cover }
+    .news-body{ padding:16px 18px 18px }
+    .news-h{ font-size: clamp(16px,2vw,18px); margin: 4px 0 6px; font-weight: 800 }
+    .news-kicker{ color:var(--muted); font-size:13px; margin:0 0 6px }
+    .news-desc{ color:#3a3d40; font-size:14px; margin:0 }
+
+    .partners{ padding: 12px 0 40px }
+    .partners-head{text-align:center; font-weight:800; letter-spacing:.18em; color:#5c5f63; font-size:12px; margin-bottom:16px}
+    .partners-grid{display:grid; gap:14px; grid-template-columns: repeat(6,1fr)}
+    .partner-tile{background:#fff; border:1px solid var(--line); border-radius:12px; display:flex; align-items:center; justify-content:center; height:76px; padding:12px; transition:transform .25s ease}
+    .partner-tile:hover{transform:translateY(-2px)}
+    .partner-tile img{ max-height:42px; max-width:100%; object-fit:contain }
+
+    .site-footer{ color:#e6f4ea }
+    .footer-main{ background:var(--brand); padding: clamp(28px,5vw,48px) 0 }
+    .footer-grid{display:grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: clamp(16px,2.8vw,32px); align-items:start}
+    .foot-col h4{font-size:16px; margin: 6px 0 12px; color:#eaf8ee; font-weight:800}
+    .foot-brand{ display:flex; align-items:center; gap:10px; margin-bottom:8px }
+    .foot-brand strong{ font-weight:900; font-size:18px }
+    .foot-tag{ color:#cfe8d2; margin:0 0 12px }
+    .foot-links{ list-style:none; padding:0; margin:0 }
+    .foot-links li{ margin: 8px 0 }
+    .foot-links a{ color:#e6f4ea; text-decoration:none }
+    .foot-links a:hover{ text-decoration:underline }
+    .newsletter-wide{ margin-top: clamp(20px,3vw,28px); background:var(--brand-600); border:1px solid rgba(255,255,255,.10); border-radius:16px; padding:12px }
+    .newsletter-row{ display:grid; grid-template-columns: 1fr auto auto; gap:12px; align-items:center }
+    .newsletter-row .nl-label{ font-weight:800; white-space:nowrap; font-size:14px }
+    .newsletter-row input{ min-width: 260px; height:48px; border-radius:999px; border:0; padding:0 16px; color:#111; background:#fff }
+    .newsletter-row button{ height:48px; border-radius:999px; border:0; padding:0 22px; font-weight:900; cursor:pointer; background:var(--accent); color:#0b2b08 }
+    .newsletter-row button:hover{ filter:brightness(.95) }
+    .footer-bottom{ background:var(--brand-600) }
+    .foot-bottom-row{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding: 14px 0; color:#cfe8d2; flex-wrap:wrap }
+    .foot-legal a{ color:#cfe8d2; text-decoration:none; margin-left:14px }
+    .foot-legal a:hover{ text-decoration:underline }
+
+    .btn.backtotop{position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom)); display:none; align-items:center; justify-content:center; height:44px; padding:0 16px; border-radius:999px; border:1px solid var(--line); background:#fff; font-weight:900; cursor:pointer; z-index:260}
+
+    /* ================== REVEAL ================== */
+    [data-reveal]{opacity:0; transform:translateY(var(--reveal-dist)); transition:opacity var(--reveal-dur) var(--reveal-ease), transform var(--reveal-dur) var(--reveal-ease); will-change:opacity,transform; transition-delay:var(--d,0ms)}
+    [data-reveal="fade"]{transform:none}
+    .is-visible{opacity:1; transform:translateY(0)}
+    @media (prefers-reduced-motion: reduce){
+      .hero .slides, [data-reveal]{transition:none}
+      .hero .media img.cover{transform:none}
+    }
+
+    /* ================== MOBILE/OVERFLOW SAFEGUARDS ================== */
+    html, body{width:100%; max-width:100%; overflow-x:hidden; overscroll-behavior-x:none;}
+    body{touch-action:pan-y;}
+    img, svg, video{max-width:100%; height:auto}
+
+    /* ================== RESPONSIVE ================== */
+    @media (max-width: 1120px){
+      .leaders{grid-template-columns:repeat(3,1fr)}
+      .values{grid-template-columns:repeat(2,1fr)}
+      .wrap{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width: 900px){
+      .menu{display:none}
+      .utils .hamburger{display:inline-flex}
+
+      .split{grid-template-columns:1fr}
+      .govern-grid{grid-template-columns:1fr}
+      .news-grid{ grid-template-columns: 1fr 1fr }
+      .partners-grid{ grid-template-columns: repeat(3,1fr) }
+      .footer-grid{ grid-template-columns: 1fr 1fr }
+
+      /* PHONE: make top icons green per request */
+      .btn-icon{ background:var(--brand); color:#fff; border-color:var(--brand) }
+      .btn-icon svg{ stroke:#fff }
+      .btn-icon:hover{ filter:brightness(.95) }
+
+      /* PHONE: newsletter becomes single column and never overflows */
+      .newsletter-row{ grid-template-columns: 1fr; }
+      .newsletter-row input{ min-width:0; width:100% }
+      .newsletter-row button{ width:100% }
+    }
+    @media (min-width: 901px){ .utils .hamburger{display:none} }
+    @media (max-width: 640px){
+      :root{ --nav-h: 68px; }
+      .container{width:min(var(--container), 100%); padding-inline:16px;}
+      .logo-img{ width:56px; height:56px; flex:0 0 56px }
+      .nav{ gap:10px }
+      .brand span{ font-size:15px; font-weight:900; white-space:nowrap; }
+      .leaders{grid-template-columns:repeat(2,1fr)}
+      .news-grid{ grid-template-columns: 1fr }
+      .partners-grid{ grid-template-columns: repeat(2,1fr) }
+      .foot-bottom-row{ flex-direction:column; text-align:center }
+
+      /* PHONE: back-to-top becomes green */
+      .btn.backtotop{ background:var(--brand); color:#fff; border-color:var(--brand) }
+    }
+    @media (max-width: 420px){
+      .leaders{grid-template-columns:1fr}
+    }
+
+    /* ====== Performance: only render big sections once visible ====== */
+    .auto-visibility{ content-visibility:auto; contain-intrinsic-size: 800px }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- ======= HEADER (matched to screenshot) ======= -->
+  <header id="siteHeader">
+    <div class="container nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="index.html" aria-label="Dadaba Group Home">
+        <img class="logo-img"
+             src="assets/img/logo1.png"
+             srcset="assets/img/logo1.png 1x, assets/img/logo1.png 2x"
+             alt="Dadaba Group logo" width="80" height="80" loading="eager" decoding="async" fetchpriority="high">
+        <span>Dadaba Group</span>
+      </a>
+
+      <ul class="menu" aria-label="Main menu">
+        <li class="has-mega">
+          <button aria-expanded="false" aria-controls="mega-about">About
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+          </button>
+          <div class="mega" id="mega-about" role="menu">
+            <div class="col">
+              <h4>Overview</h4>
+              <a href="#overview">About Dadaba <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a>
+              <a href="#leadership">Leadership <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a>
+              <a href="#journey">Our Journey <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a>
+            </div>
+            <div class="col">
+              <h4>Foundation</h4>
+              <a href="dadaba-foundation.html">Dadaba Foundation <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a>
+              <a href="#governance">Governance <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></a>
+            </div>
+          </div>
+        </li>
+
+        <li class="has-mega">
+          <button aria-expanded="false" aria-controls="mega-business">Businesses
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+          </button>
+          <div class="mega" id="mega-business" role="menu">
+            <div class="col">
+              <h4>Verticals</h4>
+              <a href="businesses.html#infrastructure">Infrastructure</a>
+              <a href="businesses.html#energy">Energy & Utilities</a>
+              <a href="businesses.html#logistics">Transport & Logistics</a>
+              <a href="businesses.html#d2c">Direct to Consumer</a>
+              <a href="businesses.html#materials">Materials & Mining</a>
+              <a href="businesses.html#realestate">Real Estate</a>
+              <a href="businesses.html#digital">Media & Digital</a>
+            </div>
+            <div class="col">
+              <h4>Subsidiaries</h4>
+              <a href="subsidiaries/dadaba-estate.html">Dadaba Estate</a>
+              <a href="subsidiaries/dadaba-carbon-hub.html">Dadaba Carbon Hub</a>
+              <a href="subsidiaries/dadaba-mining.html">Dadaba Mining Ltd</a>
+              <a href="subsidiaries/dadaba-prestige.html">Dadaba Prestige (Smart Farming)</a>
+              <a href="subsidiaries/dadaba-entertainment.html">Dadaba Entertainment</a>
+              <a href="subsidiaries/dadaba-football-agency.html">Dadaba Football Agency</a>
+              <a href="subsidiaries/dadaba-recruitment.html">Dadaba Recruitment Agency</a>
+            </div>
+          </div>
+        </li>
+
+        <li><a href="sustainability.html">Sustainability</a></li>
+        <li><a href="investors.html">Investors</a></li>
+        <li><a href="media.html">Newsroom</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <!-- Added to match screenshot -->
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="utils">
+        <button class="btn-icon" id="openSearch" aria-label="Open search" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.2-3.2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+        <button class="btn-icon hamburger" id="openDrawer" aria-expanded="false" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search overlay -->
+  <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-labelledby="searchLabel" aria-hidden="true">
+    <div class="search-box" role="document">
+      <form id="searchForm" action="#">
+        <label id="searchLabel" class="sr-only" for="q">Search</label>
+        <input type="search" name="q" id="q" placeholder="Search Dadaba Group..." autocomplete="off" />
+        <button type="submit">Search</button>
+        <button type="button" class="btn" id="closeSearch" aria-label="Close search">Close</button>
+      </form>
+      <div class="results" id="searchResults" role="listbox" aria-label="Search results" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-panel" role="dialog" aria-label="Mobile menu">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div class="brand">
+          <img class="logo-img tiny"
+               src="assets/img/logo2.png"
+               srcset="assets/img/logo2.png 1x, assets/img/logo2.png 2x"
+               alt="Dadaba Group logo" width="32" height="32" decoding="async">
+          <strong>Dadaba Group</strong>
+        </div>
+        <button class="btn" id="closeDrawer" aria-label="Close menu">Close</button>
+      </div>
+      <div class="accordion" style="margin-top:10px">
+        <details open>
+          <summary>About</summary>
+          <a href="#overview" onclick="toggleDrawer(false)">Overview</a>
+          <a href="#leadership" onclick="toggleDrawer(false)">Leadership</a>
+          <a href="#journey" onclick="toggleDrawer(false)">Our Journey</a>
+          <a href="dadaba-foundation.html" onclick="toggleDrawer(false)">Foundation</a>
+          <a href="#governance" onclick="toggleDrawer(false)">Governance</a>
+        </details>
+        <a href="businesses.html" class="badge" onclick="toggleDrawer(false)">Businesses</a>
+        <a href="sustainability.html" class="badge" onclick="toggleDrawer(false)">Sustainability</a>
+        <a href="investors.html" class="badge" onclick="toggleDrawer(false)">Investors</a>
+        <a href="media.html" class="badge" onclick="toggleDrawer(false)">Newsroom</a>
+        <a href="careers.html" class="badge" onclick="toggleDrawer(false)">Careers</a>
+        <a href="contact.html" class="badge" onclick="toggleDrawer(false)">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= HERO ======= -->
+  <section class="hero auto-visibility" aria-label="Page intro" data-one="true">
+    <div class="slides" id="slides">
+      <article class="slide" aria-hidden="false">
+        <div class="media" style="--overlay:linear-gradient(120deg, rgba(18,71,1,.55), rgba(11,39,38,.55));">
+          <img class="cover" src="assets/img/About.jpg" alt="Team collaborating on sustainable projects" loading="eager" decoding="async" fetchpriority="high">
+        </div>
+        <div class="content">
+          <div class="inner" data-reveal>
+            <span class="eyebrow">About Dadaba Group</span>
+            <h1 class="headline">We build sustainable value for people, places and the planet</h1>
+            <p class="subhead">A diversified group advancing infrastructure, energy, real estate and agritech—anchored by strong governance and impact.</p>
+            <div class="cta-row">
+              <a class="btn primary" href="#overview">Explore the overview</a>
+              <a class="btn" href="#leadership">Meet the leadership</a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="dots" id="heroDots" role="tablist" aria-label="Slide selector"></div>
+    <div class="arrows" aria-label="Slide navigation">
+      <button type="button" id="heroPrev" aria-label="Previous slide">‹ Prev</button>
+      <button type="button" id="heroNext" aria-label="Next slide">Next ›</button>
+    </div>
+  </section>
+
+  <!-- ======= OVERVIEW ======= -->
+  <section class="container auto-visibility" id="overview">
+    <div class="section-head" data-reveal>
+      <div>
+        <h2>Who we are</h2>
+        <p>Dadaba Group is a diversified investment company advancing infrastructure, energy, real estate and agritech with a commitment to inclusive growth.</p>
+      </div>
+    </div>
+
+    <div class="split" data-reveal>
+      <article class="card pad">
+        <h3 style="margin-top:0">Our vision & approach</h3>
+        <p>We partner with governments, development agencies and entrepreneurs to deliver resilient assets and transformative services. Our model blends disciplined capital allocation with deep community engagement and measurable ESG outcomes.</p>
+        <div class="values">
+          <div class="value-tile"><div class="h">Responsible Growth</div><p class="desc">Long-term value creation with transparency and robust risk management.</p></div>
+          <div class="value-tile"><div class="h">Innovation</div><p class="desc">Technology-enabled solutions—from precision agriculture to digital operations.</p></div>
+          <div class="value-tile"><div class="h">Impact</div><p class="desc">Programs that expand opportunity in education, health and livelihoods.</p></div>
+        </div>
+      </article>
+
+      <aside class="card pad" aria-labelledby="keyfacts">
+        <h3 id="keyfacts" style="margin-top:0">At a glance</h3>
+        <ul style="list-style:none; padding:0; margin:0">
+          <li style="margin:10px 0; font-weight:800">16+ operating countries</li>
+          <li style="margin:10px 0; font-weight:800">50 group companies</li>
+          <li style="margin:10px 0; font-weight:800">12,000+ jobs supported</li>
+          <li style="margin:10px 0; font-weight:800">25 active ESG programs</li>
+        </ul>
+        <p style="color:var(--muted); margin-top:12px">Figures represent groupwide footprint and community reach.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ======= LEADERSHIP ======= -->
+  <section class="container auto-visibility" id="leadership">
+    <div class="section-head" data-reveal>
+      <div>
+        <h2>Leadership</h2>
+        <p>Our experienced team brings sector expertise and a shared commitment to stewardship.</p>
+      </div>
+    </div>
+
+    <div class="leaders" id="leadersGrid">
+      <article class="leader" data-reveal>
+        <div class="photo" role="img" aria-label="Leader photo">
+          <img src="assets/img/dr-kumi.jpg" alt="Dr. Kodie — Group Chairman" loading="lazy" decoding="async">
+        </div>
+        <div class="meta">
+          <div class="name">Dr. Nana Oseadeyo Kumi Kodie</div>
+          <div class="role">Group Chairman</div>
+        </div>
+      </article>
+      <article class="leader" data-reveal>
+        <div class="photo"><img src="assets/img/woman4.jpg" alt="Ama Mensah — Director" loading="lazy" decoding="async"></div>
+        <div class="meta"><div class="name">Ama Mensah</div><div class="role"> Director </div></div>
+      </article>
+      <article class="leader" data-reveal>
+        <div class="photo"><img src="assets/img/man8.jpg" alt="Yaw Agyeman — Chief Financial Officer" loading="lazy" decoding="async"></div>
+        <div class="meta"><div class="name">Yaw Agyeman</div><div class="role">Chief Financial Officer</div></div>
+      </article>
+      <article class="leader" data-reveal>
+        <div class="photo"><img src="assets/img/man4.jpg" alt="Nana Opoku — Head of ESG" loading="lazy" decoding="async"></div>
+        <div class="meta"><div class="name">Nana Opoku</div><div class="role">Head of ESG</div></div>
+      </article>
+      <article class="leader" data-reveal>
+        <div class="photo"><img src="assets/img/woman1.jpg" alt="Selina Adu — MD, Dadaba Estate" loading="lazy" decoding="async"></div>
+        <div class="meta"><div class="name">Selina Adu</div><div class="role">MD, Dadaba Estate</div></div>
+      </article>
+      <article class="leader" data-reveal>
+        <div class="photo"><img src="assets/img/man9.jpg" alt="Kojo Boateng — MD, Carbon Hub" loading="lazy" decoding="async"></div>
+        <div class="meta"><div class="name">Kojo Boateng</div><div class="role">MD, Carbon Hub</div></div>
+      </article>
+      <article class="leader" data-reveal>
+        <div class="photo"><img src="assets/img/woman5.jpg" alt="Efua Nkrumah — MD, Mining" loading="lazy" decoding="async"></div>
+        <div class="meta"><div class="name">Efua Nkrumah</div><div class="role">MD, Mining</div></div>
+      </article>
+      <article class="leader" data-reveal>
+        <div class="photo"><img src="assets/img/man6.jpg" alt="Kwesi Owusu — MD, Smart Farming" loading="lazy" decoding="async"></div>
+        <div class="meta"><div class="name">Kwesi Owusu</div><div class="role">MD, Smart Farming</div></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ======= JOURNEY ======= -->
+  <section class="container auto-visibility" id="journey">
+    <div class="section-head" data-reveal>
+      <div>
+        <h2>Our Journey</h2>
+        <p>From a single enterprise to a multi-sector group—guided by purpose and partnership.</p>
+      </div>
+    </div>
+    <div class="card pad timeline" data-reveal>
+      <div class="milestone"><strong>2018 — Roots</strong> Founder launches the first ventures focused on property and talent development.</div>
+      <div class="milestone"><strong>2020 — Expansion</strong> New portfolio companies in media and recruitment scale across West Africa.</div>
+      <div class="milestone"><strong>2022 — ESG Commitment</strong> Group-wide sustainability framework established with board oversight.</div>
+      <div class="milestone"><strong>2023 — Carbon & Agritech</strong> Carbon Hub and Smart Farming launched to accelerate climate action and food security.</div>
+      <div class="milestone"><strong>2025 — Integrated Platform</strong> Consolidated capabilities in infrastructure, energy and real estate to drive inclusive growth.</div>
+    </div>
+  </section>
+
+  <!-- ======= FOUNDATION (snapshot) ======= -->
+  <section class="container auto-visibility" id="foundation">
+    <div class="section-head" data-reveal>
+      <div>
+        <h2>Dadaba Foundation</h2>
+        <p>We invest in people—supporting education, healthcare and livelihoods through targeted programs and partnerships.</p>
+      </div>
+      <a href="dadaba-foundation.html" class="btn" style="text-decoration:none;border:1.5px solid var(--brand);color:var(--brand);border-radius:999px;padding:10px 16px;font-weight:800">Visit Dadaba Foundation</a>
+    </div>
+
+    <div class="split" data-reveal>
+      <article class="card pad">
+        <h3 style="margin-top:0">Focus Areas</h3>
+        <ul class="policy-list">
+          <li>Scholarships and skills training for youth</li>
+          <li>Primary healthcare outreach & medical supplies</li>
+          <li>Entrepreneurship incubators and micro-grants</li>
+          <li>Community climate programs (trees, clean energy)</li>
+        </ul>
+      </article>
+      <aside class="card pad">
+        <h3 style="margin-top:0">Recent Highlights</h3>
+        <p class="desc">Donations to Empowers Africa, regional volunteer drives, and partnerships with hospitals and schools.</p>
+        <p class="desc">Our goal is measurable, durable impact—tracked via outcomes and transparent reporting.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ======= GOVERNANCE ======= -->
+  <section class="container auto-visibility" id="governance">
+    <div class="section-head" data-reveal>
+      <div>
+        <h2>Governance</h2>
+        <p>We uphold strong standards of transparency and accountability across all businesses.</p>
+      </div>
+      <a href="sustainability.html#reports" class="btn" style="text-decoration:none;border:1.5px solid var(--brand);color:var(--brand);border-radius:999px;padding:10px 16px;font-weight:800">View ESG Documents</a>
+    </div>
+
+    <div class="govern-grid">
+      <article class="card pad" data-reveal>
+        <h3 style="margin-top:0">Board Oversight</h3>
+        <p>Strategic, financial and ESG risks are reviewed by the Board and its committees with clear management ownership.</p>
+        <ul class="policy-list">
+          <li>Audit & Risk Committee</li>
+          <li>Sustainability Committee</li>
+          <li>Nominations & Remuneration Committee</li>
+        </ul>
+      </article>
+      <article class="card pad" data-reveal>
+        <h3 style="margin-top:0">Policies & Standards</h3>
+        <p>We align to international frameworks and maintain zero-tolerance policies across the group.</p>
+        <ul class="policy-list">
+          <li>Code of Conduct & Ethics</li>
+          <li>Anti-Corruption & Whistleblowing</li>
+          <li>Environmental & Social Safeguards</li>
+          <li>Supplier Standards & Human Rights</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- ======= GROUP STATS ======= -->
+  <div class="stats auto-visibility" data-reveal style="--d:60ms">
+    <div class="container wrap">
+      <div class="stat"><span class="num" data-count="16">0</span><span class="label">Operating countries</span></div>
+      <div class="stat"><span class="num" data-count="50">0</span><span class="label">Group companies</span></div>
+      <div class="stat"><span class="num" data-count="12000">0</span><span class="label">Jobs supported</span></div>
+      <div class="stat"><span class="num" data-count="25">0</span><span class="label">ESG programs</span></div>
+    </div>
+  </div>
+
+  <!-- ======= NEWS ======= -->
+  <section class="news-section auto-visibility">
+    <div class="container">
+      <h2 class="news-title" data-reveal>Recent News</h2>
+      <div class="news-grid" id="newsGrid">
+        <article class="news-card" data-reveal>
+          <figure class="news-media"><img src="assets/img/news-1.png" alt="Donation to Empowers Africa" loading="lazy" decoding="async" /></figure>
+          <div class="news-body">
+            <h3 class="news-h">Donation to Empowers Africa</h3>
+            <p class="news-kicker">Dadaba Foundation • 12 Aug 2025</p>
+            <p class="news-desc">Scholarships and skills support for young creatives in Accra.</p>
+          </div>
+        </article>
+        <article class="news-card" data-reveal>
+          <figure class="news-media"><img src="assets/img/news-2.png" alt="Dr. Kodie charity hospital visit" loading="lazy" decoding="async" /></figure>
+          <div class="news-body">
+            <h3 class="news-h">Dr. Kodie Charity Hospital Visit</h3>
+            <p class="news-kicker">Dadaba Group • 08 Aug 2025</p>
+            <p class="news-desc">Medical donations and volunteer drive expand to three regions.</p>
+          </div>
+        </article>
+        <article class="news-card" data-reveal>
+          <figure class="news-media"><img src="assets/img/news-3.jpg" alt="AOB Awards recognition" loading="lazy" decoding="async" /></figure>
+          <div class="news-body">
+            <h3 class="news-h">Recognition at AOB Awards</h3>
+            <p class="news-kicker">Dadaba Entertainment • 02 Aug 2025</p>
+            <p class="news-desc">Celebrating culture, enterprise and youth leadership.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= PARTNERS & FOOTER ======= -->
+  <section class="partners auto-visibility">
+    <div class="container">
+      <div class="partners-head" data-reveal="fade">FEATURED PARTNERS AND SPONSORS</div>
+      <div class="partners-grid" id="partnersGrid">
+        <div class="partner-tile" data-reveal><img src="assets/img/NYA.webp" alt="Partner 1" loading="lazy" decoding="async"></div>
+        <div class="partner-tile" data-reveal><img src="assets/img/sbpafricalogo2.png" alt="Partner 2" loading="lazy" decoding="async"></div>
+        <div class="partner-tile" data-reveal><img src="assets/img/ghb.png" alt="Partner 3" loading="lazy" decoding="async"></div>
+        <div class="partner-tile" data-reveal><img src="assets/img/COP28_BrandMark_Horizontal_2line_English+(1).png" alt="Partner 4" loading="lazy" decoding="async"></div>
+        <div class="partner-tile" data-reveal><img src="assets/img/gro.jpg" alt="Partner 5" loading="lazy" decoding="async"></div>
+        <div class="partner-tile" data-reveal><img src="assets/img/ampath.webp" alt="Partner 6" loading="lazy" decoding="async"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-main">
+      <div class="container">
+        <div class="footer-grid" id="footerGrid">
+          <div class="foot-col" data-reveal>
+            <div class="foot-brand">
+              <img class="logo-img small"
+                   src="assets/img/logo2.png"
+                   srcset="assets/img/logo2.png 1x, assets/img/logo2.png 2x"
+                   alt="Dadaba Group logo" width="64" height="64" decoding="async">
+              <strong>Dadaba Group</strong>
+            </div>
+            <p class="foot-tag">A diversified group advancing sustainable development across Africa and the world.</p>
+          </div>
+          <div class="foot-col" data-reveal>
+            <h4>Head Office — Ghana</h4>
+            <ul class="foot-links">
+              <li>East Legon, Boundary Rd, Accra</li>
+              <li>P.O. Box GP 4567, Legon</li>
+              <li><a href="tel:+233597294288">+233 (0) 597294288</a></li>
+              <li><a href="mailto:info@dadabagroup.com">info@dadabagroup.com</a></li>
+            </ul>
+          </div>
+          <div class="foot-col" data-reveal>
+            <h4>Quick Links</h4>
+            <ul class="foot-links">
+              <li><a href="#overview">About</a></li>
+              <li><a href="businesses.html">Businesses</a></li>
+              <li><a href="media.html">Newsroom</a></li>
+              <li><a href="careers.html">Careers</a></li>
+            </ul>
+          </div>
+          <div class="foot-col" data-reveal>
+            <h4>Reach Us</h4>
+            <ul class="foot-links">
+              <li>Mon–Fri, 9:00–17:00</li>
+              <li><a href="investors.html">Investors</a></li>
+              <li><a href="sustainability.html#reports">ESG Reports</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <form class="newsletter-wide" action="#" onsubmit="event.preventDefault(); alert('Subscribed: ' + this.email.value)" data-reveal>
+          <div class="newsletter-row">
+            <span class="nl-label">Subscribe To Our Newsletter</span>
+            <input type="email" name="email" required placeholder="Enter your email" aria-label="Email" />
+            <button type="submit">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container foot-bottom-row">
+        <div>© <span id="year"></span> Dadaba Group — All rights reserved</div>
+        <nav class="foot-legal">
+          <a href="legal.html">Legal</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <button class="btn backtotop" id="backToTop" aria-label="Back to top">↑ Top</button>
+
+<script>
+  // ===== Utility: prefers-reduced-motion =====
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Year
+  (function(){ const y = document.getElementById('year'); if(y && !y.textContent) y.textContent = new Date().getFullYear(); })();
+
+  // ===== Desktop mega menu toggle =====
+  const megaButtons = document.querySelectorAll('.has-mega > button');
+  megaButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      megaButtons.forEach(b => b.setAttribute('aria-expanded','false'));
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      e.stopPropagation();
+    }, {passive:true});
+  });
+  document.addEventListener('click', ()=> megaButtons.forEach(b => b.setAttribute('aria-expanded','false')), {passive:true});
+
+  // ===== Search & Drawer (with body scroll lock) =====
+  const body = document.body;
+  function lockScroll(){ body.style.overflow='hidden'; body.style.touchAction='none'; }
+  function unlockScroll(){ body.style.overflow=''; body.style.touchAction=''; }
+
+  function toggleSearch(show){
+    const el = document.getElementById('searchOverlay'); if(!el) return;
+    el.style.display = show ? 'flex' : 'none';
+    el.setAttribute('aria-hidden', show ? 'false' : 'true');
+    const trigger = document.getElementById('openSearch');
+    trigger?.setAttribute('aria-expanded', show ? 'true' : 'false');
+    if(show){
+      lockScroll();
+      const q = document.getElementById('q');
+      setTimeout(()=>q?.focus(), 20);
+      renderResults('');
+    } else {
+      unlockScroll();
+    }
+  }
+  function toggleDrawer(show){
+    const el = document.getElementById('drawer'); if(!el) return;
+    el.style.display = show ? 'block' : 'none';
+    el.setAttribute('aria-hidden', show? 'false':'true');
+    document.getElementById('openDrawer')?.setAttribute('aria-expanded', show? 'true':'false');
+    show ? lockScroll() : unlockScroll();
+  }
+  document.getElementById('openSearch')?.addEventListener('click', ()=>toggleSearch(true), {passive:true});
+  document.getElementById('closeSearch')?.addEventListener('click', ()=>toggleSearch(false), {passive:true});
+  document.getElementById('searchOverlay')?.addEventListener('click', (e)=>{ if(e.target.id==='searchOverlay') toggleSearch(false) }, {passive:true});
+  document.getElementById('openDrawer')?.addEventListener('click', ()=>toggleDrawer(true), {passive:true});
+  document.getElementById('closeDrawer')?.addEventListener('click', ()=>toggleDrawer(false), {passive:true});
+  document.getElementById('drawer')?.addEventListener('click', (e)=>{ if(e.target.id==='drawer') toggleDrawer(false) }, {passive:true});
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ toggleSearch(false); toggleDrawer(false); } });
+
+  // ===== Functional search (client-side) =====
+  const searchIndex = [];
+  function addIndex(title, url, excerpt){ searchIndex.push({title, url, excerpt: (excerpt||'').replace(/\s+/g,' ').trim()}); }
+
+  (function buildIndex(){
+    [['#overview','Who we are'],['#leadership','Leadership'],['#journey','Our Journey'],['#governance','Governance']].forEach(([sel, title])=>{
+      const el = document.querySelector(sel);
+      if(el){
+        const p = el.querySelector('p');
+        addIndex(title, sel, p ? p.textContent : '');
+      }
+    });
+    document.querySelectorAll('.value-tile').forEach(v=>{
+      addIndex('Value: ' + v.querySelector('.h')?.textContent.trim(), '#overview', v.querySelector('.desc')?.textContent || '');
+    });
+    document.querySelectorAll('.leader').forEach(lead=>{
+      const name = lead.querySelector('.name')?.textContent.trim() || 'Leader';
+      const role = lead.querySelector('.role')?.textContent.trim() || '';
+      addIndex('Leader: ' + name, '#leadership', role);
+    });
+    document.querySelectorAll('#governance .policy-list li').forEach(li=>{
+      addIndex('Policy: ' + li.textContent.trim(), '#governance', 'Governance policy');
+    });
+    addIndex('Dadaba Foundation', 'dadaba-foundation.html', 'Programs in education, healthcare, livelihoods and climate.');
+  })();
+
+  const resultsBox = document.getElementById('searchResults');
+  function renderResults(query){
+    const q = (query||'').toLowerCase().trim();
+    const hits = q
+      ? searchIndex.filter(it => (it.title + ' ' + it.excerpt).toLowerCase().includes(q)).slice(0,10)
+      : [
+          {title:'Businesses', url:'businesses.html', excerpt:'Explore all verticals and subsidiaries'},
+          {title:'Sustainability', url:'sustainability.html', excerpt:'ESG pillars and disclosures'},
+          {title:'Investors', url:'investors.html', excerpt:'Investor relations'},
+          {title:'Newsroom', url:'media.html', excerpt:'Latest news and stories'}
+        ];
+    resultsBox.innerHTML = hits.map(h =>
+      `<a class="result" href="${h.url}" role="option">
+         <span>${h.title}</span><small>${h.excerpt||''}</small>
+       </a>`
+    ).join('') || `<div class="result" tabindex="-1"><span>No results</span><small>Try a different term</small></div>`;
+  }
+
+  const qInput = document.getElementById('q');
+  qInput?.addEventListener('input', (e)=> renderResults(e.target.value), {passive:true});
+  document.getElementById('searchForm')?.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const first = resultsBox.querySelector('.result');
+    if(first && first.getAttribute('href')){
+      const href = first.getAttribute('href');
+      toggleSearch(false);
+      if(href.startsWith('#')){
+        const el = document.querySelector(href);
+        el?.scrollIntoView({behavior:'smooth', block:'start'});
+      }else{
+        location.href = href;
+      }
+    }
+  });
+
+  // ===== Back to top =====
+  const btt = document.getElementById('backToTop');
+  window.addEventListener('scroll', ()=>{ btt.style.display = window.scrollY>600 ? 'inline-flex':'none'; }, {passive:true});
+  btt.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
+
+  // ===== Header shadow + progress bar =====
+  const header = document.getElementById('siteHeader');
+  const progress = document.getElementById('scrollProgress');
+  const onScrollDecor = ()=>{
+    const y = window.scrollY || document.documentElement.scrollTop;
+    header.classList.toggle('scrolled', y>4);
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = h>0 ? (y / h) * 100 : 0;
+    progress.style.width = pct + '%';
+  };
+  window.addEventListener('scroll', onScrollDecor, {passive:true});
+  onScrollDecor();
+
+  // ===== HERO slider (works with one slide) =====
+  (function(){
+    const hero = document.querySelector('.hero');
+    const track = document.getElementById('slides');
+    const dotsWrap = document.getElementById('heroDots');
+    if(!hero || !track || !dotsWrap) return;
+
+    const slides = Array.from(track.querySelectorAll('.slide'));
+    const prev = document.getElementById('heroPrev');
+    const next = document.getElementById('heroNext');
+    let index = 0;
+    let autoTimer = null;
+    const AUTO_MS = 6500;
+
+    if(slides.length <= 1){ hero.setAttribute('data-one','true'); }
+
+    dotsWrap.innerHTML = '';
+    slides.forEach((_, i)=>{
+      const b = document.createElement('button');
+      b.setAttribute('aria-label', `Slide ${i+1}`);
+      b.addEventListener('click', ()=>goTo(i, true), {passive:true});
+      dotsWrap.appendChild(b);
+    });
+    const dots = Array.from(dotsWrap.querySelectorAll('button'));
+
+    function goTo(i, user=false){
+      index = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(-${index*100}%)`;
+      slides.forEach((s,idx)=> s.setAttribute('aria-hidden', idx!==index));
+      dots.forEach((d,idx)=> d.setAttribute('aria-current', idx===index ? 'true' : 'false'));
+      if(user) restartAuto();
+    }
+    function nextSlide(){ goTo(index+1); }
+    function prevSlide(){ goTo(index-1); }
+    prev?.addEventListener('click', prevSlide, {passive:true});
+    next?.addEventListener('click', nextSlide, {passive:true});
+    document.addEventListener('keydown', (e)=>{ if(e.key==='ArrowRight') nextSlide(); if(e.key==='ArrowLeft') prevSlide(); });
+
+    // Swipe
+    let touchStartX = 0;
+    track.addEventListener('touchstart', (e)=>{ touchStartX = e.changedTouches[0].clientX; }, {passive:true});
+    track.addEventListener('touchend', (e)=>{
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if(Math.abs(dx) > 50) (dx < 0 ? nextSlide() : prevSlide());
+    }, {passive:true});
+
+    function startAuto(){ if(prefersReduced || slides.length<=1) return; stopAuto(); autoTimer = setInterval(nextSlide, AUTO_MS); }
+    function stopAuto(){ if(autoTimer){ clearInterval(autoTimer); autoTimer = null; } }
+    function restartAuto(){ stopAuto(); startAuto(); }
+
+    hero?.addEventListener('pointerenter', stopAuto);
+    hero?.addEventListener('pointerleave', startAuto);
+    hero?.addEventListener('focusin', stopAuto);
+    hero?.addEventListener('focusout', startAuto);
+
+    goTo(0); startAuto();
+  })();
+
+  // ===== Parallax on first hero image =====
+  (function(){
+    const heroImg = document.querySelector('.hero .media img.cover');
+    const heroSection = document.querySelector('.hero');
+    function parallaxTick(){
+      if(!heroImg || !heroSection || prefersReduced){ return; }
+      const rect = heroSection.getBoundingClientRect();
+      const viewH = window.innerHeight || 0;
+      const prog = 1 - Math.min(Math.max((rect.bottom) / (rect.height + viewH), 0), 1);
+      const offset = prog * 24;
+      heroImg.style.setProperty('--parallax', offset.toFixed(1)+'px');
+    }
+    window.addEventListener('scroll', ()=>{ requestAnimationFrame(parallaxTick); }, {passive:true});
+    window.addEventListener('resize', parallaxTick, {passive:true});
+    parallaxTick();
+  })();
+
+  // ===== Reveal on scroll =====
+  const revealEls = Array.from(document.querySelectorAll('[data-reveal]'));
+  function applyStagger(selectors){
+    document.querySelectorAll(selectors).forEach(group=>{
+      const kids = Array.from(group.querySelectorAll('[data-reveal]'));
+      kids.forEach((el,i)=> el.style.setProperty('--d', (i*60)+'ms'));
+    });
+  }
+  applyStagger('#leadersGrid, #newsGrid, #footerGrid, #partnersGrid');
+  const ioReveal = new IntersectionObserver((entries, obs)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.16, rootMargin:'0px 0px -40px 0px'});
+  revealEls.forEach(el=> ioReveal.observe(el));
+
+  // ===== Count-up numbers in stats =====
+  (function(){
+    const section = document.querySelector('.stats');
+    if(!section) return;
+    const nums = Array.from(section.querySelectorAll('.num'));
+    const fmt = new Intl.NumberFormat('en-US');
+    const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+
+    function animateNum(el){
+      const target = Number(el.dataset.count || '0');
+      const dur = Number(el.dataset.duration || '1600');
+      const start = performance.now();
+      const from = 0;
+      function frame(now){
+        const t = Math.min((now - start) / dur, 1);
+        const eased = easeOutCubic(t);
+        const val = Math.floor(from + (target - from) * eased);
+        el.textContent = fmt.format(val);
+        if(t < 1 && !prefersReduced) requestAnimationFrame(frame);
+        else el.textContent = fmt.format(target);
+      }
+      if(prefersReduced){ el.textContent = fmt.format(target); return; }
+      requestAnimationFrame(frame);
+    }
+
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          nums.forEach(animateNum);
+          io.disconnect();
+        }
+      });
+    }, {threshold:0.35});
+    io.observe(section);
+  })();
+
+  // ===== Image loader (adds .has-image + fallbacks) =====
+  (function(){
+    function fallbackChain(src){
+      const url = new URL(src, location.href);
+      const name = url.pathname.split('/').pop() || '';
+      const dot = name.lastIndexOf('.');
+      const base = dot > -1 ? name.slice(0, dot) : name;
+      const ext  = dot > -1 ? name.slice(dot+1).toLowerCase() : '';
+      const exts = ['webp','jpg','jpeg','png'];
+      const ordered = [ext, ...exts.filter(e=>e!==ext)];
+      const folder = url.pathname.slice(0, url.pathname.length - name.length);
+      return ordered.map(e => folder + base + '.' + e);
+    }
+    function wireImage(img, hostSel){
+      if(!img) return;
+      if(img.complete && img.naturalWidth){ img.closest(hostSel)?.classList.add('has-image'); }
+      img.addEventListener('load', ()=> img.closest(hostSel)?.classList.add('has-image'), {once:true});
+      const tried = new Set([img.getAttribute('src')]);
+      const candidates = fallbackChain(img.getAttribute('src'));
+      img.addEventListener('error', ()=>{
+        let next = null;
+        for(const cand of candidates){
+          const abs = new URL(cand, location.href).pathname;
+          if(!tried.has(abs)){ next = cand; break; }
+        }
+        if(next){ tried.add(next); img.src = next; }
+      }, {once:true});
+    }
+    document.querySelectorAll('.leader .photo img').forEach(img=>wireImage(img,'.photo'));
+    document.querySelectorAll('.hero .media img.cover').forEach(img=>wireImage(img,'.media'));
+  })();
+
+  // ===== Foundation routing guard =====
+  (function(){
+    if (location.hash && location.hash.toLowerCase() === '#foundation') {
+      location.replace('dadaba-foundation.html');
+    }
+    document.querySelectorAll('a[href="#foundation"]').forEach(a => a.setAttribute('href','dadaba-foundation.html'));
+  })();
+</script>
+</body>
+</html>
