@@ -125,12 +125,6 @@
     .chip-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px}
     .chip{font-size:12px; padding:6px 10px; background:#f6f7f4; border-radius:999px; border:1px solid #eef0ea; font-weight:800}
 
-    /* KPIs */
-    .kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
-    .kpi{border:1px solid var(--line); border-radius:16px; padding:16px; background:#fff}
-    .kpi .big{font-weight:900; font-size:clamp(22px,3.6vw,34px)}
-    .kpi .small{color:#3a3d40}
-
     /* Docs/tiles */
     .doc-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
     .doc{border:1px solid var(--line); border-radius:16px; background:#fff; padding:16px}
@@ -177,7 +171,6 @@
     @media (max-width: 1120px){
       .grid{grid-template-columns:repeat(2,1fr)}
       .doc-grid{grid-template-columns:repeat(2,1fr)}
-      .kpis{grid-template-columns:repeat(2,1fr)}
     }
     @media (max-width: 900px){
       .menu{display:none}
@@ -289,7 +282,7 @@
         </li>
         <li><a href="../investors.html">Investors</a></li>
         <li><a href="../media.html">Newsroom</a></li>
-        <li><a href../careers.html>Careers</a></li>
+        <li><a href="../careers.html">Careers</a></li>
         <li><a href="../contact.html">Contact</a></li>
       </ul>
 
@@ -366,17 +359,6 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- KPIs -->
-  <section class="section container">
-    <div class="kpis" id="kpis" data-reveal>
-      <div class="kpi"><div class="big" data-count="6">0</div><div class="small"> revenue streams</div><p class="small">Film/TV, music, live, digital, brand, IP licensing*</p></div>
-      <div class="kpi"><div class="big" data-count="12">0</div><div class="small"> markets</div><p class="small">Distribution & touring footprint*</p></div>
-      <div class="kpi"><div class="big" data-count="240">0</div><div class="small"> creators</div><p class="small">Active/recurring collaborators*</p></div>
-      <div class="kpi"><div class="big" data-count="520">0</div><div class="small"> k+</div><p class="small">Historical live ticket sales*</p></div>
-    </div>
-    <p class="lead" style="margin-top:10px">*Illustrative placeholders — replace with verified values from your latest disclosure.</p>
   </section>
 
   <!-- Investment Thesis -->
@@ -747,7 +729,8 @@
       kids.forEach((el,i)=> el.style.setProperty('--d', (i*60)+'ms'));
     });
   }
-  applyStagger('#kpis, .grid, .doc-grid, #footerGrid');
+  // removed #kpis from the stagger list
+  applyStagger('.grid, .doc-grid, #footerGrid');
 
   const ioReveal = new IntersectionObserver((entries, obs)=>{
     entries.forEach(entry=>{
